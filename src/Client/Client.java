@@ -6,7 +6,9 @@ public class Client {
         ClientNetwork clientNetwork = new ClientNetwork();
     }
 
-    public static void main(String[] args) {
-        Client client = new Client();
-    }
+ public static void main(String[] args){
+
+  Client client = new Client();
+
+ }
 }
