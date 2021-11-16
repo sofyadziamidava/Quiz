@@ -1,5 +1,9 @@
 package Server;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Game extends Thread{
@@ -10,12 +14,22 @@ public class Game extends Thread{
 
     public Game(Socket socket){
         this.socket = socket;
-        System.out.println("Connected");
+        System.out.println("Client connected");
     }
 
-    public Game(Socket socket, Player player1, Player player2){
-        this.socket = socket;
-        this.player1 = player1;
-        this.player2 = player2;
+    @Override
+    public void run() {
+        try(BufferedReader inputStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            PrintWriter outputStream = new PrintWriter(socket.getOutputStream(), true))
+        {
+            outputStream.println("What old man do you never see in the summer?");
+            while(true){
+                String dataFromClient = inputStream.readLine();
+                System.out.println("Data from Client: " + dataFromClient);
+            }
+
+        }  catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -2,13 +2,11 @@ package Client;
 
 public class Client {
 
- public Client(){}
+    public Client() {
+        ClientNetwork clientNetwork = new ClientNetwork();
+    }
 
- Network network = new Network();
-
- public static void main(String[] args){
-
-  Client client = new Client();
-
- }
+    public static void main(String[] args) {
+        Client client = new Client();
+    }
 }
