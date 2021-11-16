@@ -14,7 +14,11 @@ public class ServerListener {
             while(true){
                 Player player1 = new Player(serverSocket.accept());
                 Player player2 = new Player(serverSocket.accept());
-                Game game = new Game(player1, player2);
+                Rond rond1 = new Rond(new Question("Question1", new String[]{"a1", "a2", "a3", "a4"}),
+                        new Question("Question2", new String[]{"a1", "a2", "a3", "a4"}));
+                Rond rond2 = new Rond(new Question("Question1", new String[]{"a1", "a2", "a3", "a4"}),
+                        new Question("Question2", new String[]{"a1", "a2", "a3", "a4"}));
+                Game game = new Game(player1, player2, rond1, rond2);
                 game.start();
             }
         } catch (IOException e) {
