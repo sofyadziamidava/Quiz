@@ -1,10 +1,14 @@
 package Client;
 
+import Client.GUI.Container;
+
 public class Client {
 
  public Client(){}
 
- Network network = new Network();
+ Container game = new Container();
+
+ //Network network = new Network();
 
  public static void main(String[] args){
 
