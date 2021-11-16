@@ -5,8 +5,12 @@ import java.net.ServerSocket;
 
 public class ServerListener {
 
-    //TODO: make sure player references can be filled with new player objects
-    // -> replace with waiting states?
+    //TODO:
+    // * klienten ansluter -> skickar en Rond med frågor och svar
+    // * när klienten spelat klart en rond skickar den result till server -> skickar resultat från båda klienter till båda
+    // * när båda klienter spelat klart båda ronder -> skickar bådas resultat till båda klienter
+
+
     public static void main(String[] args){
         int port = 42424;
         try {
@@ -14,11 +18,8 @@ public class ServerListener {
             while(true){
                 Player player1 = new Player(serverSocket.accept());
                 Player player2 = new Player(serverSocket.accept());
-                Rond rond1 = new Rond(new Question("Question1", new String[]{"a1", "a2", "a3", "a4"}),
-                        new Question("Question2", new String[]{"a1", "a2", "a3", "a4"}));
-                Rond rond2 = new Rond(new Question("Question1", new String[]{"a1", "a2", "a3", "a4"}),
-                        new Question("Question2", new String[]{"a1", "a2", "a3", "a4"}));
-                Game game = new Game(player1, player2, rond1, rond2);
+
+                Game game = new Game(player1, player2);
                 game.start();
             }
         } catch (IOException e) {

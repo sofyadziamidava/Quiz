@@ -7,19 +7,11 @@ import java.net.Socket;
 
 public class Network {
 
-    int port = 42424;
-    String ip = "127.0.0.1";
-    ObjectInputStream input;
-    ObjectOutputStream output;
+    public static ObjectOutputStream getOutStream(Socket socket) throws IOException {
+        return new ObjectOutputStream(socket.getOutputStream());
+    }
 
-    public Network(){
-        try {
-            Socket socket = new Socket(ip, port);
-            this.input = new ObjectInputStream(socket.getInputStream());
-            this.output = new ObjectOutputStream(socket.getOutputStream());
-        }
-        catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static ObjectInputStream getInStream(Socket socket) throws IOException {
+        return new ObjectInputStream(socket.getInputStream());
     }
 }

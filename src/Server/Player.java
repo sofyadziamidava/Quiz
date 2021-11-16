@@ -10,14 +10,14 @@ import java.net.Socket;
 
 public class Player {
 
-    Socket socket;
     ObjectInputStream in;
     ObjectOutputStream out;
 
     public Player(Socket socket) throws IOException {
-        this.socket = socket;
-        this.in = new ObjectInputStream(socket.getInputStream());
-        this.out = new ObjectOutputStream(socket.getOutputStream());
+
+        this.in = Network.getInStream(socket);
+        this.out = Network.getOutStream(socket);
+
     }
 
     public void send(Object obj) throws IOException {
