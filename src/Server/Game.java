@@ -1,21 +1,29 @@
 package Server;
 
-import java.net.Socket;
-
 public class Game extends Thread{
 
-    Socket socket;
-    Player player1;
-    Player player2;
+    int nrOfRounds;
+    Player[] players = new Player[2];
+    int currentPlayer;
+    int[] player1SumPoints = new int[nrOfRounds];
+    int[] player2SumPoints = new int[nrOfRounds];
 
-    public Game(Socket socket){
-        this.socket = socket;
-        System.out.println("Connected");
+    public Game(Player player1, Player player2) {
+        this.players[0] = player1;
+        this.players[1] = player2;
+        this.currentPlayer = 0;
     }
 
-    public Game(Socket socket, Player player1, Player player2){
-        this.socket = socket;
-        this.player1 = player1;
-        this.player2 = player2;
+    public void run() {
+
+        for (int i = 0; i < nrOfRounds; i++) {
+            // starta en runda, skicka med spelarna
+            // registrera spelarnas poäng per runda
+        }
+        // skicka slutresultat till användaren
+
     }
+
+
+
 }
