@@ -29,22 +29,11 @@ public class ClientNetwork {
             //Få opponentens resultat, visa den
             //Ta emot en Rond igen
 
-            ClientProtocol clientProtocol = new ClientProtocol();
+            ClientProtocol clientProtocol = new ClientProtocol(window);
 
             Object o;
             while ((o = dataFromServer.readObject()) != null) {
                 clientProtocol.handleNewRond(o);
-
-                sleep();
-                window.dispose();
-
-                Window gameWindow = new Window();
-                GameWindow gw = gameWindow.getGameWindow();
-                gameWindow.add(gw);
-                gameWindow.setVisible(true);
-
-                sleep();
-                gw.question.setText("How old are you?");
 
             }
         } catch(IOException |

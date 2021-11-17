@@ -4,11 +4,13 @@ import Server.Game;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.List;
 
 public class GameWindow extends JPanel {
     public JLabel question;
     JPanel questionPanel;
     myButton timer;
+    myButton[]buttonsArray;
 
 
     public GameWindow() {
@@ -45,6 +47,8 @@ public class GameWindow extends JPanel {
         buttonsPanel.add(b3);
         buttonsPanel.add(b4);
 
+        buttonsArray = new myButton[]{b1, b2, b3 ,b4};
+
 
 
         this.add(questionPanel, BorderLayout.NORTH);
@@ -53,8 +57,15 @@ public class GameWindow extends JPanel {
 
     public void displayQuestion(String question) {
         this.question.setText(question);
-
     }
+
+    public void displayButtons(List<String> list){
+        for (int i = 0; i < buttonsArray.length; i++) {
+            buttonsArray[i].setText(list.get(i));
+        }
+    }
+
+
 
     public static void main(String[] args) {
         Window testWindow = new Window();
