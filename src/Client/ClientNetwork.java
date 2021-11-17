@@ -3,10 +3,7 @@ package Client;
 import Client.GUI.GameWindow;
 import Client.GUI.Window;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 
 public class ClientNetwork {
@@ -23,14 +20,19 @@ public class ClientNetwork {
         String serverHost = "127.0.0.1";
 
         try(Socket clientSocket = new Socket(serverHost, serverPort);
-            BufferedReader dataFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            PrintWriter dataToServer = new PrintWriter(clientSocket.getOutputStream(), true);)
+            ObjectInputStream dataFromServer = new ObjectInputStream(clientSocket.getInputStream());
+            ObjectOutputStream dataToServer = new ObjectOutputStream(clientSocket.getOutputStream());)
         {
 
-            String messageFromServer;
-            while((messageFromServer = dataFromServer.readLine()) != null){
-                if(messageFromServer.equals("Paket")){
+            ClientProtocol clientProtocol = new ClientProtocol();
 
+            Rond ronds[] = new Rond[2];
+            Object o;
+            while((o = dataFromServer.readObject()) != null){
+                ronds[0] = (Rond)o;
+                int poäng = 0;
+                clientProtocol.inputHandler(rond[0]);
+                dataToServer.writeObject((Integer) poäng);
 
                     window.dispose();
 
@@ -42,9 +44,8 @@ public class ClientNetwork {
                     sleep();
                     gw.question.setText("How old are you?");
 
-                }
             }
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
@@ -55,6 +56,15 @@ public class ClientNetwork {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+    }
+
+    private Rond reciveRond(){
+        Object temp;
+        Rond rond;
+        while((temp = dataFromServer.readObject()) != null){
+            rond = (Rond)temp;
+    }
+        return rond;
     }
 }
 
