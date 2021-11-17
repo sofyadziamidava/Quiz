@@ -1,9 +1,6 @@
 package Server;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 
 public class Game extends Thread {
@@ -20,20 +17,21 @@ public class Game extends Thread {
 
     @Override
     public void run() {
-        try(BufferedReader inputStream = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            PrintWriter outputStream = new PrintWriter(socket.getOutputStream(), true);
-            PrintWriter outputStream2 = new PrintWriter(socket2.getOutputStream(), true))
+        try(ObjectOutputStream dataToFirstPlayer = new ObjectOutputStream(socket.getOutputStream());
+            ObjectOutputStream dataToSecondPlayer = new ObjectOutputStream(socket2.getOutputStream());
+            ObjectInputStream dataFromServer = new ObjectInputStream(socket.getInputStream());)
         {
+            System.out.println("check point");
             //outputStream.println("What old man do you never see in the summer?");
-            String paketet = "Paket";
-            outputStream.println(paketet);
-            outputStream2.println(paketet);
-            while(true){
-                String dataFromClient = inputStream.readLine();
-                System.out.println("Data from Client: " + dataFromClient);
+            Rond rond = new Rond();
+            dataToFirstPlayer.writeObject(rond);
+            dataToSecondPlayer.writeObject(rond);
+            while (true){
+               Object o = dataFromServer.readObject();
             }
 
-        }  catch (IOException e) {
+
+        }  catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
