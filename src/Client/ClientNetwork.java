@@ -20,10 +20,9 @@ public class ClientNetwork {
         int serverPort = 42424;
         String serverHost = "127.0.0.1";
 
-        try(Socket clientSocket = new Socket(serverHost, serverPort);
-            ObjectInputStream dataFromServer = new ObjectInputStream(clientSocket.getInputStream());
-            ObjectOutputStream dataToServer = new ObjectOutputStream(clientSocket.getOutputStream());)
-        {
+        try (Socket clientSocket = new Socket(serverHost, serverPort);
+             ObjectInputStream dataFromServer = new ObjectInputStream(clientSocket.getInputStream());
+             ObjectOutputStream dataToServer = new ObjectOutputStream(clientSocket.getOutputStream());) {
             //Få en Rond objekt från servern
             //Lägga info från ronden i window
             //Skicka resultat till servern när spelaren är klar
@@ -33,26 +32,29 @@ public class ClientNetwork {
             ClientProtocol clientProtocol = new ClientProtocol();
 
             Object o;
-            while((o = dataFromServer.readObject()) != null){
+            while ((o = dataFromServer.readObject()) != null) {
                 clientProtocol.handleNewRond(o);
 
-                    sleep();
-                    window.dispose();
+                sleep();
+                window.dispose();
 
-                    Window gameWindow = new Window();
-                    GameWindow gw = gameWindow.getGameWindow();
-                    gameWindow.add(gw);
-                    gameWindow.setVisible(true);
+                Window gameWindow = new Window();
+                GameWindow gw = gameWindow.getGameWindow();
+                gameWindow.add(gw);
+                gameWindow.setVisible(true);
 
-                    sleep();
-                    gw.question.setText("How old are you?");
+                sleep();
+                gw.question.setText("How old are you?");
 
-                }
             }
-        } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
-        }
+        } catch(IOException |
+    ClassNotFoundException e)
+
+    {
+        e.printStackTrace();
     }
+
+}
 
     private void sleep(){
         try{
