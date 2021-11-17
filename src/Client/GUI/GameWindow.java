@@ -1,5 +1,7 @@
 package Client.GUI;
 
+import Server.Game;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -19,7 +21,7 @@ public class GameWindow extends JPanel {
         questionPanel.setBackground(Color.white);
 
         JPanel timerPanel = new JPanel();
-        timerPanel.setPreferredSize(new Dimension(750, 250));
+        timerPanel.setPreferredSize(new Dimension(50, 50));
         timerPanel.setBackground(Color.red);
 
         JPanel buttonsPanel = new JPanel();
@@ -43,5 +45,11 @@ public class GameWindow extends JPanel {
     public void displayQuestion(String question) {
         this.question.setText(question);
 
+    }
+
+    public static void main(String[] args) {
+        Window testWindow = new Window();
+        testWindow.add(testWindow.getGameWindow());
+        testWindow.setVisible(true);
     }
 }

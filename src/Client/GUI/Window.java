@@ -10,6 +10,7 @@ public class Window extends JFrame {
         setTitle("QuizKampen");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+
     }
 
     public GameWindow getGameWindow() {
