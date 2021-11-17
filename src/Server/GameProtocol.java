@@ -15,22 +15,36 @@ public class GameProtocol {
         this.game = game;
     }
 
-    public void gameProcess()  {
+    public void gameProcess() throws IOException, ClassNotFoundException {
 
         if (state == NEWROND) {
-            game.sendRounds();
+            game.getPlayer1().send("NEWROND");
+            game.getPlayer2().send("NEWROND");
+            //game.sendRounds();
             state = WAITINGFORRESULTS;
         } else if (state == WAITINGFORRESULTS){
-            game.waitingForAnswers();
+            System.out.println(game.getPlayer1().receive());
+            System.out.println(game.getPlayer2().receive());
+            game.getPlayer1().send("WAITINGFORRESULTS");
+            game.getPlayer2().send("WAITINGFORRESULTS");
+            //game.waitingForAnswers();
             state = SENDINGRESULTS;
             }
          else if (state == SENDINGRESULTS) {
-             game.sendingOpponentResultToClients();
+            System.out.println(game.getPlayer1().receive());
+            System.out.println(game.getPlayer2().receive());
+            game.getPlayer1().send("SENDINGRESULTS");
+            game.getPlayer2().send("SENDINGRESULTS");
+             //game.sendingOpponentResultToClients();
              if (game.getCurrentRound() == game.getNrOfRounds()-1) {
                  state = ENDRESULT;
              }
         } else if(state == ENDRESULT){
-            game.sendAllOpponentResultsToClient();
+            System.out.println(game.getPlayer1().receive());
+            System.out.println(game.getPlayer2().receive());
+            game.getPlayer1().send("ENDRESULT");
+            game.getPlayer2().send("ENDRESULT");
+            //game.sendAllOpponentResultsToClient();
         }
     }
 

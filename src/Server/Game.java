@@ -18,6 +18,13 @@ public class Game extends Thread{
 
     }
 
+    public Player getPlayer1(){
+        return players[0];
+    }
+    public Player getPlayer2(){
+        return players[1];
+    }
+
     public int getNrOfRounds(){
         return nrOfRounds;
     }
@@ -79,10 +86,28 @@ public class Game extends Thread{
 
     public void run() {
 
-        for (currentRound = 0; currentRound < nrOfRounds; currentRound++) {
-            GameProtocol protocol = new GameProtocol(this);
+        GameProtocol protocol = new GameProtocol(this);
+        String input;
+        try {
             protocol.gameProcess();
+            input = getPlayer1().receive();
+            System.out.println("här" + input);
+
+            while (((input = getPlayer1().receive()) != null) || ((input = getPlayer2().receive()) != null)) {
+                protocol.gameProcess();
         }
+
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        /*for (currentRound = 0; currentRound < nrOfRounds; currentRound++) {
+            GameProtocol protocol = new GameProtocol(this);
+            try {
+                protocol.gameProcess();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }*/
 
         //TODO: how to solve for creating a new game after played???
 

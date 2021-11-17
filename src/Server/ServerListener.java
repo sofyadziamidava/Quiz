@@ -5,11 +5,6 @@ import java.net.ServerSocket;
 
 public class ServerListener {
 
-    //TODO:
-    // * klienten ansluter -> skickar en Rond med frågor och svar
-    // * när klienten spelat klart en rond skickar den result till server -> skickar resultat från båda klienter till båda
-    // * när båda klienter spelat klart båda ronder -> skickar bådas resultat till båda klienter
-
 
     public static void main(String[] args){
         int port = 42424;
