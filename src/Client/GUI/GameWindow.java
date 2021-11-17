@@ -8,20 +8,26 @@ import java.awt.*;
 public class GameWindow extends JPanel {
     public JLabel question;
     JPanel questionPanel;
+    myButton timer;
 
 
     public GameWindow() {
+
+        timer = new myButton("");
 
         setBackground(Color.yellow);
         setLayout(new BorderLayout());
 
         questionPanel = new JPanel();
+        questionPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 80));
         question = new JLabel("Whats your name?");
         questionPanel.add(question);
         questionPanel.setBackground(Color.white);
 
         JPanel timerPanel = new JPanel();
         timerPanel.setBackground(Color.red);
+
+
 
         JPanel buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(2, 2));
@@ -34,6 +40,7 @@ public class GameWindow extends JPanel {
         buttonsPanel.add(b2);
         buttonsPanel.add(b3);
         buttonsPanel.add(b4);
+
 
 
         this.add(questionPanel, BorderLayout.NORTH);
