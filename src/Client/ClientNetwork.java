@@ -31,7 +31,7 @@ public class ClientNetwork {
             while((messageFromServer = dataFromServer.readLine()) != null){
                 if(messageFromServer.equals("Paket")){
 
-
+                    sleep();
                     window.dispose();
 
                     Window gameWindow = new Window();
