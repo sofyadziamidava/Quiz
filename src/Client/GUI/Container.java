@@ -1,6 +1,7 @@
 package Client.GUI;
 
 import javax.swing.*;
+import javax.xml.stream.events.StartElement;
 import java.awt.*;
 
 public class Container extends JFrame {
@@ -20,14 +21,24 @@ public class Container extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        gameWindow = new GameWindow();
-        this.add(gameWindow);
+        //gameWindow = new GameWindow();
+        //this.add(gameWindow);
 
         //startWindow = new StartWindow();
-        //add(startWindow);
+        //this.add(startWindow);
 
 
         setVisible(true);
+    }
+
+    public GameWindow getGameWindow(){
+        this.add(gameWindow);
+        return gameWindow;
+    }
+
+    public StartWindow getStartWindow(){
+        this.add(startWindow);
+        return startWindow;
     }
 
     public static void main(String[] args) {

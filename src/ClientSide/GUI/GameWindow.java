@@ -1,4 +1,4 @@
-package Client.GUI;
+package ClientSide.GUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -6,14 +6,16 @@ import java.awt.*;
 public class GameWindow extends JPanel {
 
 
-    JLabel question;
+    public JLabel question;
+    JPanel questionPanel;
+
 
     public GameWindow(){
 
         setBackground(Color.yellow);
         setLayout(new BorderLayout());
 
-        JPanel questionPanel = new JPanel();
+        questionPanel = new JPanel();
         question = new JLabel("Whats your name?");
         questionPanel.add(question);
         questionPanel.setBackground(Color.white);
@@ -45,6 +47,5 @@ public class GameWindow extends JPanel {
         this.question.setText(question);
 
     }
-
 
 }

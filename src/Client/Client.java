@@ -1,14 +1,18 @@
 package Client;
 
+import Client.GUI.Container;
+import Client.GUI.StartWindow;
+
 public class Client {
 
     public Client() {
-        ClientNetwork clientNetwork = new ClientNetwork();
+        //ClientNetwork clientNetwork = new ClientNetwork();
     }
 
- public static void main(String[] args){
+    public static void main(String[] args) {
 
-  Client client = new Client();
+        StartWindow startWindow = new Container().getStartWindow();
+        Client client = new Client();
 
- }
+    }
 }

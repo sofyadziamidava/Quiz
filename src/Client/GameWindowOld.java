@@ -4,20 +4,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.net.Socket;
 
-public class GameWindow extends JFrame implements ActionListener {
+
+public class GameWindowOld extends JFrame implements ActionListener {
 
     JPanel root;
     JLabel label;
     JButton startButton;
     private String message;
 
-    public GameWindow(){
+    public GameWindowOld(){
 
         createGameWindow();
         gameFrameSettings();

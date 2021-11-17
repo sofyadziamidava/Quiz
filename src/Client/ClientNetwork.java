@@ -1,15 +1,19 @@
 package Client;
 
+import Client.GUI.Container;
+import ClientSide.GUI.ContainerNew;
+import ClientSide.GUI.GameWindow;
+import ClientSide.GUI.StartWindowNew;
+
 import java.io.*;
 import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class ClientNetwork {
 
-    GameWindow gameWindow;
+    ContainerNew containerNew;
 
-    public ClientNetwork() {
-        gameWindow = new GameWindow();
+    public ClientNetwork(ContainerNew containerNew) {
+        this.containerNew = containerNew;
         connectToServer();
     }
 
@@ -21,13 +25,33 @@ public class ClientNetwork {
             BufferedReader dataFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
             PrintWriter dataToServer = new PrintWriter(clientSocket.getOutputStream(), true);)
         {
-            System.out.println("Connection established...");
+
             String messageFromServer;
             while((messageFromServer = dataFromServer.readLine()) != null){
-                gameWindow.getMessageFromServer(messageFromServer);
-                System.out.println("Data from server: " + messageFromServer);
+                if(messageFromServer.equals("Paket")){
+
+
+                    containerNew.dispose();
+
+                    ContainerNew gameWindow = new ContainerNew();
+                    GameWindow gw = gameWindow.getGameWindow();
+                    gameWindow.add(gw);
+                    gameWindow.setVisible(true);
+
+                    sleep();
+                    gw.question.setText("How old are you?");
+
+                }
             }
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private void sleep(){
+        try{
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
             e.printStackTrace();
         }
     }
