@@ -21,7 +21,6 @@ public class GameWindow extends JPanel {
         questionPanel.setBackground(Color.white);
 
         JPanel timerPanel = new JPanel();
-        timerPanel.setPreferredSize(new Dimension(50, 50));
         timerPanel.setBackground(Color.red);
 
         JPanel buttonsPanel = new JPanel();
