@@ -2,11 +2,9 @@ package Client;
 
 import Client.GUI.GameWindow;
 import Client.GUI.Window;
+import Server.Rond;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
+import java.io.*;
 import java.net.Socket;
 
 public class ClientNetwork {
@@ -23,13 +21,20 @@ public class ClientNetwork {
         String serverHost = "127.0.0.1";
 
         try(Socket clientSocket = new Socket(serverHost, serverPort);
-            BufferedReader dataFromServer = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-            PrintWriter dataToServer = new PrintWriter(clientSocket.getOutputStream(), true);)
+            ObjectInputStream dataFromServer = new ObjectInputStream(clientSocket.getInputStream());
+            ObjectOutputStream dataToServer = new ObjectOutputStream(clientSocket.getOutputStream());)
         {
+            //Få en Rond objekt från servern
+            //Lägga info från ronden i window
+            //Skicka resultat till servern när spelaren är klar
+            //Få opponentens resultat, visa den
+            //Ta emot en Rond igen
 
-            String messageFromServer;
-            while((messageFromServer = dataFromServer.readLine()) != null){
-                if(messageFromServer.equals("Paket")){
+            ClientProtocol clientProtocol = new ClientProtocol();
+
+            Object o;
+            while((o = dataFromServer.readObject()) != null){
+                clientProtocol.handleNewRond(o);
 
                     sleep();
                     window.dispose();
@@ -44,7 +49,7 @@ public class ClientNetwork {
 
                 }
             }
-        } catch (IOException e) {
+        } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
