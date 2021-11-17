@@ -13,14 +13,18 @@ public class GameWindow extends JPanel {
 
     public GameWindow() {
 
-        timer = new myButton("");
+        timer = new myButton("0");
 
         setBackground(Color.yellow);
         setLayout(new BorderLayout());
 
         questionPanel = new JPanel();
         questionPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 80));
+
         question = new JLabel("Whats your name?");
+        question.setFont(new Font("Arial",Font.PLAIN,24));
+        question.add(timer);
+
         questionPanel.add(question);
         questionPanel.setBackground(Color.white);
 
@@ -44,8 +48,7 @@ public class GameWindow extends JPanel {
 
 
         this.add(questionPanel, BorderLayout.NORTH);
-        this.add(timerPanel, BorderLayout.CENTER);
-        this.add(buttonsPanel, BorderLayout.SOUTH);
+        this.add(buttonsPanel, BorderLayout.CENTER);
     }
 
     public void displayQuestion(String question) {
