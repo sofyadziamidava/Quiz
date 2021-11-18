@@ -1,44 +1,59 @@
 package Client.GUI;
 
-import Server.Game;
+import Client.Clock;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.List;
 
 public class GameWindow extends JPanel {
+
     public JLabel question;
+    JLabel timerText;
+    JLabel timerLabel;
     JPanel questionPanel;
-    myButton timer;
+    JPanel buttonsPanel;
+    myButton timerButton;
     myButton[]buttonsArray;
+    Clock timer;
 
 
     public GameWindow() {
 
-        timer = new myButton("0");
+        buttonsArray = new myButton[4];
+        timerButton = new myButton("15");
+        timerLabel = new JLabel();
+        timer = new Clock(timerLabel);
+
 
         setBackground(Color.yellow);
-        setLayout(new BorderLayout());
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         questionPanel = new JPanel();
         questionPanel.setLayout(new FlowLayout(FlowLayout.CENTER, 10, 80));
 
         question = new JLabel("Whats your name?");
         question.setFont(new Font("Arial",Font.PLAIN,24));
-        question.add(timer);
+
 
         questionPanel.add(question);
         questionPanel.setBackground(Color.white);
 
+
         JPanel timerPanel = new JPanel();
-        timerPanel.setBackground(Color.red);
+        timerPanel.setBackground(Color.white);
+        timerText = new JLabel("Time left: ");
+        timerText.setFont(new Font("Arial", Font.BOLD, 20));
+        timerLabel.setFont(new Font("Arila", Font.BOLD, 20));
+        timerPanel.add(timerText);
+        timerPanel.add(timerLabel);
 
-
-
-        JPanel buttonsPanel = new JPanel();
+        buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(2, 2));
         buttonsPanel.setBackground(Color.GREEN);
-        myButton b1 = new myButton("Button1");
+        createButtons(buttonsArray, buttonsPanel);
+
+        /*myButton b1 = new myButton("Button1");
         myButton b2 = new myButton("Button2");
         myButton b3 = new myButton("Button3");
         myButton b4 = new myButton("Button4");
@@ -47,11 +62,13 @@ public class GameWindow extends JPanel {
         buttonsPanel.add(b3);
         buttonsPanel.add(b4);
 
-        buttonsArray = new myButton[]{b1, b2, b3 ,b4};
+        buttonsArray = new myButton[]{b1, b2, b3 ,b4};*/
 
+        timer.start();
 
 
         this.add(questionPanel, BorderLayout.NORTH);
+        add(timerPanel);
         this.add(buttonsPanel, BorderLayout.CENTER);
     }
 
@@ -65,7 +82,16 @@ public class GameWindow extends JPanel {
         }
     }
 
-
+    public myButton[] createButtons(myButton[] buttonsArray, JPanel buttonsPanel){
+        myButton[] b = buttonsArray;
+        //lägga till ActionListener, intern klass
+        for (int i = 0; i<4; ++i){
+            myButton button = new myButton("button"+i);
+            buttonsPanel.add(button);
+            b[i] = button;
+        }
+        return b;
+    }
 
     public static void main(String[] args) {
         Window testWindow = new Window();

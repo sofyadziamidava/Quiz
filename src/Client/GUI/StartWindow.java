@@ -42,6 +42,7 @@ public class StartWindow extends JPanel{
     private class StartAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            //lägg till connect to server, ändra state
             savedName = name.getText();
             System.out.println(savedName);
             System.out.println("Ready from button: " + ready);

@@ -1,26 +1,28 @@
 package Client;
+import javax.swing.*;
 
-import java.time.Duration;
-import java.time.Instant;
+public class Clock extends Thread {
 
-public class Clock{
+    private int timeLeft = 15;
+    JLabel timer;
 
-    Instant start;
 
-    public Clock(){}
-
-    public void timeStart() {
-        this.start = Instant.now();
+    public Clock(JLabel timer){
+        this.timer = timer;
     }
 
-    public String elapsedTime(){
-        Instant now = Instant.now();
-        if (Duration.between(start, now) == null){
-            return "0";
-        }
-        else {
-            return Long.toString(Duration.between(start, now).toSeconds());
+    public void run() {
+        //när tid blir 0 ändra state?
+        while (timeLeft > -1) {
+            try {
+                timer.setText("" + timeLeft);
+                Thread.sleep(1000);
+                --timeLeft;
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
+
 
