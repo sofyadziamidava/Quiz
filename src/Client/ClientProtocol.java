@@ -2,9 +2,9 @@ package Client;
 
 import Client.GUI.GameWindow;
 import Client.GUI.Window;
-import Server.Rond;
+import Server.Game;
+import shared.Rond;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
@@ -12,8 +12,9 @@ import java.util.List;
 public class ClientProtocol {
 
     Window window;
+    GameWindow gamePanel;
 
-    private String Question1;
+    private String question1;
     private String Question2;
     private String[] answers1;
     private String[] answers2;
@@ -46,7 +47,7 @@ public class ClientProtocol {
 
     public void handleNewRond(Object o){
         Rond newRond = (Rond)o;
-        Question1 = newRond.getQuestion1().getQuestion();
+        question1 = newRond.getQuestion1().getQuestion();
         Question2 = newRond.getQuestion2().getQuestion();
         answers1 = newRond.getQuestion1().getAnswers();
         answers2 = newRond.getQuestion2().getAnswers();
@@ -59,18 +60,40 @@ public class ClientProtocol {
         String correctAnswer2 = answers2[0];
         List<String> alternatives1 = Arrays.asList(answers1);
         List<String> alternatives2 = Arrays.asList(answers2);
-        Collections.shuffle(alternatives1);
         Collections.shuffle(alternatives2);
+
+        createGameWindow(question1, alternatives1, correctAnswer1);
+        boolean checkTimer = gamePanel.getTimerLabel().getText().equals("0");
+
+        while(!checkTimer){
+
+            ClientNetwork.sleep();
+            if(gamePanel.isButtonPressed()){
+                System.out.println("Inside if-scope");
+                break;
+            }
+            checkTimer = gamePanel.getTimerLabel().getText().equals("0");
+        }
+
+        System.out.println("out of while loop");
+
+    }
+
+
+    private void createGameWindow(String question, List<String> alternatives1, String correctAnswer1) {
 
         window.dispose();
 
         Window gameWindow = new Window();
-        GameWindow gw = gameWindow.getGameWindow();
-        gameWindow.add(gw);
+        gamePanel = gameWindow.getGameWindow();
+        gameWindow.add(gamePanel);
         gameWindow.setVisible(true);
 
-        gw.displayQuestion(Question1);
-        gw.displayButtons(alternatives1);
+        gamePanel.displayQuestion(question);
+        gamePanel.displayButtons(alternatives1);
+        gamePanel.setCorrectAnswer(correctAnswer1);
+
+        Collections.shuffle(alternatives1);
     }
 
     public void sendPointsToServer(int points){

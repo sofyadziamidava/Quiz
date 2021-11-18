@@ -1,8 +1,6 @@
 package Client;
 
-import Client.GUI.GameWindow;
 import Client.GUI.Window;
-import Server.Rond;
 
 import java.io.*;
 import java.net.Socket;
@@ -33,6 +31,7 @@ public class ClientNetwork {
 
             Object o;
             while ((o = dataFromServer.readObject()) != null) {
+                sleep();
                 clientProtocol.handleNewRond(o);
 
             }
@@ -45,9 +44,9 @@ public class ClientNetwork {
 
 }
 
-    private void sleep(){
+    public static void sleep(){
         try{
-            Thread.sleep(5000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
