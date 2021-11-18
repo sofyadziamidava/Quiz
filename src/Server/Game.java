@@ -2,7 +2,7 @@ package Server;
 
 import java.io.IOException;
 
-public class Game extends Thread{
+public class Game extends Thread {
 
     int nrOfRounds;
     int currentRound;
@@ -15,19 +15,22 @@ public class Game extends Thread{
         this.players[0] = player1;
         this.players[1] = player2;
         currentPlayer = 0;
-
+        currentRound = 0;
+        nrOfRounds = 1;
     }
 
-    public Player getPlayer1(){
+    public Player getPlayer1() {
         return players[0];
     }
-    public Player getPlayer2(){
+
+    public Player getPlayer2() {
         return players[1];
     }
 
-    public int getNrOfRounds(){
+    public int getNrOfRounds() {
         return nrOfRounds;
     }
+
     public int getCurrentRound() {
         return currentRound;
     }
@@ -37,7 +40,7 @@ public class Game extends Thread{
      */
     public void sendRounds() {
         Rond rond = new Rond();
-        for (Player player:players) {
+        for (Player player : players) {
             try {
                 player.send(rond);
             } catch (IOException e) {
@@ -47,7 +50,7 @@ public class Game extends Thread{
         }
     }
 
-    public void waitingForAnswers() {
+ /*   public boolean gotAnswersFromBothClients(String[] input) {
         int answerFromClient = 0;
         while(answerFromClient < 2) {
             String nrOfCorrectAnswers;
@@ -64,7 +67,8 @@ public class Game extends Thread{
                 e.printStackTrace();
             }
         }
-    }
+        return true;
+    }*/
 
     public void sendingOpponentResultToClients() {
         try {
@@ -87,16 +91,22 @@ public class Game extends Thread{
     public void run() {
 
         GameProtocol protocol = new GameProtocol(this);
-        String input;
+        String player1Input = null;
+        String player2Input = null;
+        String[] input = new String[2];
         try {
-            protocol.gameProcess();
-            input = getPlayer1().receive();
-            System.out.println("här" + input);
+            input[0] = null;
+            protocol.gameProcess(input);
 
-            while (((input = getPlayer1().receive()) != null) || ((input = getPlayer2().receive()) != null)) {
-                protocol.gameProcess();
-        }
-
+            while (true) {
+                player1Input = getPlayer1().receive();
+                player2Input = getPlayer2().receive();
+                if (player1Input != null && player2Input != null) {
+                    input[0] = player1Input;
+                    input[1] = player2Input;
+                    protocol.gameProcess(input);
+                }
+            }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -109,10 +119,7 @@ public class Game extends Thread{
             }
         }*/
 
-        //TODO: how to solve for creating a new game after played???
-
     }
-
 
 
 }

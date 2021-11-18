@@ -1,15 +1,11 @@
 package Server;
 
-import Server.Network;
-
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.net.Socket;
 
-//TODO: decide what information player objects needs to hold
-// -> eller är det här bara en mellanhand, som skickar data mellan spelet och användaren?
 
 public class Player implements Serializable {
 
