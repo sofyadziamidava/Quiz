@@ -1,8 +1,11 @@
 package Client;
 
 import Client.GUI.Window;
+import Server.Rond;
 
 import java.io.*;
+import java.io.*;
+import java.lang.reflect.Array;
 import java.net.Socket;
 
 public class ClientNetwork {
@@ -19,15 +22,12 @@ public class ClientNetwork {
         String serverHost = "127.0.0.1";
 
         try (Socket clientSocket = new Socket(serverHost, serverPort);
+             ObjectOutputStream dataToServer = new ObjectOutputStream(clientSocket.getOutputStream());
              ObjectInputStream dataFromServer = new ObjectInputStream(clientSocket.getInputStream());
-             ObjectOutputStream dataToServer = new ObjectOutputStream(clientSocket.getOutputStream());) {
-            //Få en Rond objekt från servern
-            //Lägga info från ronden i window
-            //Skicka resultat till servern när spelaren är klar
-            //Få opponentens resultat, visa den
-            //Ta emot en Rond igen
-
-            ClientProtocol clientProtocol = new ClientProtocol(window);
+        ) {
+            Object obj;
+            while ((obj = dataFromServer.readObject()) != null) {
+                if (obj instanceof Rond) {
 
             Object o;
             while ((o = dataFromServer.readObject()) != null) {
