@@ -1,8 +1,10 @@
 package Client;
 
 import Client.GUI.Window;
+import shared.Rond;
 
 import java.io.*;
+import java.lang.reflect.Array;
 import java.net.Socket;
 
 public class ClientNetwork {
@@ -17,35 +19,34 @@ public class ClientNetwork {
     public void connectToServer() {
         int serverPort = 42424;
         String serverHost = "127.0.0.1";
+        ClientProtocol clientProtocol = new ClientProtocol(window);
 
         try (Socket clientSocket = new Socket(serverHost, serverPort);
+             ObjectOutputStream dataToServer = new ObjectOutputStream(clientSocket.getOutputStream());
              ObjectInputStream dataFromServer = new ObjectInputStream(clientSocket.getInputStream());
-             ObjectOutputStream dataToServer = new ObjectOutputStream(clientSocket.getOutputStream());) {
-            //Få en Rond objekt från servern
-            //Lägga info från ronden i window
-            //Skicka resultat till servern när spelaren är klar
-            //Få opponentens resultat, visa den
-            //Ta emot en Rond igen
+        ) {
+            Object obj;
+            while ((obj = dataFromServer.readObject()) != null) {
+                if (obj instanceof Rond) {  // kommer in med runda
+                    sleep();
+                    clientProtocol.handleNewRond(obj);
+                }
+                else if (obj instanceof Integer) {  // kommer in med resultat från andra spelaren, integer
 
-            ClientProtocol clientProtocol = new ClientProtocol(window);
+                }
+                else if (obj instanceof Array) {   // kommer in med alla resultat från andra spelaren, integer array
 
-            Object o;
-            while ((o = dataFromServer.readObject()) != null) {
-                sleep();
-                clientProtocol.handleNewRond(o);
+                }
 
             }
-        } catch(IOException |
-    ClassNotFoundException e)
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
-    {
-        e.printStackTrace();
     }
 
-}
-
-    public static void sleep(){
-        try{
+    public static void sleep() {
+        try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
