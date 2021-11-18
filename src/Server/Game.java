@@ -1,5 +1,7 @@
 package Server;
 
+import shared.Rond;
+
 import java.io.IOException;
 
 public class Game extends Thread {
