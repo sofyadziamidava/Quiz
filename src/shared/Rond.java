@@ -1,16 +1,15 @@
 package shared;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Rond implements Serializable {
     Question question1;
     Question question2;
 
-    public Rond() {
-        String[] a = new String[]{"19","25","48","6"};
-        String[] b = new String[]{"Stockholm","Oslo","Malmö","6"};
-        this.question1 = new Question("Hur gammal är du?", a);
-        this.question2 = new Question("Vad är Sveriges huvudstad?", b);
+    public Rond(ArrayList<Question> q) {
+        this.question1 = q.get(0);
+        this.question2 = q.get(1);
     }
 
     public Question getQuestion1() {
