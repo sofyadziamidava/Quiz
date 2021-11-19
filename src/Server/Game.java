@@ -6,6 +6,7 @@ import java.io.IOException;
 
 public class Game extends Thread {
 
+    Database db;
     int nrOfRounds;
     int currentRound;
     Player[] players = new Player[2];
@@ -14,6 +15,7 @@ public class Game extends Thread {
     int[] player2SumPoints = new int[nrOfRounds];
 
     public Game(Player player1, Player player2) {
+        this.db = new Database();     // kan jag initiera databasen någon annanstans?
         this.players[0] = player1;
         this.players[1] = player2;
         currentPlayer = 0;
@@ -37,11 +39,8 @@ public class Game extends Thread {
         return currentRound;
     }
 
-    /*
-    Creating a round and sending it to both clients
-     */
     public void sendRounds() {
-        Rond rond = new Rond();
+        Rond rond = new Rond(db.createRond("natur"));
         for (Player player : players) {
             try {
                 player.send(rond);
@@ -51,26 +50,6 @@ public class Game extends Thread {
             }
         }
     }
-
- /*   public boolean gotAnswersFromBothClients(String[] input) {
-        int answerFromClient = 0;
-        while(answerFromClient < 2) {
-            String nrOfCorrectAnswers;
-            try {
-                if((nrOfCorrectAnswers = players[0].receive()) != null  ) {
-                    player1SumPoints[currentRound] = Integer.parseInt(nrOfCorrectAnswers);
-                    answerFromClient++;
-                }
-                if((nrOfCorrectAnswers = players[1].receive()) != null  ) {
-                    player2SumPoints[currentRound] = Integer.parseInt(nrOfCorrectAnswers);
-                    answerFromClient ++;
-                }
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-        return true;
-    }*/
 
     public void sendingOpponentResultToClients() {
         try {
@@ -92,7 +71,7 @@ public class Game extends Thread {
 
     public void run() {
 
-        GameProtocol protocol = new GameProtocol(this);
+        GameProtocol protocol = new GameProtocol(this);   // kan jag initiera protokollet någon annanstans?
         String player1Input = null;
         String player2Input = null;
         String[] input = new String[2];
@@ -112,15 +91,6 @@ public class Game extends Thread {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-        /*for (currentRound = 0; currentRound < nrOfRounds; currentRound++) {
-            GameProtocol protocol = new GameProtocol(this);
-            try {
-                protocol.gameProcess();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }*/
-
     }
 
 

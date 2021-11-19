@@ -1,6 +1,9 @@
 package Server;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Properties;
 
 public class GameProtocol {
     public static final int NEWROND = 0;
@@ -8,10 +11,20 @@ public class GameProtocol {
     private static final int ENDRESULT = 2;
     public int state = NEWROND;
 
-    Game game;
+    private Game game;
+
 
     public GameProtocol(Game game) {
         this.game = game;
+        }
+
+    public void loadData() {
+        Properties p = new Properties();
+        try {
+            p.load(new FileInputStream("Server/gameData.properties"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void gameProcess(String[] input) throws IOException, ClassNotFoundException {
@@ -28,7 +41,7 @@ public class GameProtocol {
                 state = NEWROND;
             }
         } else if (state == ENDRESULT) {
-            game.sendAllOpponentResultsToClient();   // useless??
+            game.interrupt();
         }
     }
 
