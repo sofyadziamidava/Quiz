@@ -45,9 +45,9 @@ public class ClientNetwork {
 
     }
 
-    public static void sleep(int seconds) {
+    public static void sleep(int milliseconds) {
         try {
-            Thread.sleep(seconds);
+            Thread.sleep(milliseconds);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

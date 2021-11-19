@@ -17,6 +17,7 @@ public class ClientProtocol {
     private String question;
     private List<String> answers;
     private String correctAnswer;
+    private final int FIRST_ELEMENT = 0;
 
     public ClientProtocol(Window window){
         this.window = window;
@@ -26,8 +27,8 @@ public class ClientProtocol {
         Rond newRond = (Rond)o;
         List<Question> questionList = newRond.getQuestionList();
 
-        for(Question currentQuestion : questionList){
-            playRound(currentQuestion);
+        for(Question question : questionList){
+            playRound(question);
         }
 
         //send points to server
@@ -39,10 +40,10 @@ public class ClientProtocol {
         playCurrentQuestion();
     }
 
-    private void unpackCurrentQuestion(Question q) {
-        this.question = q.getQuestion();
-        this.answers = q.getAnswers();
-        this.correctAnswer = answers.get(0);
+    private void unpackCurrentQuestion(Question question) {
+        this.question = question.getQuestion();
+        this.answers = question.getAnswers();
+        this.correctAnswer = answers.get(FIRST_ELEMENT);
         Collections.shuffle(answers);
     }
 
