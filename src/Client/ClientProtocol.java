@@ -2,7 +2,7 @@ package Client;
 
 import Client.GUI.GameWindow;
 import Client.GUI.Window;
-import Server.Game;
+import shared.Question;
 import shared.Rond;
 
 import java.util.Arrays;
@@ -12,39 +12,36 @@ import java.util.List;
 public class ClientProtocol {
 
     Window window;
+    Window gameWindow;
     GameWindow gamePanel;
 
-    private String question1;
-    private String Question2;
-    private String[] answers1;
-    private String[] answers2;
+    private String question;
+    private String[] answers;
+    private String correctAnswer;
 
     public ClientProtocol(Window window){
         this.window = window;
     }
 
-
     public void handleNewRond(Object o){
         Rond newRond = (Rond)o;
-        question1 = newRond.getQuestion1().getQuestion();
-        Question2 = newRond.getQuestion2().getQuestion();
-        answers1 = newRond.getQuestion1().getAnswers();
-        answers2 = newRond.getQuestion2().getAnswers();
-        displayRond();
+        List<Question> questionList = newRond.getQuestionList();
+
+        for(Question q : questionList){
+            playRound(q);
+        }
+
+        //send points to server
     }
 
-    public void displayRond(){
-        String correctAnswer1 = answers1[0];
-        String correctAnswer2 = answers2[0];
-        List<String> alternatives1 = Arrays.asList(answers1);
-        List<String> alternatives2 = Arrays.asList(answers2);
-        Collections.shuffle(alternatives2);
+    private void playRound(Question q) {
+        unpackQuestion(q);
+        List<String> alternatives = Arrays.asList(answers);
+        Collections.shuffle(alternatives);
+        createGameWindow(question, alternatives, correctAnswer);
 
-        createGameWindow(question1, alternatives1, correctAnswer1);
         boolean checkTimer = gamePanel.getTimerLabel().getText().equals("0");
-
         while(!checkTimer){
-
             ClientNetwork.sleep();
             if(gamePanel.isButtonPressed()){
                 System.out.println("Inside if-scope");
@@ -54,25 +51,29 @@ public class ClientProtocol {
         }
 
         System.out.println("out of while loop");
-
+        this.gameWindow.dispose();
     }
 
+    private void unpackQuestion(Question q) {
+        this.question = q.getQuestion();
+        this.answers = q.getAnswers();
+        this.correctAnswer = answers[0];
+    }
 
-    private void createGameWindow(String question, List<String> alternatives1, String correctAnswer1) {
-
+    private void createGameWindow(String question, List<String> alternatives, String correctAnswer) {
         window.dispose();
-
-        Window gameWindow = new Window();
-        gamePanel = gameWindow.getGameWindow();
+        this.gameWindow = new Window();
+        this.gamePanel = gameWindow.getGameWindow();
         gameWindow.add(gamePanel);
         gameWindow.setVisible(true);
 
-        gamePanel.displayQuestion(question);
-        gamePanel.displayButtons(alternatives1);
-        gamePanel.setCorrectAnswer(correctAnswer1);
-
-        Collections.shuffle(alternatives1);
+        this.gamePanel.displayQuestion(question);
+        this.gamePanel.displayButtons(alternatives);
+        this.gamePanel.setCorrectAnswer(correctAnswer);
     }
+
+
+
 
     public void sendPointsToServer(int points){
 

@@ -18,4 +18,5 @@ public class Question implements Serializable {
     public String[] getAnswers() {
         return answers;
     }
+
 }
