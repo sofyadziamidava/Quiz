@@ -8,11 +8,12 @@ public class GameProtocol {
     private static final int ENDRESULT = 2;
     public int state = NEWROND;
 
-    Game game;
+    private Game game;
+
 
     public GameProtocol(Game game) {
         this.game = game;
-    }
+        }
 
     public void gameProcess(String[] input) throws IOException, ClassNotFoundException {
 
@@ -28,7 +29,7 @@ public class GameProtocol {
                 state = NEWROND;
             }
         } else if (state == ENDRESULT) {
-            game.sendAllOpponentResultsToClient();   // useless??
+            game.interrupt();
         }
     }
 

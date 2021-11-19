@@ -2,107 +2,76 @@ package Client;
 
 import Client.GUI.GameWindow;
 import Client.GUI.Window;
+import shared.Question;
 import shared.Rond;
 
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
 public class ClientProtocol {
 
     Window window;
+    Window gameWindow;
     GameWindow gamePanel;
 
-    private String question1;
-    private String Question2;
-    private String[] answers1;
-    private String[] answers2;
-
-    private final static int RECIVEROND = 0;
-    private final static int SENDRESULT = 1;
-    private final static int GETOPPONENTSRESULT = 2;
-    private final static int GETFINALRESULT = 3;
-
-    private int state = RECIVEROND;
+    private String question;
+    private List<String> answers;
+    private String correctAnswer;
+    private final int FIRST_ELEMENT = 0;
 
     public ClientProtocol(Window window){
         this.window = window;
     }
 
-    public Object handleInput(Object input){
-        Object output = 2;
-        if(state == RECIVEROND){
-            output = 1;
-            state = SENDRESULT;
-        } else if(state == SENDRESULT){
-
-        } else if(state == GETOPPONENTSRESULT){
-
-        } else if (state == GETFINALRESULT){
-
-        }
-        return output;
-    }
-
     public void handleNewRond(Object o){
         Rond newRond = (Rond)o;
-        question1 = newRond.getQuestion1().getQuestion();
-        Question2 = newRond.getQuestion2().getQuestion();
-        answers1 = newRond.getQuestion1().getAnswers();
-        answers2 = newRond.getQuestion2().getAnswers();
-        displayRond();
-        //System.out.printf("first question: %s%ncorrect answer: %s%n",firstQuestion,correctAnswser1);
+        List<Question> questionList = newRond.getQuestionList();
+
+        for(Question question : questionList){
+            playRound(question);
+        }
+
+        //Show result window for client
+        //send points to server
     }
 
-    public void displayRond(){
-        String correctAnswer1 = answers1[0];
-        String correctAnswer2 = answers2[0];
-        List<String> alternatives1 = Arrays.asList(answers1);
-        List<String> alternatives2 = Arrays.asList(answers2);
-        Collections.shuffle(alternatives2);
+    private void playRound(Question currentQuestion) {
+        unpackCurrentQuestion(currentQuestion);
+        createGameWindowFromCurrentQuestion(question, answers, correctAnswer);
+        playCurrentQuestion();
+    }
 
-        createGameWindow(question1, alternatives1, correctAnswer1);
+    private void unpackCurrentQuestion(Question question) {
+        this.question = question.getQuestion();
+        this.answers = question.getAnswers();
+        this.correctAnswer = answers.get(FIRST_ELEMENT);
+        Collections.shuffle(answers);
+    }
+
+    private void createGameWindowFromCurrentQuestion(String question, List<String> alternatives, String correctAnswer) {
+        window.dispose();
+        this.gameWindow = new Window();
+        this.gamePanel = gameWindow.getGameWindow();
+        this.gameWindow.add(gamePanel);
+        this.gameWindow.setVisible(true);
+
+        this.gamePanel.displayQuestion(question);
+        this.gamePanel.displayButtons(alternatives);
+        this.gamePanel.setCorrectAnswer(correctAnswer);
+    }
+
+    private void playCurrentQuestion() {
         boolean checkTimer = gamePanel.getTimerLabel().getText().equals("0");
-
         while(!checkTimer){
-
-            ClientNetwork.sleep();
+            ClientNetwork.sleep(1000);
             if(gamePanel.isButtonPressed()){
                 System.out.println("Inside if-scope");
                 break;
             }
             checkTimer = gamePanel.getTimerLabel().getText().equals("0");
         }
-
         System.out.println("out of while loop");
-
+        ClientNetwork.sleep(3000);
+        this.gameWindow.dispose();
     }
-
-
-    private void createGameWindow(String question, List<String> alternatives1, String correctAnswer1) {
-
-        window.dispose();
-
-        Window gameWindow = new Window();
-        gamePanel = gameWindow.getGameWindow();
-        gameWindow.add(gamePanel);
-        gameWindow.setVisible(true);
-
-        gamePanel.displayQuestion(question);
-        gamePanel.displayButtons(alternatives1);
-        gamePanel.setCorrectAnswer(correctAnswer1);
-
-        Collections.shuffle(alternatives1);
-    }
-
-    public void sendPointsToServer(int points){
-
-    }
-
-    public void reciveRondsResult(){
-
-    }
-
-
-
 }

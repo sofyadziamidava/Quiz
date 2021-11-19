@@ -13,21 +13,14 @@ public class GameWindow extends JPanel implements ActionListener {
     public JLabel question;
     JLabel timerText;
     JLabel timerLabel;
-
-
-
     JPanel questionPanel;
     JPanel buttonsPanel;
     myButton[]buttonsArray;
     Clock timer;
     private String correctAnswer;
     private boolean buttonPressed = false;
+    myButton[] buttonsInGame;
 
-
-/*
-    boolean timerLable = true;
-    boolean buttonPressed = true;
-     */
 
     public void setCorrectAnswer(String correctAnswer) {
         this.correctAnswer = correctAnswer;
@@ -65,18 +58,7 @@ public class GameWindow extends JPanel implements ActionListener {
         buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(2, 2));
         buttonsPanel.setBackground(Color.GREEN);
-        createButtons(buttonsArray, buttonsPanel);
-
-        /*myButton b1 = new myButton("Button1");
-        myButton b2 = new myButton("Button2");
-        myButton b3 = new myButton("Button3");
-        myButton b4 = new myButton("Button4");
-        buttonsPanel.add(b1);
-        buttonsPanel.add(b2);
-        buttonsPanel.add(b3);
-        buttonsPanel.add(b4);
-
-        buttonsArray = new myButton[]{b1, b2, b3 ,b4};*/
+        this.buttonsInGame = createButtons(buttonsArray, buttonsPanel);
 
         timer.start();
 
@@ -133,7 +115,15 @@ public class GameWindow extends JPanel implements ActionListener {
         } else{
             temp.setBackground(Color.red);
         }
+        setButtonsEnabled();
         buttonPressed = true;
 
+    }
+
+    private void setButtonsEnabled() {
+        //set all buttons to -> setEnable(false);
+        for(myButton button : buttonsInGame){
+            button.setEnabled(false);
+        }
     }
 }
