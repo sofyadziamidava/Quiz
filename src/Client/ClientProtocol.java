@@ -19,31 +19,10 @@ public class ClientProtocol {
     private String[] answers1;
     private String[] answers2;
 
-    private final static int RECIVEROND = 0;
-    private final static int SENDRESULT = 1;
-    private final static int GETOPPONENTSRESULT = 2;
-    private final static int GETFINALRESULT = 3;
-
-    private int state = RECIVEROND;
-
     public ClientProtocol(Window window){
         this.window = window;
     }
 
-    public Object handleInput(Object input){
-        Object output = 2;
-        if(state == RECIVEROND){
-            output = 1;
-            state = SENDRESULT;
-        } else if(state == SENDRESULT){
-
-        } else if(state == GETOPPONENTSRESULT){
-
-        } else if (state == GETFINALRESULT){
-
-        }
-        return output;
-    }
 
     public void handleNewRond(Object o){
         Rond newRond = (Rond)o;

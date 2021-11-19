@@ -27,14 +27,14 @@ public class ClientNetwork {
         ) {
             Object obj;
             while ((obj = dataFromServer.readObject()) != null) {
-                if (obj instanceof Rond) {  // kommer in med runda
+                if (obj instanceof Rond) {
                     sleep();
                     clientProtocol.handleNewRond(obj);
                 }
-                else if (obj instanceof Integer) {  // kommer in med resultat från andra spelaren, integer
+                else if (obj instanceof Integer) {
 
                 }
-                else if (obj instanceof Array) {   // kommer in med alla resultat från andra spelaren, integer array
+                else if (obj instanceof Array) {
 
                 }
 
