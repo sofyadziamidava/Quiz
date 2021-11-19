@@ -3,6 +3,7 @@ package Server;
 import shared.Question;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Database {
 
@@ -14,20 +15,20 @@ public class Database {
     private ArrayList<Question> djur = new ArrayList<>();
 
     public Database() {
-        natur.add(new Question("a", new String[]{"a","b","c","d"}));
-        natur.add(new Question("a", new String[]{"a","b","c","d"}));
+        natur.add(new Question("a", Arrays.asList("a","b","c","d")));
+        natur.add(new Question("a", Arrays.asList("a","b","c","d")));
 
-        vetenskap.add(new Question("a", new String[]{"a","b","c","d"}));
-        vetenskap.add(new Question("a", new String[]{"a","b","c","d"}));
+        vetenskap.add(new Question("a", Arrays.asList("a","b","c","d")));
+        vetenskap.add(new Question("a", Arrays.asList("a","b","c","d")));
 
-        kultur.add(new Question("a", new String[]{"a","b","c","d"}));
-        kultur.add(new Question("a", new String[]{"a","b","c","d"}));
+        kultur.add(new Question("a", Arrays.asList("a","b","c","d")));
+        kultur.add(new Question("a", Arrays.asList("a","b","c","d")));
 
-        samhälle.add(new Question("a", new String[]{"a","b","c","d"}));
-        samhälle.add(new Question("a", new String[]{"a","b","c","d"}));
+        samhälle.add(new Question("a", Arrays.asList("a","b","c","d")));
+        samhälle.add(new Question("a", Arrays.asList("a","b","c","d")));
 
-        djur.add(new Question("a", new String[]{"a","b","c","d"}));
-        djur.add(new Question("a", new String[]{"a","b","c","d"}));
+        djur.add(new Question("a", Arrays.asList("a","b","c","d")));
+        djur.add(new Question("a", Arrays.asList("a","b","c","d")));
 
         categories.add(natur);
         categories.add(vetenskap);

@@ -1,20 +1,18 @@
 package shared;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Rond implements Serializable {
-    ArrayList<Question> questionList;
+    List<Question> questionList;
 
 
-    public Rond(ArrayList<Question> questions) {
+    public Rond(List<Question> questions) {
 
         this.questionList = questions;
     }
 
-    public ArrayList<Question> getQuestionList() {
+    public List<Question> getQuestionList() {
         return questionList;
     }
 }
