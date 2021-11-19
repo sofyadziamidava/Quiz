@@ -9,6 +9,7 @@ public class Rond implements Serializable {
     List<Question> questionList = new ArrayList<>();
 
     public Rond() {
+
         List<String> answers = Arrays.asList("19","25","48","6");
         List<String> b = Arrays.asList("Stockholm","Oslo","Malmö","Warszawa");
         Question question1 = new Question("Hur gammal är du?", answers);
