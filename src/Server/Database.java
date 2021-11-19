@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 public class Database {
 
-    private ArrayList<ArrayList> categories = new ArrayList<>();
+    private final ArrayList<ArrayList<Question>> categories = new ArrayList<>();
     private ArrayList<Question> natur = new ArrayList<>();
     private ArrayList<Question> vetenskap = new ArrayList<>();
     private ArrayList<Question> kultur = new ArrayList<>();

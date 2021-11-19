@@ -54,26 +54,6 @@ public class Game extends Thread {
         }
     }
 
- /*   public boolean gotAnswersFromBothClients(String[] input) {
-        int answerFromClient = 0;
-        while(answerFromClient < 2) {
-            String nrOfCorrectAnswers;
-            try {
-                if((nrOfCorrectAnswers = players[0].receive()) != null  ) {
-                    player1SumPoints[currentRound] = Integer.parseInt(nrOfCorrectAnswers);
-                    answerFromClient++;
-                }
-                if((nrOfCorrectAnswers = players[1].receive()) != null  ) {
-                    player2SumPoints[currentRound] = Integer.parseInt(nrOfCorrectAnswers);
-                    answerFromClient ++;
-                }
-            } catch (IOException | ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-        }
-        return true;
-    }*/
-
     public void sendingOpponentResultToClients() {
         try {
             players[0].send(player2SumPoints[currentRound]);
@@ -114,8 +94,6 @@ public class Game extends Thread {
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
-
     }
 
 
