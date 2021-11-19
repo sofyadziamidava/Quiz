@@ -2,7 +2,6 @@ package Client;
 
 import Client.GUI.GameWindow;
 import Client.GUI.Window;
-import Server.Game;
 import shared.Rond;
 
 import java.util.Arrays;
