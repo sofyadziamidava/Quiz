@@ -52,7 +52,6 @@ public class ClientProtocol {
         answers1 = newRond.getQuestion1().getAnswers();
         answers2 = newRond.getQuestion2().getAnswers();
         displayRond();
-        //System.out.printf("first question: %s%ncorrect answer: %s%n",firstQuestion,correctAnswser1);
     }
 
     public void displayRond(){
