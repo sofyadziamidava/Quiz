@@ -3,8 +3,9 @@ package Client;
 import Client.GUI.Window;
 import shared.Rond;
 
-import java.io.*;
-import java.lang.reflect.Array;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.Arrays;
 
@@ -32,8 +33,9 @@ public class ClientNetwork {
                     sleep(3000);
                     clientProtocol.handleNewRond(obj);
                     String pointsToSend = String.valueOf(ClientProtocol.getPointsPerRond());
+                    System.out.println("sending points from client to server");
                     dataToServer.writeObject(pointsToSend);
-                    System.out.println("Points: " + ClientProtocol.getPointsPerRond());
+                    //System.out.println("Points: " + ClientProtocol.getPointsPerRond());
                 }
                 else if (obj instanceof Integer) {
                     System.out.println("Opponents points: " + obj);

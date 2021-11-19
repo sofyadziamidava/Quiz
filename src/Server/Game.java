@@ -11,8 +11,8 @@ public class Game extends Thread {
     int currentRound;
     Player[] players = new Player[2];
     int currentPlayer;
-    int[] player1SumPoints = new int[nrOfRounds];
-    int[] player2SumPoints = new int[nrOfRounds];
+    int[] player1SumPoints;
+    int[] player2SumPoints;
 
     public Game(Player player1, Player player2) {
         this.db = new Database();     // kan jag initiera databasen någon annanstans?
@@ -21,6 +21,8 @@ public class Game extends Thread {
         currentPlayer = 0;
         currentRound = 0;
         nrOfRounds = 1;
+        player1SumPoints = new int[nrOfRounds];
+        player2SumPoints = new int[nrOfRounds];
     }
 
     public Player getPlayer1() {
@@ -37,6 +39,11 @@ public class Game extends Thread {
 
     public int getCurrentRound() {
         return currentRound;
+    }
+
+    public void updatePoints(String[] input) { // input ["0", "0"] pla1sum [] curr 0
+        this.player1SumPoints[currentRound] = Integer.parseInt(input[0]);
+        this.player2SumPoints[currentRound] = Integer.parseInt(input[1]);
     }
 
     public void sendRounds() {
@@ -76,18 +83,18 @@ public class Game extends Thread {
         String player2Input = null;
         String[] input = new String[2];
         try {
-            input[0] = null;
-            protocol.gameProcess(input);
+            //input[0] = null;
+            protocol.gameProcess(input);   // första gången protokollet kallas skickas string med null,null
 
-            while (true) {
+            while (true) {  // loopen går igång direkt, ligger och väntar på svar från båda
                 player1Input = getPlayer1().receive();
                 player2Input = getPlayer2().receive();
                 if (player1Input != null && player2Input != null) {
                     input[0] = player1Input;
                     input[1] = player2Input;
-                    System.out.println("First players result from client: " + input[0]);
-                    System.out.println("Second players result from client: " + input[1]);
-                    protocol.gameProcess(input);
+                    //System.out.println("First players result from client: " + input[0]);
+                    //System.out.println("Second players result from client: " + input[1]);
+                    protocol.gameProcess(input);  // kommer player1 input alltid på index 0 ???
                 }
             }
         } catch (IOException | ClassNotFoundException e) {

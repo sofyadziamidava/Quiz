@@ -1,9 +1,6 @@
 package Server;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Properties;
 
 public class GameProtocol {
     public static final int NEWROND = 0;
@@ -18,23 +15,15 @@ public class GameProtocol {
         this.game = game;
         }
 
-    public void loadData() {
-        Properties p = new Properties();
-        try {
-            p.load(new FileInputStream("Server/gameData.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     public void gameProcess(String[] input) throws IOException, ClassNotFoundException {
 
-        if (state == NEWROND) {
+        if (state == NEWROND) {   // -> null,null
             System.out.println("First sate - send rond");
             game.sendRounds();          // Rond
             state = WAITINGFORRESULTS;
         } else if (state == WAITINGFORRESULTS) {
-            System.out.println("Second sate - waiting for results");
+            System.out.println("updating points in waiting for results");
+            game.updatePoints(input);    // should add new points to players
             if (game.getCurrentRound() == game.getNrOfRounds() - 1) {
                 System.out.println("Last sate - sending final results");
                 game.sendAllOpponentResultsToClient();   // int[]
