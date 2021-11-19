@@ -85,6 +85,8 @@ public class Game extends Thread {
                 if (player1Input != null && player2Input != null) {
                     input[0] = player1Input;
                     input[1] = player2Input;
+                    System.out.println("First players result from client: " + input[0]);
+                    System.out.println("Second players result from client: " + input[1]);
                     protocol.gameProcess(input);
                 }
             }
