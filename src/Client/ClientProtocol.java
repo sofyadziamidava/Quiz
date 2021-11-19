@@ -16,7 +16,7 @@ public class ClientProtocol {
     GameWindow gamePanel;
 
     private String question;
-    private String[] answers;
+    private List<String> answers;
     private String correctAnswer;
 
     public ClientProtocol(Window window){
@@ -36,9 +36,8 @@ public class ClientProtocol {
 
     private void playRound(Question q) {
         unpackQuestion(q);
-        List<String> alternatives = Arrays.asList(answers);
-        Collections.shuffle(alternatives);
-        createGameWindow(question, alternatives, correctAnswer);
+        Collections.shuffle(answers);
+        createGameWindow(question, answers, correctAnswer);
 
         boolean checkTimer = gamePanel.getTimerLabel().getText().equals("0");
         while(!checkTimer){
@@ -57,7 +56,7 @@ public class ClientProtocol {
     private void unpackQuestion(Question q) {
         this.question = q.getQuestion();
         this.answers = q.getAnswers();
-        this.correctAnswer = answers[0];
+        this.correctAnswer = answers.get(0);
     }
 
     private void createGameWindow(String question, List<String> alternatives, String correctAnswer) {
