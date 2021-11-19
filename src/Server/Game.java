@@ -39,9 +39,6 @@ public class Game extends Thread {
         return currentRound;
     }
 
-    /*
-    Creating a round and sending it to both clients
-     */
     public void sendRounds() {
         Rond rond = new Rond(db.createRond("natur"));
         for (Player player : players) {

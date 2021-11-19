@@ -28,7 +28,7 @@ public class GameProtocol {
                 state = NEWROND;
             }
         } else if (state == ENDRESULT) {
-            game.sendAllOpponentResultsToClient();   // useless??
+            game.interrupt();
         }
     }
 
