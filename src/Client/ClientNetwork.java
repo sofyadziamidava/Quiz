@@ -28,7 +28,7 @@ public class ClientNetwork {
             Object obj;
             while ((obj = dataFromServer.readObject()) != null) {
                 if (obj instanceof Rond) {
-                    sleep();
+                    sleep(3000);
                     clientProtocol.handleNewRond(obj);
                 }
                 else if (obj instanceof Integer) {
@@ -45,9 +45,9 @@ public class ClientNetwork {
 
     }
 
-    public static void sleep() {
+    public static void sleep(int seconds) {
         try {
-            Thread.sleep(1000);
+            Thread.sleep(seconds);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

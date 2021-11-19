@@ -61,7 +61,7 @@ public class ClientProtocol {
     private void playCurrentQuestion() {
         boolean checkTimer = gamePanel.getTimerLabel().getText().equals("0");
         while(!checkTimer){
-            ClientNetwork.sleep();
+            ClientNetwork.sleep(1000);
             if(gamePanel.isButtonPressed()){
                 System.out.println("Inside if-scope");
                 break;
@@ -69,6 +69,7 @@ public class ClientProtocol {
             checkTimer = gamePanel.getTimerLabel().getText().equals("0");
         }
         System.out.println("out of while loop");
+        ClientNetwork.sleep(3000);
         this.gameWindow.dispose();
     }
 }
