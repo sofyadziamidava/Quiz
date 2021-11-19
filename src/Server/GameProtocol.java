@@ -1,9 +1,6 @@
 package Server;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.Properties;
 
 public class GameProtocol {
     public static final int NEWROND = 0;
@@ -17,15 +14,6 @@ public class GameProtocol {
     public GameProtocol(Game game) {
         this.game = game;
         }
-
-    public void loadData() {
-        Properties p = new Properties();
-        try {
-            p.load(new FileInputStream("Server/gameData.properties"));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
 
     public void gameProcess(String[] input) throws IOException, ClassNotFoundException {
 
