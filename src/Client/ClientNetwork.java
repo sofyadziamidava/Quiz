@@ -39,16 +39,18 @@ public class ClientNetwork {
                 }
                 else if (obj instanceof Integer) {
                     System.out.println("Opponents points: " + obj);
+                    dataToServer.writeObject("a");
                     //Show both players result
                     //Send "trigger" to server in order to recive new rond
                 }
                 else if (obj instanceof int[]) {
                     System.out.println("Client recived an array");
-                    int[] results = (int[]) obj;
+                    int[] results = (int[])obj;
                     System.out.println(Arrays.toString(results));
                     for (int result: results) {
                         System.out.println(result);
                     }
+                    dataToServer.writeObject("b");
                     //Show final results
                 }
 

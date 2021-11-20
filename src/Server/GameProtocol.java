@@ -35,7 +35,7 @@ public class GameProtocol {
             }
         } else if (state == ENDRESULT) {
             System.out.println("Game ends");
-            game.interrupt();
+            game.ends();
         }
         System.out.println("End of gameProcess method");
     }

@@ -10,17 +10,16 @@ public class Game extends Thread {
     int nrOfRounds;
     int currentRound;
     Player[] players = new Player[2];
-    int currentPlayer;
     int[] player1SumPoints;
     int[] player2SumPoints;
+    boolean gameOn = true;
 
     public Game(Player player1, Player player2) {
         this.db = new Database();     // kan jag initiera databasen någon annanstans?
         this.players[0] = player1;
         this.players[1] = player2;
-        currentPlayer = 0;
         currentRound = 0;
-        nrOfRounds = 1;
+        nrOfRounds = 2;
         player1SumPoints = new int[nrOfRounds];
         player2SumPoints = new int[nrOfRounds];
     }
@@ -41,7 +40,12 @@ public class Game extends Thread {
         return currentRound;
     }
 
-    public void updatePoints(String[] input) { // input ["0", "0"] pla1sum [] curr 0
+    public void ends() {
+        gameOn = false;
+        this.interrupt();
+    }
+
+    public void updatePoints(String[] input) {
         this.player1SumPoints[currentRound] = Integer.parseInt(input[0]);
         this.player2SumPoints[currentRound] = Integer.parseInt(input[1]);
     }
@@ -62,6 +66,7 @@ public class Game extends Thread {
         try {
             players[0].send(player2SumPoints[currentRound]);
             players[1].send(player1SumPoints[currentRound]);
+            currentRound++;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -86,7 +91,7 @@ public class Game extends Thread {
             //input[0] = null;
             protocol.gameProcess(input);   // första gången protokollet kallas skickas string med null,null
 
-            while (true) {  // loopen går igång direkt, ligger och väntar på svar från båda
+            while (gameOn) {  // loopen går igång direkt, ligger och väntar på svar från båda
                 player1Input = getPlayer1().receive();
                 player2Input = getPlayer2().receive();
                 if (player1Input != null && player2Input != null) {
