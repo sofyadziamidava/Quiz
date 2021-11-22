@@ -19,11 +19,14 @@ public class ClientProtocol {
     private String correctAnswer;
     private final int FIRST_ELEMENT = 0;
 
+    private static int pointsPerRond;
+
     public ClientProtocol(Window window){
         this.window = window;
     }
 
     public void handleNewRond(Object o){
+        pointsPerRond = 0;
         Rond newRond = (Rond)o;
         List<Question> questionList = newRond.getQuestionList();
 
@@ -71,7 +74,15 @@ public class ClientProtocol {
             checkTimer = gamePanel.getTimerLabel().getText().equals("0");
         }
         System.out.println("out of while loop");
-        ClientNetwork.sleep(3000);
+        ClientNetwork.sleep(1000);
         this.gameWindow.dispose();
+    }
+
+    public static int getPointsPerRond() {
+        return pointsPerRond;
+    }
+
+    public static void increasePoint() {
+       pointsPerRond++;
     }
 }
