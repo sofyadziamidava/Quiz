@@ -32,16 +32,14 @@ public class ClientNetwork {
                 if (obj instanceof Rond) {
                     sleep(3000);
                     clientProtocol.handleNewRond(obj);
+                    System.out.println("round received ");
                     String pointsToSend = String.valueOf(ClientProtocol.getPointsPerRond());
                     System.out.println("sending points from client to server");
                     dataToServer.writeObject(pointsToSend);
-                    //System.out.println("Points: " + ClientProtocol.getPointsPerRond());
                 }
                 else if (obj instanceof Integer) {
                     System.out.println("Opponents points: " + obj);
                     dataToServer.writeObject("a");
-                    //Show both players result
-                    //Send "trigger" to server in order to recive new rond
                 }
                 else if (obj instanceof int[]) {
                     System.out.println("Client recived an array");
@@ -51,7 +49,6 @@ public class ClientNetwork {
                         System.out.println(result);
                     }
                     dataToServer.writeObject("b");
-                    //Show final results
                 }
 
             }
