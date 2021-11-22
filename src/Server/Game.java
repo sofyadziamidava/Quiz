@@ -13,14 +13,17 @@ public class Game extends Thread {
     int nrOfQuestionsPerRound;
     int currentRound;
     Player[] players = new Player[2];
+    PlayerStream[] playerStreams = new PlayerStream[2];
     int[] player1SumPoints;
     int[] player2SumPoints;
     boolean gameOn = true;
 
-    public Game(Player player1, Player player2) {
+    public Game(PlayerStream ps1, PlayerStream ps2)  {
         this.db = new Database();
-        this.players[0] = player1;
-        this.players[1] = player2;
+        this.players[0] = new Player();
+        this.players[1] = new Player();
+        this.playerStreams[0] = ps1;
+        this.playerStreams[1] = ps2;
         currentRound = 0;
     }
 
@@ -30,6 +33,14 @@ public class Game extends Thread {
 
     public Player getPlayer2() {
         return players[1];
+    }
+
+    public PlayerStream getPlayerStream1() {
+        return playerStreams[0];
+    }
+
+    public PlayerStream getPlayerStream2() {
+        return playerStreams[1];
     }
 
     public void setPlayersResultHolder(){
@@ -65,9 +76,9 @@ public class Game extends Thread {
 
     public void sendRounds() {
         Rond rond = new Rond(db.createRond());
-        for (Player player : players) {
+        for (PlayerStream playerStream : playerStreams) {
             try {
-                player.send(rond);
+                playerStream.send(rond);
             } catch (IOException e) {
                 e.printStackTrace();
                 System.out.println("could not send round to player");
@@ -77,8 +88,8 @@ public class Game extends Thread {
 
     public void sendingOpponentResultToClients() {
         try {
-            players[0].send(player2SumPoints[currentRound]);
-            players[1].send(player1SumPoints[currentRound]);
+            playerStreams[0].send(player2SumPoints[currentRound]);
+            playerStreams[1].send(player1SumPoints[currentRound]);
             currentRound++;
         } catch (IOException e) {
             e.printStackTrace();
@@ -87,8 +98,8 @@ public class Game extends Thread {
 
     public void sendAllOpponentResultsToClient() {
         try {
-            players[0].send(player2SumPoints[currentRound]);
-            players[1].send(player1SumPoints[currentRound]);
+            playerStreams[0].send(player2SumPoints[currentRound]);
+            playerStreams[1].send(player1SumPoints[currentRound]);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -116,8 +127,8 @@ public class Game extends Thread {
             protocol.gameProcess(input);   // första gången protokollet kallas skickas string med null,null
 
             while (gameOn) {  // loopen går igång direkt, ligger och väntar på svar från båda
-                String player1Input = getPlayer1().receive();
-                String player2Input = getPlayer2().receive();
+                String player1Input = getPlayerStream1().receive();
+                String player2Input = getPlayerStream2().receive();
                 if (player1Input != null && player2Input != null) {
                     input[0] = player1Input;
                     input[1] = player2Input;

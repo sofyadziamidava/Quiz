@@ -1,3 +1,4 @@
+/*
 package Server;
 
 import java.io.IOException;
@@ -31,3 +32,4 @@ public class ResultThread extends Thread{
         }
     }
 }
+*/

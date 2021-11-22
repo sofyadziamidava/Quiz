@@ -11,7 +11,7 @@ public class ServerListener {
         try {
             ServerSocket serverSocket = new ServerSocket(port);
             while(true){
-                Game game = new Game(new Player(serverSocket.accept()), new Player(serverSocket.accept()));
+                Game game = new Game(new PlayerStream(serverSocket.accept()), new PlayerStream(serverSocket.accept()));
                 game.start();
             }
         } catch (IOException e) {
