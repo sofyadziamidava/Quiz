@@ -1,5 +1,7 @@
 package Client.GUI;
 
+import Client.ClientProtocol;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -44,6 +46,7 @@ public class StartWindow extends JPanel{
         public void actionPerformed(ActionEvent e) {
             //lägg till connect to server, ändra state
             savedName = name.getText();
+            ClientProtocol.clientName = savedName;
             System.out.println(savedName);
             System.out.println("Ready from button: " + ready);
             nameLabel.setText("Hello " + savedName + ", Please wait for the game to start...");

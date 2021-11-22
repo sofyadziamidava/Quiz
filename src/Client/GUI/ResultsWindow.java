@@ -72,7 +72,8 @@ public class ResultsWindow extends JPanel {
         player1ResultsField.setLayout(new BoxLayout(player1ResultsField, BoxLayout.Y_AXIS));
         player1ResultsField.add(player1Label = new JLabel("Player1"));
         player1ResultsField.add(questionResults = new JPanel());
-        player1ResultsField.add(showTotalResult(player1ResultsField, points));
+        player1ResultsField.add(showTotalResult(points));
+       // player1ResultsField.add(showTotalResult(player1ResultsField, points));
 
         questionResults.setLayout(new BoxLayout(questionResults, BoxLayout.Y_AXIS));
         questionResults.add(player1Results = new JLabel("player1results Q1"));
@@ -83,7 +84,8 @@ public class ResultsWindow extends JPanel {
         player2ResultsField.setLayout(new BoxLayout(player2ResultsField, BoxLayout.Y_AXIS));
         player2ResultsField.add(player2Label = new JLabel("Player2"));
         player2ResultsField.add(questionResults = new JPanel());
-        player2ResultsField.add(player2Tot = new JLabel("player2total"));
+        player2ResultsField.add(showTotalResult(opponentResult));
+        //player2ResultsField.add(player2Tot = new JLabel("player2total"));
 
         questionResults.setLayout(new BoxLayout(questionResults, BoxLayout.Y_AXIS));
         questionResults.add(player2Results = new JLabel("player2results Q1"));
@@ -91,8 +93,8 @@ public class ResultsWindow extends JPanel {
         questionResults.add(new JLabel("Player2results Q3"));
 
         playerTotalField.setBackground(Color.YELLOW);
-        playerTotalField.add(showTotalResult(playerTotalField, points));
-        playerTotalField.add(showTotalResult(playerTotalField, opponentResult));
+        playerTotalField.add(showTotalResult(ClientProtocol.clientScoreTotal));
+        playerTotalField.add(showTotalResult(ClientProtocol.opponentScoreTotal));
 
         /*buttonsPanel.add(continueButton = SetContinueButtonText(rounds, question));*/
         buttonsPanel.add(continueButton = new myButton("Continue"));
@@ -100,7 +102,7 @@ public class ResultsWindow extends JPanel {
         buttonsPanel.add(new myButton("Exit"));
     }
 
-    public JLabel showTotalResult(JPanel panel, int points){
+    public JLabel showTotalResult(int points){
         JLabel resultsLabel = new JLabel("Player 1 total: "+""+points+" || ");
         return resultsLabel;
     }

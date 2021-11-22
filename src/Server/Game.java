@@ -87,8 +87,8 @@ public class Game extends Thread {
 
     public void sendAllOpponentResultsToClient() {
         try {
-            players[0].send(player2SumPoints);
-            players[1].send(player1SumPoints);
+            players[0].send(player2SumPoints[currentRound]);
+            players[1].send(player1SumPoints[currentRound]);
         } catch (IOException e) {
             e.printStackTrace();
         }

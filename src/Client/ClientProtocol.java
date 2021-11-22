@@ -21,8 +21,20 @@ public class ClientProtocol {
     private String correctAnswer;
     private final int FIRST_ELEMENT = 0;
     public static boolean waitingForNextRound = true;
+    public static int clientScoreTotal;
+    public static int opponentScoreTotal;
+    public static String clientName;
+    public static String opponentName;
 
     private static int pointsPerRond;
+
+    public void addClientScore(int newScore) {
+        clientScoreTotal += newScore;
+    }
+
+    public void addOpponentScore(int newScore) {
+        opponentScoreTotal += newScore;
+    }
 
     public ClientProtocol(Window window){
         this.window = window;
@@ -44,12 +56,14 @@ public class ClientProtocol {
         for(Question question : questionList){
             playRound(question);
         }
+        addClientScore(pointsPerRond);
 
         //resultsWindow();
         //send points to server
     }
 
     public void resultsWindow(int opponentResult) {
+        addOpponentScore(opponentResult);
         this.window = new Window();
         this.resultsWindow = new ResultsWindow(pointsPerRond, opponentResult);
         window.add(resultsWindow);

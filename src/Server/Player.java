@@ -9,6 +9,7 @@ import java.net.Socket;
 
 public class Player implements Serializable {
 
+    String name;
     ObjectInputStream in;
     ObjectOutputStream out;
 
@@ -16,6 +17,10 @@ public class Player implements Serializable {
 
         this.out = Network.getOutStream(socket);
         this.in = Network.getInStream(socket);
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 
     public void send(Object obj) throws IOException {

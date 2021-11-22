@@ -3,9 +3,10 @@ package Server;
 import java.io.IOException;
 
 public class GameProtocol {
-    public static final int NEWROND = 0;
-    public static final int WAITINGFORRESULTS = 1;
-    private static final int ENDRESULT = 2;
+    //public static final int INIT = 0;
+    public static final int NEWROND = 1;
+    public static final int WAITINGFORRESULTS = 2;
+    private static final int ENDRESULT = 3;
     public int state = NEWROND;
 
     private Game game;
@@ -16,6 +17,13 @@ public class GameProtocol {
 
     public void gameProcess(String[] input) throws IOException, ClassNotFoundException {
 
+        /*if (state == INIT) {
+            game.getPlayer1().setName(input[0]);
+            game.getPlayer2().setName(input[1]);
+            game.getPlayer1().send(game.getPlayer2().name);
+            game.getPlayer2().send(game.getPlayer1().name);
+            state = NEWROND;
+        }*/
         if (state == NEWROND) {   // -> null,null
             game.sendRounds();          // Rond
             state = WAITINGFORRESULTS;
@@ -23,6 +31,7 @@ public class GameProtocol {
             game.updatePoints(input);    // should add new points to players
             if (game.getCurrentRound() == game.getNrOfRounds() - 1) {
                 game.sendAllOpponentResultsToClient();   // int[]
+                //game.sendingOpponentResultToClients();
                 state = ENDRESULT;
             } else {
                 game.sendingOpponentResultToClients();  // int
