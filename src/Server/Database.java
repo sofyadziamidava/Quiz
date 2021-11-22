@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Properties;
+import java.util.Random;
 
 public class Database {
 
@@ -17,21 +18,23 @@ public class Database {
     private ArrayList<Question> samhälle = new ArrayList<>();
     private ArrayList<Question> djur = new ArrayList<>();
 
+    ArrayList<Integer> alreadySelectedRonds = new ArrayList<>();
+
     public Database() {
-        natur.add(new Question("a", Arrays.asList("a","b","c","d")));
-        natur.add(new Question("a", Arrays.asList("a","b","c","d")));
+        natur.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
+        natur.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
 
-        vetenskap.add(new Question("a", Arrays.asList("a","b","c","d")));
-        vetenskap.add(new Question("a", Arrays.asList("a","b","c","d")));
+        vetenskap.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
+        vetenskap.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
 
-        kultur.add(new Question("a", Arrays.asList("a","b","c","d")));
-        kultur.add(new Question("a", Arrays.asList("a","b","c","d")));
+        kultur.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
+        kultur.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
 
-        samhälle.add(new Question("a", Arrays.asList("a","b","c","d")));
-        samhälle.add(new Question("a", Arrays.asList("a","b","c","d")));
+        samhälle.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
+        samhälle.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
 
-        djur.add(new Question("a", Arrays.asList("a","b","c","d")));
-        djur.add(new Question("a", Arrays.asList("a","b","c","d")));
+        djur.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
+        djur.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
 
         categories.add(natur);
         categories.add(vetenskap);
@@ -40,8 +43,22 @@ public class Database {
         categories.add(djur);
     }
 
-    public ArrayList<Question> createRond(String category){
-        if (category.equalsIgnoreCase("natur")) {
+
+    public ArrayList<Question> createRond() {
+        Random rand = new Random();
+        int upperbound = 5;
+        int int_random = rand.nextInt(upperbound);
+
+        while (alreadySelectedRonds.contains(int_random)) {
+            int_random = rand.nextInt(upperbound);
+        }
+
+        return categories.get(int_random);
+    }
+
+
+
+        /*if (category.equalsIgnoreCase("natur")) {
             return categories.get(0);
         }
         else if (category.equalsIgnoreCase("vetenskap")) {
@@ -57,9 +74,9 @@ public class Database {
             return categories.get(4);
         }
         return null;
-    }
-
-
+    }*/
 
 
 }
+
+

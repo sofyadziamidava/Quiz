@@ -64,7 +64,7 @@ public class Game extends Thread {
     }
 
     public void sendRounds() {
-        Rond rond = new Rond(db.createRond("natur"));
+        Rond rond = new Rond(db.createRond());
         for (Player player : players) {
             try {
                 player.send(rond);
