@@ -2,12 +2,16 @@ package Server;
 
 import shared.Rond;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 public class Game extends Thread {
 
     Database db;
     int nrOfRounds;
+    int nrOfQuestionsPerRound;
+
     int currentRound;
     Player[] players = new Player[2];
     int[] player1SumPoints;
@@ -30,6 +34,13 @@ public class Game extends Thread {
 
     public Player getPlayer2() {
         return players[1];
+    }
+
+    public void setNrOfRounds(int nrOfRounds) {
+        this.nrOfRounds = nrOfRounds;
+    }
+    public void setNrOfQuestionsPerRound(int nrOfQuestionsPerRound) {
+        this.nrOfQuestionsPerRound = nrOfQuestionsPerRound;
     }
 
     public int getNrOfRounds() {
@@ -79,6 +90,18 @@ public class Game extends Thread {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    public void loadData() {
+        Properties p = new Properties();
+        try {
+            p.load(new FileInputStream("Server/gameData.properties"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.setNrOfRounds(Integer.parseInt(p.getProperty("nrOfRounds")));
+        this.setNrOfQuestionsPerRound(Integer.parseInt(p.getProperty("nrOfQuestionsPerRound")));
     }
 
     public void run() {
