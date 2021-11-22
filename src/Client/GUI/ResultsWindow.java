@@ -14,7 +14,7 @@ public class ResultsWindow extends JPanel {
     private Question question;
     private Player player1;
     private Player player2;
-    private int[] points;
+    private int points;
 
     private myButton continueButton;
 
@@ -37,7 +37,7 @@ public class ResultsWindow extends JPanel {
     private JLabel topText;
 
     public ResultsWindow(Rond rond, Question question, Player player1, Player player2){}
-    public ResultsWindow(int[] points){
+    public ResultsWindow(int points){
 
         //rounds = rond.getQuestionList();
         this.question = question;
@@ -67,7 +67,7 @@ public class ResultsWindow extends JPanel {
         player1ResultsField.setLayout(new BoxLayout(player1ResultsField, BoxLayout.Y_AXIS));
         player1ResultsField.add(player1Label = new JLabel("Player1"));
         player1ResultsField.add(questionResults = new JPanel());
-        player1ResultsField.add(player1Tot = new JLabel("player1total"));
+        player1ResultsField.add(showTotalResult(player1ResultsField, points));
 
         questionResults.setLayout(new BoxLayout(questionResults, BoxLayout.Y_AXIS));
         questionResults.add(player1Results = new JLabel("player1results Q1"));
@@ -86,12 +86,17 @@ public class ResultsWindow extends JPanel {
         questionResults.add(new JLabel("Player2results Q3"));
 
         playerTotalField.setBackground(Color.YELLOW);
-        playerTotalField.add(player1Tot = new JLabel("player1total"));
+        playerTotalField.add(showTotalResult(playerTotalField, points));
         playerTotalField.add(player2Tot = new JLabel("player2total"));
 
         /*buttonsPanel.add(continueButton = SetContinueButtonText(rounds, question));*/
         buttonsPanel.add(continueButton = new myButton("Continue"));
         buttonsPanel.add(new myButton("Exit"));
+    }
+
+    public JLabel showTotalResult(JPanel panel, int points){
+        JLabel resultsLabel = new JLabel("Player 1 total: "+""+points+" || ");
+        return resultsLabel;
     }
 
     /*public JLabel SetCategoryText(Question category){
@@ -100,7 +105,7 @@ public class ResultsWindow extends JPanel {
         categoryLabel.setForeground(Color.blue);
         return categoryLabel;
     }
-*/
+
 
     public JPanel setTotalLabel(JPanel panel, int[] points){
         for (int i = 0; i<points.length; ++i) {
@@ -111,7 +116,7 @@ public class ResultsWindow extends JPanel {
     }
 
 
-    /*public JPanel BuildPlayerResultsField(JPanel resultsField, Player player){ //Lägg till string name i Player?
+    public JPanel BuildPlayerResultsField(JPanel resultsField, Player player){ //Lägg till string name i Player?
 
         JPanel playerResultsField = new JPanel();
         playerResultsField.setBackground(Color.green);
@@ -166,7 +171,7 @@ public class ResultsWindow extends JPanel {
     public static void main(String[] args) {
         int[] testArr = new int[]{1,5};
         Window test = new Window();
-        test.add(new ResultsWindow(testArr));
+        test.add(new ResultsWindow(2));
         test.setVisible(true);
     }
 
