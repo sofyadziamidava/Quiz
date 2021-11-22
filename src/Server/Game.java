@@ -23,7 +23,6 @@ public class Game extends Thread {
         this.players[0] = player1;
         this.players[1] = player2;
         currentRound = 0;
-        nrOfRounds = 1;
         player1SumPoints = new int[nrOfRounds];
         player2SumPoints = new int[nrOfRounds];
     }
