@@ -11,7 +11,6 @@ public class Game extends Thread {
     Database db;
     int nrOfRounds;
     int nrOfQuestionsPerRound;
-
     int currentRound;
     Player[] players = new Player[2];
     int[] player1SumPoints;
@@ -23,7 +22,7 @@ public class Game extends Thread {
         this.players[0] = player1;
         this.players[1] = player2;
         currentRound = 0;
-        player1SumPoints = new int[nrOfRounds];
+        player1SumPoints = new int[nrOfRounds];   // detta har inte rätt längd ..
         player2SumPoints = new int[nrOfRounds];
     }
 
@@ -38,6 +37,7 @@ public class Game extends Thread {
     public void setNrOfRounds(int nrOfRounds) {
         this.nrOfRounds = nrOfRounds;
     }
+
     public void setNrOfQuestionsPerRound(int nrOfQuestionsPerRound) {
         this.nrOfQuestionsPerRound = nrOfQuestionsPerRound;
     }
