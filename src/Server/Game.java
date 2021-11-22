@@ -94,7 +94,7 @@ public class Game extends Thread {
     public void loadData() {
         Properties p = new Properties();
         try {
-            p.load(new FileInputStream("Server/gameData.properties"));
+            p.load(new FileInputStream("C:\\Users\\User\\Desktop\\Nackademin\\OOP\\Quiz\\src\\Server\\gameData.properties"));
 
         } catch (IOException e) {
             e.printStackTrace();
@@ -119,8 +119,6 @@ public class Game extends Thread {
                 if (player1Input != null && player2Input != null) {
                     input[0] = player1Input;
                     input[1] = player2Input;
-                    //System.out.println("First players result from client: " + input[0]);
-                    //System.out.println("Second players result from client: " + input[1]);
                     protocol.gameProcess(input);  // kommer player1 input alltid på index 0 ???
                 }
             }

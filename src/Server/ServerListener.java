@@ -15,6 +15,7 @@ public class ServerListener {
                 Player player2 = new Player(serverSocket.accept());
 
                 Game game = new Game(player1, player2);
+                game.loadData();
                 game.start();
             }
         } catch (IOException e) {
