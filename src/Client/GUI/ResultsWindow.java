@@ -14,6 +14,7 @@ public class ResultsWindow extends JPanel {
     private Question question;
     private Player player1;
     private Player player2;
+    private int[] points;
 
     private myButton continueButton;
 
@@ -35,13 +36,14 @@ public class ResultsWindow extends JPanel {
     private JLabel player2Results;
     private JLabel topText;
 
-    public ResultsWindow(){}
-    public ResultsWindow(Rond rond, Question question, Player player1, Player player2){
+    public ResultsWindow(Rond rond, Question question, Player player1, Player player2){}
+    public ResultsWindow(int[] points){
 
-        rounds = rond.getQuestionList();
+        //rounds = rond.getQuestionList();
         this.question = question;
         this.player1 = player1;
         this.player2 = player2;
+        this.points = points;
 
         setBackground(Color.gray);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -98,8 +100,18 @@ public class ResultsWindow extends JPanel {
         categoryLabel.setForeground(Color.blue);
         return categoryLabel;
     }
+*/
 
-    public JPanel BuildPlayerResultsField(JPanel resultsField, Player player){ //Lägg till string name i Player?
+    public JPanel setTotalLabel(JPanel panel, int[] points){
+        for (int i = 0; i<points.length; ++i) {
+            JLabel totalLabel;
+            panel.add(totalLabel = new JLabel(""+points[i]));
+        }
+        return panel;
+    }
+
+
+    /*public JPanel BuildPlayerResultsField(JPanel resultsField, Player player){ //Lägg till string name i Player?
 
         JPanel playerResultsField = new JPanel();
         playerResultsField.setBackground(Color.green);
@@ -152,8 +164,9 @@ public class ResultsWindow extends JPanel {
 
 
     public static void main(String[] args) {
+        int[] testArr = new int[]{1,5};
         Window test = new Window();
-        test.add(new ResultsWindow());
+        test.add(new ResultsWindow(testArr));
         test.setVisible(true);
     }
 
