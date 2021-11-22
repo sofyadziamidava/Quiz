@@ -78,12 +78,12 @@ public class ClientProtocol {
         while(!checkTimer){
             ClientNetwork.sleep(1000);
             if(gamePanel.isButtonPressed()){
-                System.out.println("Inside if-scope");
+                //System.out.println("Inside if-scope");
                 break;
             }
             checkTimer = gamePanel.getTimerLabel().getText().equals("0");
         }
-        System.out.println("out of while loop");
+        //System.out.println("out of while loop");
         ClientNetwork.sleep(1000);
         this.gameWindow.dispose();
     }
