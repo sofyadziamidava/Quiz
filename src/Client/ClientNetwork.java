@@ -38,9 +38,9 @@ public class ClientNetwork {
                     dataToServer.writeObject(pointsToSend);
                 }
                 else if (obj instanceof Integer) {
-                    System.out.println("Opponents points: " + obj);
-                    waitForContinue();
-                    dataToServer.writeObject("a");
+                    clientProtocol.resultsWindow((int)obj);
+                    dataToServer.writeObject(clientProtocol.waitForContinue());
+
                 }
                 else if (obj instanceof int[]) {
                     System.out.println("Client recived an array");

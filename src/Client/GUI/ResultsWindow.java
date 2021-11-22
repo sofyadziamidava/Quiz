@@ -1,5 +1,6 @@
 package Client.GUI;
 
+import Client.ClientProtocol;
 import Server.Player;
 import shared.Question;
 import shared.Rond;
@@ -17,6 +18,7 @@ public class ResultsWindow extends JPanel {
     private Player player1;
     private Player player2;
     private int points;
+    private int opponentResult;
 
     private myButton continueButton;
 
@@ -39,13 +41,14 @@ public class ResultsWindow extends JPanel {
     private JLabel topText;
 
     public ResultsWindow(Rond rond, Question question, Player player1, Player player2){}
-    public ResultsWindow(int points){
+    public ResultsWindow(int points, int opponentResult){
 
         //rounds = rond.getQuestionList();
         this.question = question;
         this.player1 = player1;
         this.player2 = player2;
         this.points = points;
+        this.opponentResult = opponentResult;
 
         setBackground(Color.gray);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -89,10 +92,11 @@ public class ResultsWindow extends JPanel {
 
         playerTotalField.setBackground(Color.YELLOW);
         playerTotalField.add(showTotalResult(playerTotalField, points));
-        playerTotalField.add(player2Tot = new JLabel("player2total"));
+        playerTotalField.add(showTotalResult(playerTotalField, opponentResult));
 
         /*buttonsPanel.add(continueButton = SetContinueButtonText(rounds, question));*/
         buttonsPanel.add(continueButton = new myButton("Continue"));
+        continueButton.addActionListener(new myContinueListener());
         buttonsPanel.add(new myButton("Exit"));
     }
 
@@ -102,12 +106,12 @@ public class ResultsWindow extends JPanel {
     }
 
     private class myContinueListener implements ActionListener{
-
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            ClientProtocol.waitingForNextRound = false;
         }
     }
+
 
     /*public JLabel SetCategoryText(Question category){
         JLabel categoryLabel = new JLabel(category.getCategory); //Vi behöver nog lägga till String Category i Question
@@ -181,7 +185,7 @@ public class ResultsWindow extends JPanel {
     public static void main(String[] args) {
         int[] testArr = new int[]{1,5};
         Window test = new Window();
-        test.add(new ResultsWindow(2));
+        test.add(new ResultsWindow(2, 2));
         test.setVisible(true);
     }
 

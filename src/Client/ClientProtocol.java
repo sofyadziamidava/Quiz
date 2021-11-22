@@ -20,6 +20,7 @@ public class ClientProtocol {
     private List<String> answers;
     private String correctAnswer;
     private final int FIRST_ELEMENT = 0;
+    public static boolean waitingForNextRound = true;
 
     private static int pointsPerRond;
 
@@ -27,7 +28,15 @@ public class ClientProtocol {
         this.window = window;
     }
 
+    public String waitForContinue() {
+        while (waitingForNextRound) {
+            ClientNetwork.sleep(500);
+        }
+        return "a";
+    }
+
     public void handleNewRond(Object o){
+        waitingForNextRound = true;
         pointsPerRond = 0;
         Rond newRond = (Rond)o;
         List<Question> questionList = newRond.getQuestionList();
@@ -36,13 +45,13 @@ public class ClientProtocol {
             playRound(question);
         }
 
-        resultsWindow();
+        //resultsWindow();
         //send points to server
     }
 
-    private void resultsWindow() {
+    public void resultsWindow(int opponentResult) {
         this.window = new Window();
-        this.resultsWindow = new ResultsWindow(pointsPerRond);
+        this.resultsWindow = new ResultsWindow(pointsPerRond, opponentResult);
         window.add(resultsWindow);
         this.window.setVisible(true);
 
