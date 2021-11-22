@@ -36,7 +36,7 @@ public class ClientProtocol {
             playRound(question);
         }
 
-        //resultsWindow();
+        resultsWindow();
         //send points to server
     }
 

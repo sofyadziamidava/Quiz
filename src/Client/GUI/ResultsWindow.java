@@ -6,6 +6,8 @@ import shared.Rond;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ResultsWindow extends JPanel {
@@ -97,6 +99,14 @@ public class ResultsWindow extends JPanel {
     public JLabel showTotalResult(JPanel panel, int points){
         JLabel resultsLabel = new JLabel("Player 1 total: "+""+points+" || ");
         return resultsLabel;
+    }
+
+    private class myContinueListener implements ActionListener{
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+        }
     }
 
     /*public JLabel SetCategoryText(Question category){

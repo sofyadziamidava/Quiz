@@ -39,6 +39,7 @@ public class ClientNetwork {
                 }
                 else if (obj instanceof Integer) {
                     System.out.println("Opponents points: " + obj);
+                    waitForContinue();
                     dataToServer.writeObject("a");
                 }
                 else if (obj instanceof int[]) {
