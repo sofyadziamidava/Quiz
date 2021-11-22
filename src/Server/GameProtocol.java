@@ -10,17 +10,17 @@ public class GameProtocol {
 
     private Game game;
 
-
     public GameProtocol(Game game) {
         this.game = game;
         }
 
     public void gameProcess(String[] input) throws IOException, ClassNotFoundException {
 
-        if (state == NEWROND) {
+        if (state == NEWROND) {   // -> null,null
             game.sendRounds();          // Rond
             state = WAITINGFORRESULTS;
         } else if (state == WAITINGFORRESULTS) {
+            game.updatePoints(input);    // should add new points to players
             if (game.getCurrentRound() == game.getNrOfRounds() - 1) {
                 game.sendAllOpponentResultsToClient();   // int[]
                 state = ENDRESULT;
@@ -29,7 +29,7 @@ public class GameProtocol {
                 state = NEWROND;
             }
         } else if (state == ENDRESULT) {
-            game.interrupt();
+            game.ends();
         }
     }
 

@@ -13,15 +13,15 @@ public class Game extends Thread {
     int nrOfQuestionsPerRound;
     int currentRound;
     Player[] players = new Player[2];
-    int currentPlayer;
-    int[] player1SumPoints = new int[nrOfRounds];
-    int[] player2SumPoints = new int[nrOfRounds];
+    int[] player1SumPoints;
+    int[] player2SumPoints;
+    boolean gameOn = true;
 
     public Game(Player player1, Player player2) {
-        this.db = new Database();     // kan jag initiera databasen någon annanstans?
+        this.db = new Database();
         this.players[0] = player1;
         this.players[1] = player2;
-        currentPlayer = 0;
+        currentRound = 0;
     }
 
     public Player getPlayer1() {
@@ -32,32 +32,35 @@ public class Game extends Thread {
         return players[1];
     }
 
-    public void setNrOfRounds(int nrOfRounds) {
-        this.nrOfRounds = nrOfRounds;
+    public void setPlayersResultHolder(){
+        this.player1SumPoints = new int[this.getNrOfRounds()];
+        this.player2SumPoints = new int[this.getNrOfRounds()];
     }
 
-    public int getNrOfRounds() {
-        return nrOfRounds;
+    public void setNrOfRounds(int nrOfRounds) {
+        this.nrOfRounds = nrOfRounds;
     }
 
     public void setNrOfQuestionsPerRound(int nrOfQuestionsPerRound) {
         this.nrOfQuestionsPerRound = nrOfQuestionsPerRound;
     }
 
+    public int getNrOfRounds() {
+        return nrOfRounds;
+    }
+
     public int getCurrentRound() {
         return currentRound;
     }
 
-    public void loadData() {
-        Properties p = new Properties();
-        try {
-            p.load(new FileInputStream("Server/gameData.properties"));
+    public void ends() {
+        gameOn = false;
+        this.interrupt();
+    }
 
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        this.setNrOfRounds(Integer.parseInt(p.getProperty("nrOfRounds")));
-        this.setNrOfQuestionsPerRound(Integer.parseInt(p.getProperty("nrOfQuestionsPerRound")));
+    public void updatePoints(String[] input) {
+        this.player1SumPoints[currentRound] = Integer.parseInt(input[0]);
+        this.player2SumPoints[currentRound] = Integer.parseInt(input[1]);
     }
 
     public void sendRounds() {
@@ -76,6 +79,7 @@ public class Game extends Thread {
         try {
             players[0].send(player2SumPoints[currentRound]);
             players[1].send(player1SumPoints[currentRound]);
+            currentRound++;
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -90,19 +94,30 @@ public class Game extends Thread {
         }
     }
 
+    public void loadData() {
+        Properties p = new Properties();
+        try {
+            p.load(new FileInputStream("src/Server/gameData.properties"));
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.setNrOfRounds(Integer.parseInt(p.getProperty("nrOfRounds")));
+        this.setNrOfQuestionsPerRound(Integer.parseInt(p.getProperty("nrOfQuestionsPerRound")));
+        this.setPlayersResultHolder();
+    }
+
     public void run() {
 
-        GameProtocol protocol = new GameProtocol(this);   // kan jag initiera protokollet någon annanstans?
-        String player1Input = null;
-        String player2Input = null;
+        this.loadData();
+        GameProtocol protocol = new GameProtocol(this);
         String[] input = new String[2];
         try {
-            input[0] = null;
-            protocol.gameProcess(input);
+            protocol.gameProcess(input);   // första gången protokollet kallas skickas string med null,null
 
-            while (true) {
-                player1Input = getPlayer1().receive();
-                player2Input = getPlayer2().receive();
+            while (gameOn) {  // loopen går igång direkt, ligger och väntar på svar från båda
+                String player1Input = getPlayer1().receive();
+                String player2Input = getPlayer2().receive();
                 if (player1Input != null && player2Input != null) {
                     input[0] = player1Input;
                     input[1] = player2Input;
