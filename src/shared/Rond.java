@@ -7,11 +7,14 @@ public class Rond implements Serializable {
 
     String category;
     List<Question> questionList;
+    int nrOfQuestions;
 
-
-    public Rond(List<Question> questions, String category) {
+    public Rond(String category) {
         this.category = category;
-        this.questionList = questions;
+    }
+
+    public void addQuestions(List q) {
+        this.questionList = q;
     }
 
     public List<Question> getQuestionList() {
@@ -21,4 +24,6 @@ public class Rond implements Serializable {
     public String getCategory() {
         return category;
     }
+
+
 }

@@ -75,7 +75,7 @@ public class Game extends Thread {
     }
 
     public void sendRounds() {
-        Rond rond = new Rond(db.createRond());
+        Rond rond = db.createRond(nrOfQuestionsPerRound);
         for (PlayerStream playerStream : playerStreams) {
             try {
                 playerStream.send(rond);

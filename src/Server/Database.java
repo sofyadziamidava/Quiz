@@ -1,6 +1,7 @@
 package Server;
 
 import shared.Question;
+import shared.Rond;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -11,70 +12,47 @@ import java.util.Random;
 
 public class Database {
 
-    private final ArrayList<ArrayList<Question>> categories = new ArrayList<>();
-    private ArrayList<Question> natur = new ArrayList<>();
-    private ArrayList<Question> vetenskap = new ArrayList<>();
-    private ArrayList<Question> kultur = new ArrayList<>();
-    private ArrayList<Question> samhälle = new ArrayList<>();
-    private ArrayList<Question> djur = new ArrayList<>();
+    // you can't play more rounds than there are categories -> infinite loop in getRandomCategory()
 
-    ArrayList<Integer> alreadySelectedRonds = new ArrayList<>();
+    private ArrayList<Category> categories = new ArrayList<>();
+
+    private ArrayList<Question> q1 = new ArrayList<>();
+    private ArrayList<Question> q2 = new ArrayList<>();
+    private ArrayList<Question> q3 = new ArrayList<>();
+    private ArrayList<Question> q4 = new ArrayList<>();
+
+    ArrayList<Integer> alreadySelectedCategories = new ArrayList<>();
 
     public Database() {
-        natur.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
-        natur.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
+        categories.add(new Category("a", q1));
+        categories.add(new Category("a", q2));
+        categories.add(new Category("a", q3));
+        categories.add(new Category("a", q4));
 
-        vetenskap.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
-        vetenskap.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
-
-        kultur.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
-        kultur.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
-
-        samhälle.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
-        samhälle.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
-
-        djur.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
-        djur.add(new Question("a", Arrays.asList("a", "b", "c", "d")));
-
-        categories.add(natur);
-        categories.add(vetenskap);
-        categories.add(kultur);
-        categories.add(samhälle);
-        categories.add(djur);
     }
 
+//TODO: chose a random category, pick an amount of questions from that category
 
-    public ArrayList<Question> createRond() {
+    public Category getRandomCategory() {
         Random rand = new Random();
-        int upperbound = 5;
+        int upperbound = categories.size();
         int int_random = rand.nextInt(upperbound);
 
-        while (alreadySelectedRonds.contains(int_random)) {
+        while (alreadySelectedCategories.contains(int_random)) {
             int_random = rand.nextInt(upperbound);
         }
-
+        alreadySelectedCategories.add(int_random);
         return categories.get(int_random);
     }
 
+    public Rond createRond(int nrOfQuestions) {
+        Category c = getRandomCategory();
+        Rond rond = new Rond(c.getCategory());
+        rond.addQuestions(c.getQuestions(nrOfQuestions));
+        return rond;
+    }
 
 
-        /*if (category.equalsIgnoreCase("natur")) {
-            return categories.get(0);
-        }
-        else if (category.equalsIgnoreCase("vetenskap")) {
-            return categories.get(1);
-        }
-        else if (category.equalsIgnoreCase("kultur")) {
-            return categories.get(2);
-        }
-        else if (category.equalsIgnoreCase("samhälle")) {
-            return categories.get(3);
-        }
-        else if (category.equalsIgnoreCase("djur")) {
-            return categories.get(4);
-        }
-        return null;
-    }*/
 
 
 }
