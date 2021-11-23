@@ -21,13 +21,15 @@ public class GameWindow extends JPanel implements ActionListener {
     private String correctAnswer;
     private boolean buttonPressed = false;
     myButton[] buttonsInGame;
+    ClientProtocol clientProtocol;
 
 
     public void setCorrectAnswer(String correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
 
-    public GameWindow() {
+    public GameWindow(ClientProtocol clientProtocol) {
+        this.clientProtocol = clientProtocol;
 
         buttonsArray = new myButton[4];
         timerLabel = new JLabel();
@@ -92,13 +94,6 @@ public class GameWindow extends JPanel implements ActionListener {
     }
 
 
-
-    public static void main(String[] args) {
-        Window testWindow = new Window();
-        testWindow.add(testWindow.getGameWindow());
-        testWindow.setVisible(true);
-    }
-
     public JLabel getTimerLabel() {
         return timerLabel;
     }
@@ -113,7 +108,7 @@ public class GameWindow extends JPanel implements ActionListener {
         myButton temp = (myButton) e.getSource();
         if(temp.getText().equals(correctAnswer)){
             temp.setBackground(Color.green);
-            ClientProtocol.increasePoint();
+            clientProtocol.increasePoint();
         } else{
             temp.setBackground(Color.red);
         }

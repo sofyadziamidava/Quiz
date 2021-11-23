@@ -13,10 +13,6 @@ public class Window extends JFrame {
 
     }
 
-    public GameWindow getGameWindow() {
-        return new GameWindow();
-    }
-
     public static void main(String[] args) {
         new Window();
     }

@@ -35,7 +35,7 @@ public class ClientNetwork {
                     System.out.println("round received ");
                     sleep(3000);
                     clientProtocol.handleNewRond(obj);
-                    String pointsToSend = String.valueOf(ClientProtocol.getPointsPerRond());
+                    String pointsToSend = String.valueOf(clientProtocol.getPointsPerRond());
                     System.out.println("sending " + pointsToSend + " points from client to server");
                     System.out.println("Total score player: " + player.getScore());
                     dataToServer.writeObject(pointsToSend);

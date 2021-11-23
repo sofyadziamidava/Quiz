@@ -23,15 +23,13 @@ public class ClientProtocol {
     private String correctAnswer;
     private final int FIRST_ELEMENT = 0;
     public static boolean waitingForNextRound = true;
-    public static int clientScoreTotal;
     public static int opponentScoreTotal;
     public static String clientName;
 
     List<Integer> playerScoreTable;
     List<Integer> opponentScoreTable = new ArrayList<>();
 
-
-    private static int pointsPerRond;
+    private int pointsPerRond;
 
     public ClientProtocol(Window window, Player player){
         this.window = window;
@@ -63,7 +61,6 @@ public class ClientProtocol {
         player.increasePoint(pointsPerRond);
         sendListToPlayerTable(playerScoreTable);
         System.out.println("Size of list (2): " + playerScoreTable.size());
-
     }
 
     private void sendListToPlayerTable(List<Integer> playerScoreTable) {
@@ -73,7 +70,6 @@ public class ClientProtocol {
     public void resultsWindow(int opponentResult) {
         player.increaseOpponentScore(opponentResult);
         window.getContentPane().removeAll();
-
         this.resultsWindow = new ResultsWindow(pointsPerRond, opponentResult, player);
         window.add(resultsWindow);
 
@@ -82,7 +78,6 @@ public class ClientProtocol {
 
     public void displayWaitingWindow(){
         window.getContentPane().removeAll();
-
         this.waitingWindow = new WaitingWindow();
         window.add(waitingWindow);
 
@@ -110,12 +105,10 @@ public class ClientProtocol {
     private void createGameWindowFromCurrentQuestion(String question, List<String> alternatives, String correctAnswer) {
         window.getContentPane().removeAll();
 
-
-        this.gamePanel = window.getGameWindow();
+        this.gamePanel = new GameWindow(this);
         this.gamePanel.displayQuestion(question);
         this.gamePanel.displayButtons(alternatives);
         this.gamePanel.setCorrectAnswer(correctAnswer);
-
         this.window.add(gamePanel);
 
         window.setVisible(true);
@@ -139,20 +132,16 @@ public class ClientProtocol {
 
     private void createEndResultWindow() {
         window.getContentPane().removeAll();
-
-        System.out.println("inside end result method");
-
         this.resultsWindowEnd = new ResultsWindowEnd(player);
         window.add(resultsWindowEnd);
-
         window.setVisible(true);
     }
 
-    public static int getPointsPerRond() {
+    public int getPointsPerRond() {
         return pointsPerRond;
     }
 
-    public static void increasePoint() {
+    public void increasePoint() {
        pointsPerRond++;
     }
 }
