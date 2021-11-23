@@ -106,6 +106,7 @@ public class ResultsWindowEnd extends JPanel {
             counter = 1;
             round++;
         }
+        questionResults.add(new JLabel("testing to see if list empty " + round));
     }
 
     private class myContinueListener implements ActionListener{

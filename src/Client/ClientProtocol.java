@@ -138,9 +138,10 @@ public class ClientProtocol {
 
     private void createEndResultWindow() {
         window.dispose();
+        System.out.println("inside end result method");
         this.window = new Window();
         this.resultsWindowEnd = new ResultsWindowEnd(player);
-        window.add(resultsWindow);
+        window.add(resultsWindowEnd);
         this.window.setVisible(true);
     }
 
