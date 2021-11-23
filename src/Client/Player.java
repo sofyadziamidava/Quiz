@@ -1,14 +1,23 @@
 package Client;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
 
     private final String name;
     private int totalScore;
     private int opponentScore;
+    List<List<Integer>> scoreTablePlayer;
+    List<List<Integer>> scoreTableOpponent;
+
+
 
     public Player(String name) {
         this.name = name;
         this.totalScore = 0;
+        scoreTablePlayer = new ArrayList<>();
+        scoreTableOpponent = new ArrayList<>();
     }
 
     public void increaseOpponentScore(int points) {
