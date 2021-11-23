@@ -25,7 +25,7 @@ public class GameProtocol {
             state = NEWROND;
         }*/
         if (state == NEWROND) {   // -> null,null
-
+            game.sendOpponentPlayer();
             game.sendRounds();          // Rond
             state = WAITINGFORRESULTS;
         } else if (state == WAITINGFORRESULTS) {
@@ -33,9 +33,11 @@ public class GameProtocol {
             if (game.getCurrentRound() == game.getNrOfRounds() - 1) {
                 game.sendAllOpponentResultsToClient();   // int[]
                 //game.sendingOpponentResultToClients();
+                game.sendOpponentPlayer();
                 state = ENDRESULT;
             } else {
                 game.sendingOpponentResultToClients();  // int
+                game.sendOpponentPlayer();
                 state = NEWROND;
             }
         } else if (state == ENDRESULT) {

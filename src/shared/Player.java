@@ -20,12 +20,10 @@ public class Player implements Serializable {
         return this.name;
     }
 
-    public void addRounds(int r){
-        int numberOfRounds = r;
-        for (int i = 0; i<r; ++i){
-            rounds.add(points);
-        }
+    public void addRounds(){
+        rounds.add(points);
     }
+
 
     public void addPoints(int round, int points){
         rounds.get(round).add(points);

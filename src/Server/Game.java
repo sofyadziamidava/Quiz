@@ -96,8 +96,8 @@ public class Game extends Thread {
         }
     }
 
-    public void setPlayers(){
-
+    public void setPlayers(Player player, int playerNr){
+        this.players[playerNr] = player;
     }
 
     public void sendingOpponentResultToClients() {
@@ -142,7 +142,11 @@ public class Game extends Thread {
 
             while (gameOn) {  // loopen går igång direkt, ligger och väntar på svar från båda
                 String player1Input = getPlayerStream1().receive();
+                Player player1 = getPlayerStream1().playerReceive();
+                setPlayers(player1, 0);
                 String player2Input = getPlayerStream2().receive();
+                Player player2 = getPlayerStream2().playerReceive();
+                setPlayers(player2, 1);
                 if (player1Input != null && player2Input != null) {
                     input[0] = player1Input;
                     input[1] = player2Input;

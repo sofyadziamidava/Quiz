@@ -34,7 +34,7 @@ public class ClientNetwork {
             while ((obj = dataFromServer.readObject()) != null) {
 
                 if (obj instanceof Rond) {
-                    sleep(3000);
+                    sleep(5000);
                     currentRound = (Rond)obj;
                     clientProtocol.handleNewRond(obj);
                     System.out.println("round received ");

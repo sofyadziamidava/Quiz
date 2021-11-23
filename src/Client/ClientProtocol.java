@@ -28,8 +28,8 @@ public class ClientProtocol {
     public static int totalRounds;
     public static String clientName;
     public static String opponentName;
-    public static Player clientPlayer;
-    public static Player opponentPlayer;
+    public static Player clientPlayer = new Player();
+    public static Player opponentPlayer = new Player();
 
     private static int pointsPerRond;
 

@@ -1,5 +1,7 @@
 package Server;
 
+import shared.Player;
+
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -24,6 +26,10 @@ public class PlayerStream implements Serializable {
 
     public String receive() throws IOException, ClassNotFoundException {
         return (String)in.readObject();
+    }
+
+    public Player playerReceive() throws IOException, ClassNotFoundException {
+        return (Player)in.readObject();
     }
 
 

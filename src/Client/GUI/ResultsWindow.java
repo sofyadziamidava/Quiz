@@ -68,6 +68,8 @@ public class ResultsWindow extends JPanel {
         continueButton.addActionListener(new myContinueListener());
         buttonsPanel.add(new myButton("Exit"));
 
+        checkWinner();
+
     }
     public ResultsWindow(int points, int opponentResult){
 
@@ -127,8 +129,15 @@ public class ResultsWindow extends JPanel {
         buttonsPanel.add(new myButton("Exit"));
     }
 
-    public String checkWinner(){
-        if
+    public void checkWinner(){
+        if (ClientProtocol.currentRound == ClientProtocol.totalRounds){
+            if(player1.getTotalForAllRounds()>player2.getTotalForAllRounds()){
+                JOptionPane.showMessageDialog(null, "YOU WON");
+            }
+            else{
+                JOptionPane.showMessageDialog(null, "YOU LOST");
+            }
+        }
     }
 
     public JLabel showTotalResult(int points){
