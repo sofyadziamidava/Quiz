@@ -7,6 +7,7 @@ import Client.GUI.Window;
 import shared.Question;
 import shared.Rond;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -28,6 +29,9 @@ public class ClientProtocol {
     public static int opponentScoreTotal;
     public static String clientName;
 
+    List<Integer> playerScoreTable;
+    List<Integer> opponentScoreTable = new ArrayList<>();
+
 
     private static int pointsPerRond;
 
@@ -48,6 +52,7 @@ public class ClientProtocol {
     }
 
     public void handleNewRond(Object o){
+        playerScoreTable = new ArrayList<>();
         waitingForNextRound = true;
         pointsPerRond = 0;
         Rond newRond = (Rond)o;
@@ -58,6 +63,13 @@ public class ClientProtocol {
         }
         displayWaitingWindow();
         player.increasePoint(pointsPerRond);
+        sendListToPlayerTable(playerScoreTable);
+        System.out.println("Size of list (2): " + playerScoreTable.size());
+
+    }
+
+    private void sendListToPlayerTable(List<Integer> playerScoreTable) {
+        player.addToScoreTablePlayer(playerScoreTable);
     }
 
     public void resultsWindow(int opponentResult) {
@@ -67,7 +79,6 @@ public class ClientProtocol {
         this.resultsWindow = new ResultsWindow(pointsPerRond, opponentResult, player);
         window.add(resultsWindow);
         this.window.setVisible(true);
-
     }
 
     public void displayWaitingWindow(){
@@ -83,6 +94,11 @@ public class ClientProtocol {
         unpackCurrentQuestion(currentQuestion);
         createGameWindowFromCurrentQuestion(question, answers, correctAnswer);
         playCurrentQuestion();
+        addScoreToPlayerTable(pointsPerRond);
+    }
+
+    private void addScoreToPlayerTable(int pointsPerRond) {
+        playerScoreTable.add(pointsPerRond);
     }
 
     private void unpackCurrentQuestion(Question question) {

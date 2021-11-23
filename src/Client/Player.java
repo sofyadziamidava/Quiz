@@ -20,6 +20,14 @@ public class Player {
         scoreTableOpponent = new ArrayList<>();
     }
 
+    public void addToScoreTablePlayer(List<Integer> list){
+        scoreTablePlayer.add(list);
+    }
+
+    public List<List<Integer>> getScoreTablePlayer() {
+        return scoreTablePlayer;
+    }
+
     public void increaseOpponentScore(int points) {
         this.opponentScore += points;
     }

@@ -47,6 +47,7 @@ public class ClientNetwork {
                     System.out.println("Opponent total score: " + player.getOpponentScore());
                     clientProtocol.resultsWindow(opponentScore);
                     dataToServer.writeObject(clientProtocol.waitForContinue());
+                    System.out.println("Size of list should end at size 3: " + player.getScoreTablePlayer().size());
                 }
 
                 else if (obj instanceof int[]) {
