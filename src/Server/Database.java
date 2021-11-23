@@ -5,33 +5,42 @@ import shared.Rond;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Properties;
-import java.util.Random;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
 public class Database {
 
     // you can't play more rounds than there are categories -> infinite loop in getRandomCategory()
 
     private ArrayList<Category> categories = new ArrayList<>();
-
-    private ArrayList<Question> q1 = new ArrayList<>();
-    private ArrayList<Question> q2 = new ArrayList<>();
-    private ArrayList<Question> q3 = new ArrayList<>();
-    private ArrayList<Question> q4 = new ArrayList<>();
-
-    ArrayList<Integer> alreadySelectedCategories = new ArrayList<>();
+    private ArrayList<Integer> alreadySelectedCategories = new ArrayList<>();
 
     public Database() {
-        categories.add(new Category("a", q1));
-        categories.add(new Category("a", q2));
-        categories.add(new Category("a", q3));
-        categories.add(new Category("a", q4));
+        loadCategories();
     }
 
     public void loadCategories() {
-
+        try {
+            final List<String> lines = Files.readAllLines(Paths.get("src/Server/questionsQuiz.txt"), StandardCharsets.UTF_8);
+            for (String line:lines
+            ) {
+                if (line.contains("#")) {
+                    categories.add(new Category(line.substring(1)));
+                }
+                else if (line.contains("?")) {
+                    categories.get(categories.size()-1).addQuestion(new Question(line));
+                }
+                else if (line.contains(",")) {
+                    Category c = categories.get(categories.size()-1);
+                    c.getLatestQuestion().addAnswers(Arrays.asList(line.split(",")));
+                }
+            }
+        }
+        catch (IOException e) {
+            System.out.println("could not open file");
+        }
     }
 
     public Category getRandomCategory() {
@@ -54,8 +63,10 @@ public class Database {
     }
 
 
-
-
+    public static void main(String[] args) throws IOException {
+        Database db = new Database();
+        db.loadCategories();
+    }
 }
 
 

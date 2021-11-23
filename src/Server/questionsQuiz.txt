@@ -1,4 +1,4 @@
-##natur
+#Natur
 
 Vilket djur sover i sex månader om året?
 Björnen, Fjällräven, Sommarharen, myran
@@ -24,7 +24,7 @@ Hur länge kan vissa sengångare sover upp till?
 Vilken hatighet kan Flygfiskar komma upp i?
 60 km/h, 70 km/h, 80 km/h, 50 km/h
 
-##Vetenskap
+#Vetenskap
 Vad uppfanns Alfred Nobel, som instiftade Nobelpriset?
 Dynamiten, Stubinen till dynamiten, Nitroglycerin som finns i dynamit, Starkare svartkrut
 
@@ -50,7 +50,7 @@ Vilket vitamin kallas även askorbinsyra?
 C, B, A, D
 
 
-## Samhälle
+#Samhälle
 
 När avskaffades värnplikten i Sverige?
 2010, 2000, 2012, 1995
@@ -76,7 +76,7 @@ Högsta januaritemperaturen i Sverige?
 Högsta temperatur i Sverige någonsin?
 38, 41, 39, 37.8
 
-## Java
+#Java
 
 Vad är en korrekt syntax för att mata ut "Hello World" i Java?
 System.out.println("Hello World"); system.out.println("Hello World"); System.out.println("Hello World") System.out.println("hello world");
@@ -108,7 +108,7 @@ Storlek på en char?
 Vad är x i: int x = 5 + 12 / 3 + 1;
 10, 6, 7, 8
 
-## Rymden
+#Rymden
 
 Hur lång tid tar det för solens ljus att nå jorden?
 8 minuter, 7 timmar, 16 sekunder, 24 timmar

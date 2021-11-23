@@ -11,9 +11,17 @@ public class Category {
     String category;
     List<Question> questions;
 
-    public Category(String category, List q) {
+    public Category(String category) {
         this.category = category;
-        this.questions = q;
+        this.questions = new ArrayList<>();
+    }
+
+    public Question getQuestion(int i){
+        return questions.get(i);
+    }
+
+    public Question getLatestQuestion() {
+        return questions.get(questions.size()-1);
     }
 
     public void addQuestion(Question q) {
@@ -41,7 +49,7 @@ public class Category {
     }
 
     public String getCategory() {
-        return category;
+        return this.category;
     }
 
 
