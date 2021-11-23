@@ -1,7 +1,7 @@
 package Client.GUI;
 
 import Client.ClientProtocol;
-import Server.Player;
+import Client.Player;
 import shared.Question;
 import shared.Rond;
 
@@ -13,10 +13,12 @@ import java.util.List;
 
 public class ResultsWindow extends JPanel {
 
+    Player player;
+
     private List<Question> rounds;
     private Question question;
-    private Player player1;
-    private Player player2;
+
+
     private int points;
     private int opponentResult;
 
@@ -40,12 +42,12 @@ public class ResultsWindow extends JPanel {
     private JLabel player2Results;
     private JLabel topText;
 
-    public ResultsWindow(int points, int opponentResult){
+    public ResultsWindow(int points, int opponentResult, Player player){
+
+        this.player = player;
 
         //rounds = rond.getQuestionList();
         this.question = question;
-        this.player1 = player1;
-        this.player2 = player2;
         this.points = points;
         this.opponentResult = opponentResult;
 
@@ -62,17 +64,15 @@ public class ResultsWindow extends JPanel {
 
         resultsPanel.setBackground(Color.CYAN);
         resultsPanel.setLayout(new GridLayout(0,2));
-        /*resultsPanel.add(playerResultsField = BuildPlayerResultsField(playerResultsField, player1));
-        *resultsPanel.add(playerResultsField = BuildPlayerResultsField(playerResultsField, player2));*/
+
         resultsPanel.add(player1ResultsField = new JPanel());
         resultsPanel.add(player2ResultsField = new JPanel());
 
         player1ResultsField.setBackground(Color.green);
         player1ResultsField.setLayout(new BoxLayout(player1ResultsField, BoxLayout.Y_AXIS));
-        player1ResultsField.add(player1Label = new JLabel("Player1"));
+        player1ResultsField.add(player1Label = new JLabel(player.getName()));
         player1ResultsField.add(questionResults = new JPanel());
         player1ResultsField.add(showTotalResult(points));
-       // player1ResultsField.add(showTotalResult(player1ResultsField, points));
 
         questionResults.setLayout(new BoxLayout(questionResults, BoxLayout.Y_AXIS));
         questionResults.add(player1Results = new JLabel("player1results Q1"));
@@ -115,8 +115,9 @@ public class ResultsWindow extends JPanel {
 
     public static void main(String[] args) {
         int[] testArr = new int[]{1,5};
+        Player player = new Player("Kalle");
         Window test = new Window();
-        test.add(new ResultsWindow(2, 2));
+        test.add(new ResultsWindow(2, 2, player));
         test.setVisible(true);
     }
 

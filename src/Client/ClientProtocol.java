@@ -63,7 +63,7 @@ public class ClientProtocol {
     public void resultsWindow(int opponentResult) {
         window.dispose();
         this.window = new Window();
-        this.resultsWindow = new ResultsWindow(pointsPerRond, opponentResult);
+        this.resultsWindow = new ResultsWindow(pointsPerRond, opponentResult, player);
         window.add(resultsWindow);
         this.window.setVisible(true);
 
