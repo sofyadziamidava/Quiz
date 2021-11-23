@@ -87,7 +87,7 @@ public class ResultsWindow extends JPanel {
 
         playerTotalField.setBackground(Color.YELLOW);
         playerTotalField.add(new JLabel(player.getName() + " total: " + points));
-        playerTotalField.add(new JLabel("Opponent total: " + points));
+        playerTotalField.add(new JLabel("Opponent total: " + opponentResult));
 
         buttonsPanel.add(continueButton = new myButton("Continue"));
         continueButton.addActionListener(new myContinueListener());
