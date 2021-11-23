@@ -68,5 +68,3 @@ public class Database {
         db.loadCategories();
     }
 }
-
-
