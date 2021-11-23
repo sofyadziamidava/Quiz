@@ -53,6 +53,8 @@ public class ClientProtocol {
     }
 
     public void handleNewRond(Object o){
+        clientPlayer.addRounds();
+        opponentPlayer.addRounds();
         currentRound +=1;
         waitingForNextRound = true;
         pointsPerRond = 0;

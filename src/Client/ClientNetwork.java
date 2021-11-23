@@ -7,9 +7,7 @@ import shared.Rond;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Array;
 import java.net.Socket;
-import java.util.Arrays;
 
 public class ClientNetwork {
 
@@ -34,6 +32,8 @@ public class ClientNetwork {
             while ((obj = dataFromServer.readObject()) != null) {
 
                 if (obj instanceof Rond) {
+                    dataToServer.writeObject(ClientProtocol.clientPlayer);
+                    System.out.println("Player sent");
                     sleep(5000);
                     currentRound = (Rond)obj;
                     clientProtocol.handleNewRond(obj);
@@ -54,6 +54,7 @@ public class ClientNetwork {
                 }
                 else if (obj instanceof Player){
                     ClientProtocol.opponentPlayer = (Player)obj;
+                    System.out.println("Player received");
                 }
             }
         } catch (IOException | ClassNotFoundException e) {

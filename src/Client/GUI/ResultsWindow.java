@@ -57,8 +57,10 @@ public class ResultsWindow extends JPanel {
         add(playerTotalField = new JPanel());
         add(buttonsPanel = new JPanel());
 
-        resultsPanel.add(playerResultsField = BuildPlayerResultsField(playerResultsField, player1));
-        resultsPanel.add(playerResultsField = BuildPlayerResultsField(playerResultsField, player2));
+        player1ResultsField = BuildPlayerResultsField(player1);
+        resultsPanel.add(player1ResultsField);
+        player2ResultsField = BuildPlayerResultsField(player2);
+        resultsPanel.add(player2ResultsField);
 
         playerTotalField.setBackground(Color.YELLOW);
         playerTotalField.add(setRoundTotalLabel(player1));
@@ -164,7 +166,7 @@ public class ResultsWindow extends JPanel {
 
 
 
-    public JPanel BuildPlayerResultsField(JPanel resultsField, Player player){
+    public JPanel BuildPlayerResultsField(Player player){
 
         JPanel playerResultsField = new JPanel();
         playerResultsField.setBackground(Color.green);
@@ -174,7 +176,7 @@ public class ResultsWindow extends JPanel {
         questionResults.setLayout(new BoxLayout(questionResults, BoxLayout.Y_AXIS));
         BuildPlayerResultsLabels(questionResults, player);
 
-        return resultsField;
+        return playerResultsField;
     }
 
     public void BuildPlayerResultsLabels(JPanel playerPanel, Player player){

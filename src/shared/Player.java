@@ -7,10 +7,11 @@ import java.util.ArrayList;
 public class Player implements Serializable {
 
     private String name;
-    private ArrayList<ArrayList<Integer>> rounds;
-    private ArrayList<Integer> points;
+    private ArrayList<ArrayList<Integer>> rounds = new ArrayList<ArrayList<Integer>>();
 
-    public Player(){}
+    public Player(){
+        System.out.println("Player gay");
+    }
 
     public void setName(String name) {
         this.name = name;
@@ -21,12 +22,12 @@ public class Player implements Serializable {
     }
 
     public void addRounds(){
-        rounds.add(points);
+        rounds.add(new ArrayList<>());
     }
 
 
     public void addPoints(int round, int points){
-        rounds.get(round).add(points);
+        rounds.get(round-1).add(points);
     }
 
     public ArrayList<Integer> getCurrentRoundList(){
@@ -41,7 +42,7 @@ public class Player implements Serializable {
         int total = 0;
         for(int i = 0; i<rounds.size(); ++i){
             for(int j = 0; j<rounds.get(i).size(); ++j){
-                total += points.get(j);
+                total += rounds.get(i).get(j);
             }
         }
         return total;
@@ -58,7 +59,7 @@ public class Player implements Serializable {
 
     public int getPointForSpecificQuestion(int round, int question){
         int point;
-        point = rounds.get(round).get(question);
+        point = rounds.get(round-1).get(question);
         return point;
     }
 

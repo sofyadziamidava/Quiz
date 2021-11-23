@@ -140,17 +140,32 @@ public class Game extends Thread {
         try {
             protocol.gameProcess(input);   // första gången protokollet kallas skickas string med null,null
 
+            Object ob1 = getPlayerStream1().in.readObject();
+            Object ob2 = getPlayerStream2().in.readObject();
             while (gameOn) {  // loopen går igång direkt, ligger och väntar på svar från båda
-                String player1Input = getPlayerStream1().receive();
-                Player player1 = getPlayerStream1().playerReceive();
-                setPlayers(player1, 0);
-                String player2Input = getPlayerStream2().receive();
-                Player player2 = getPlayerStream2().playerReceive();
-                setPlayers(player2, 1);
-                if (player1Input != null && player2Input != null) {
-                    input[0] = player1Input;
-                    input[1] = player2Input;
+                if(ob1 instanceof String || ob2 instanceof String) {
+                    if (ob1 instanceof String) {
+                        String player1Input = getPlayerStream1().receive();
+                        if (player1Input != null) {
+                            input[0] = player1Input;
+                        }
+                    }
+                    else if (ob2 instanceof String) {
+                        String player2Input = getPlayerStream2().receive();
+                        if (player2Input != null) {
+                            input[1] = player2Input;
+                        }
+                    }
+                    else{
+                        continue;
+                    }
                     protocol.gameProcess(input);
+                }
+                else if(ob1 instanceof Player && ob2 instanceof Player){
+                    Player player1 = getPlayerStream1().playerReceive();
+                    setPlayers(player1, 0);
+                    Player player2 = getPlayerStream2().playerReceive();
+                    setPlayers(player2, 1);
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
