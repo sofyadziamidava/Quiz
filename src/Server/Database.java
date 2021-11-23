@@ -28,10 +28,7 @@ public class Database {
         categories.add(new Category("a", q2));
         categories.add(new Category("a", q3));
         categories.add(new Category("a", q4));
-
     }
-
-//TODO: chose a random category, pick an amount of questions from that category
 
     public Category getRandomCategory() {
         Random rand = new Random();

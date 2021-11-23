@@ -7,7 +7,6 @@ public class Rond implements Serializable {
 
     String category;
     List<Question> questionList;
-    int nrOfQuestions;
 
     public Rond(String category) {
         this.category = category;
