@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.List;
 
 public class ResultsWindowEnd extends JPanel {
@@ -66,20 +67,17 @@ public class ResultsWindowEnd extends JPanel {
         player1ResultsField.setLayout(new BoxLayout(player1ResultsField, BoxLayout.Y_AXIS));
         player1ResultsField.add(player1Label = new JLabel(player.getName()));
         player1ResultsField.add(questionResults = new JPanel());
-        player1ResultsField.add(new JLabel(player.getName() + " total: " + points));
-
-        questionResults.setLayout(new BoxLayout(questionResults, BoxLayout.Y_AXIS));
-        roundResultOfGamePlayer();
+        player1ResultsField.add(new JLabel(player.getName() + " total: " + player.getScore()));
+        List<Integer> t = List.of(1,2,3);
+        roundResultOfGame(player.getScoreTablePlayer(), questionResults);
 
         player2ResultsField.setBackground(Color.pink);
         player2ResultsField.setLayout(new BoxLayout(player2ResultsField, BoxLayout.Y_AXIS));
         player2ResultsField.add(player2Label = new JLabel("Opponent"));
-        player2ResultsField.add(questionResults = new JPanel());
+        player2ResultsField.add(questionResults2 = new JPanel());
         player2ResultsField.add(new JLabel("Opponent total: " + opponentResult));
 
-        questionResults.setLayout(new BoxLayout(questionResults, BoxLayout.Y_AXIS));
-
-        roundResultOfGame(player.getScoreTableOpponent(), questionResults);
+        roundResultOfGame(player.getScoreTableOpponent(), questionResults2);
 
 
 
@@ -100,21 +98,6 @@ public class ResultsWindowEnd extends JPanel {
         }
     }
 
-    private void roundResultOfGamePlayer() {
-        int counter = 1;
-        int round = 1;
-        for(List<Integer> list : player.getScoreTablePlayer()){
-            questionResults.add(new JLabel("Round " + round));
-            for(Integer i : list){
-                questionResults.add(new JLabel("player1results Q" + counter + ": " + i));
-                counter++;
-            }
-            counter = 1;
-            round++;
-        }
-        questionResults.add(new JLabel("testing to see if list empty " + round));
-    }
-
     private class myContinueListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -123,7 +106,7 @@ public class ResultsWindowEnd extends JPanel {
     }
 
     public static void main(String[] args) {
-        int[] testArr = new int[]{1,5};
+
         Player player = new Player("Kalle");
         Window test = new Window();
         test.add(new ResultsWindowEnd(player));

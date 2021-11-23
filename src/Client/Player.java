@@ -1,6 +1,7 @@
 package Client;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Player {
@@ -8,24 +9,14 @@ public class Player {
     private final String name;
     private int totalScore;
     private int opponentScore;
-    List<List<Integer>> scoreTablePlayer;
+    List<Integer> scoreTablePlayer;
     List<Integer> scoreTableOpponent;
-
-
 
     public Player(String name) {
         this.name = name;
         this.totalScore = 0;
         scoreTablePlayer = new ArrayList<>();
         scoreTableOpponent = new ArrayList<>();
-    }
-
-    public void addToScoreTablePlayer(List<Integer> list){
-        scoreTablePlayer.add(list);
-    }
-
-    public List<List<Integer>> getScoreTablePlayer() {
-        return scoreTablePlayer;
     }
 
     public void increaseOpponentScore(int points) {
@@ -48,11 +39,20 @@ public class Player {
         return totalScore;
     }
 
+    public void addToScoreTablePlayer(List<Integer> list){
+        this.scoreTablePlayer = list;
+    }
+
     public void addToScoreTableOpponent(List<Integer> list){
-        scoreTableOpponent = list;
+        this.scoreTableOpponent = list;
     }
 
     public List<Integer> getScoreTableOpponent() {
         return scoreTableOpponent;
+    }
+
+    public List<Integer> getScoreTablePlayer() {
+        System.out.println(Arrays.toString(scoreTablePlayer.toArray()));
+        return scoreTablePlayer;
     }
 }

@@ -33,6 +33,7 @@ public class ClientProtocol {
     public ClientProtocol(Window window, Player player){
         this.window = window;
         this.player = player;
+        playerScoreTable = new ArrayList<>();
         opponentScoreTable = new ArrayList<>();
     }
 
@@ -44,7 +45,6 @@ public class ClientProtocol {
     }
 
     public void handleNewRond(Object o){
-        playerScoreTable = new ArrayList<>();
         waitingForNextRound = true;
         pointsPerRondPlayer = 0;
         Rond newRond = (Rond)o;
@@ -55,12 +55,8 @@ public class ClientProtocol {
         }
         displayWaitingWindow();
         player.increasePoint(pointsPerRondPlayer);
-        sendListToPlayerTable(playerScoreTable);
-        System.out.println("Size of list (2): " + playerScoreTable.size());
-    }
+        addScoreToPlayerTable(pointsPerRondPlayer);
 
-    private void sendListToPlayerTable(List<Integer> playerScoreTable) {
-        player.addToScoreTablePlayer(playerScoreTable);
     }
 
     public void resultsWindow(int opponentResult) {
@@ -84,11 +80,6 @@ public class ClientProtocol {
         unpackCurrentQuestion(currentQuestion);
         createGameWindowFromCurrentQuestion(question, answers, correctAnswer);
         playCurrentQuestion();
-        addScoreToPlayerTable(pointsPerRondPlayer);
-    }
-
-    private void addScoreToPlayerTable(int pointsPerRond) {
-        playerScoreTable.add(pointsPerRond);
     }
 
     private void unpackCurrentQuestion(Question question) {
@@ -141,11 +132,19 @@ public class ClientProtocol {
        pointsPerRondPlayer++;
     }
 
+    private void addScoreToPlayerTable(int pointsPerRond) {
+        this.playerScoreTable.add(pointsPerRond);
+    }
+
     public void addToScoreTableOpponent(int opponentScore) {
         this.opponentScoreTable.add(opponentScore);
     }
 
     public void sendListToOpponentTable() {
         player.addToScoreTableOpponent(opponentScoreTable);
+    }
+
+    public void sendListToPlayerTable() {
+        player.addToScoreTablePlayer(playerScoreTable);
     }
 }

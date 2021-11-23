@@ -32,33 +32,27 @@ public class ClientNetwork {
             while ((obj = dataFromServer.readObject()) != null) {
 
                 if (obj instanceof Rond) {
-                    System.out.println("round received ");
                     sleep(3000);
                     clientProtocol.handleNewRond(obj);
                     String pointsToSend = String.valueOf(clientProtocol.getPointsPerRondPlayer());
-                    System.out.println("sending " + pointsToSend + " points from client to server");
-                    System.out.println("Total score player: " + player.getScore());
                     dataToServer.writeObject(pointsToSend);
 
                 } else if (obj instanceof Integer) {
                     int opponentScore = (int) obj;
-                    System.out.println("OpponentScore from server: " + opponentScore);
-                    System.out.println("Opponent total score: " + player.getOpponentScore());
                     clientProtocol.addToScoreTableOpponent(opponentScore);
                     clientProtocol.resultsWindow(opponentScore);
                     dataToServer.writeObject(clientProtocol.waitForContinue());
-                    System.out.println("Size of list should end at size 3: " + player.getScoreTablePlayer().size());
 
                 } else if (obj instanceof Boolean) {
-                    System.out.println("Recieving boolean correct");
                     clientProtocol.sendListToOpponentTable();
+                    clientProtocol.sendListToPlayerTable();
                     clientProtocol.closeGame();
+                    System.out.println("Player total score: " + player.getScore());
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();
         }
-
     }
 
     public static void sleep(int milliseconds) {
