@@ -12,7 +12,6 @@ public class Clock extends Thread {
     }
 
     public void run() {
-        //när tid blir 0 ändra state?
         while (timeLeft > -1) {
             try {
                 timer.setText("" + timeLeft);
