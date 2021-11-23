@@ -6,9 +6,7 @@ import shared.Rond;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.lang.reflect.Array;
 import java.net.Socket;
-import java.util.Arrays;
 
 public class ClientNetwork {
 
