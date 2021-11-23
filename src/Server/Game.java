@@ -105,6 +105,15 @@ public class Game extends Thread {
         }
     }
 
+    public void sendEndOfGame() {
+        try {
+            playerStreams[0].send(true);
+            playerStreams[1].send(true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void loadData() {
         Properties p = new Properties();
         try {
@@ -139,7 +148,6 @@ public class Game extends Thread {
             e.printStackTrace();
         }
     }
-
 
 }
 

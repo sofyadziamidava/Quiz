@@ -54,6 +54,9 @@ public class ClientNetwork {
                     int[] results = (int[])obj;
                     clientProtocol.resultsWindow(results[0]);
                 }
+                else if (obj instanceof Boolean) {
+                    System.out.println("Recieving boolean correct");
+                }
             }
         } catch (IOException | ClassNotFoundException e) {
             e.printStackTrace();

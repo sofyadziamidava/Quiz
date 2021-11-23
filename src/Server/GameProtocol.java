@@ -31,6 +31,7 @@ public class GameProtocol {
             game.updatePoints(input);    // should add new points to players
             if (game.getCurrentRound() == game.getNrOfRounds() - 1) {
                 game.sendAllOpponentResultsToClient();   // int[]
+                game.sendEndOfGame();
                 //game.sendingOpponentResultToClients();
                 state = ENDRESULT;
             } else {
