@@ -68,22 +68,17 @@ public class ResultsWindowEnd extends JPanel {
         player1ResultsField.add(player1Label = new JLabel(player.getName()));
         player1ResultsField.add(questionResults = new JPanel());
         player1ResultsField.add(new JLabel(player.getName() + " total: " + player.getScore()));
-        List<Integer> t = List.of(1,2,3);
         roundResultOfGame(player.getScoreTablePlayer(), questionResults);
 
         player2ResultsField.setBackground(Color.pink);
         player2ResultsField.setLayout(new BoxLayout(player2ResultsField, BoxLayout.Y_AXIS));
         player2ResultsField.add(player2Label = new JLabel("Opponent"));
+        questionResults2 = new JPanel();
+        questionResults2.setLayout(new FlowLayout());
         player2ResultsField.add(questionResults2 = new JPanel());
         player2ResultsField.add(new JLabel("Opponent total: " + opponentResult));
-
         roundResultOfGame(player.getScoreTableOpponent(), questionResults2);
 
-
-
-        playerTotalField.setBackground(Color.YELLOW);
-        playerTotalField.add(new JLabel(player.getName() + " total: " + points));
-        playerTotalField.add(new JLabel("Opponent total: " + opponentResult));
 
         buttonsPanel.add(continueButton = new myButton("Continue"));
         continueButton.addActionListener(new myContinueListener());
@@ -106,7 +101,6 @@ public class ResultsWindowEnd extends JPanel {
     }
 
     public static void main(String[] args) {
-
         Player player = new Player("Kalle");
         Window test = new Window();
         test.add(new ResultsWindowEnd(player));
