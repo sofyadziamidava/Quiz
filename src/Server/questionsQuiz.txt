@@ -1,0 +1,153 @@
+##natur
+
+Vilket djur sover i sex månader om året?
+Björnen, Fjällräven, Sommarharen, myran
+
+Vilket svenskt djur brukar kallas för ”skogens konung”?
+Älgen, Vargen, Björnen, Falken
+
+Vad får man om man korsar en orm och en igelkott?
+Taggtråd, Spikklubba, Spikmatta, Ormkotte
+
+Vilket djur ser bäst?
+Zebra, Gorilla, Örn, Häst
+
+Vilket djur är halvfint?
+Delfin, Hund, Katt, Fluga
+
+Vad finns i slutet på en regnbåge?
+Bokstaven E, En skatt, En källare, En samling av färger
+
+Hur länge kan vissa sengångare sover upp till?
+20 timmar, 23 timmar, 12 timmar, 15 timmar
+
+Vilken hatighet kan Flygfiskar komma upp i?
+60 km/h, 70 km/h, 80 km/h, 50 km/h
+
+##Vetenskap
+Vad uppfanns Alfred Nobel, som instiftade Nobelpriset?
+Dynamiten, Stubinen till dynamiten, Nitroglycerin som finns i dynamit, Starkare svartkrut
+
+Vilken partikel har negativ laddning?
+Elektron, Proton, Neutro, Elektroproton
+
+Vilken vetenskap kan beskrivas som vetenskapen om materia, energi och krafter?
+Fysik, Kemi, Biologi, Biokemi
+
+Vilket pH-värde är neutralt?
+7, 0, 14, 2
+
+Vilken kemisk beteckning har svavelsyra?
+H2SO4, HCL, HN03, H20
+
+Vilken är enheten för elektrisk ström?
+Ampere, Volt, Watt, Spänning
+
+Vilken metall har den kemiska beteckningen Ag?
+Silver, Guld, Aluminium, Koppar
+
+Vilket vitamin kallas även askorbinsyra?
+C, B, A, D
+
+
+## Samhälle
+
+När avskaffades värnplikten i Sverige?
+2010, 2000, 2012, 1995
+
+Vilken av följande lagar är inte en svensk grundlag?
+Konstitutionslagen, Yttrandefrihet, Regeringsformen, Tryckfrighetsförordningen
+
+I vilken stad blir Nobels fredspris utdelat?
+Oslo, Berlin, Stockholm, Paris
+
+Vilka fick rösträtt när demokrati infördes i det antika Athen?
+Manliga medborgare över 20 år, Manliga pensionärer, Kvinnliga medborgare över 20 år, Kvinnliga pensionärer
+
+Hur många kommuner finns det i Sverige?
+290, 80, 110, 180
+
+Sveriges näst högsta bergstopp?
+Sarektjåkkå, Kaskasatjåkka, Kaskasapakte, Palkattjåkkå
+
+Högsta januaritemperaturen i Sverige?
+12.4, 8.9, 17.2, 7.3
+
+Högsta temperatur i Sverige någonsin?
+38, 41, 39, 37.8
+
+## Java
+
+Vad är en korrekt syntax för att mata ut "Hello World" i Java?
+System.out.println("Hello World"); system.out.println("Hello World"); System.out.println("Hello World") System.out.println("hello world");
+
+Vilken metod kan användas för att hitta längden på en sträng?
+length(), length, getLength(), getSize()
+
+Vilket nyckelord används för att returnera ett värde i en metod?
+return, get, break, void
+
+Vilket nyckelord används för att stoppa en loop?
+break, return, exit, stop
+
+Korrekt syntax för java main metod?
+public static void main(String[] args), public static main(String[] args), public static void main(), public main(String[] args)
+
+Storlek på en char?
+2 bytes, 1 byte, 4 byte, 8 byte
+
+Vad är ar[4] i int[] ar = {1,2,3,4,5,6}; ?
+5, 4, 3, 6
+
+Vad är default-värdet för en strängvariabel?
+null, 0, "", inte definierat
+
+Storlek på en char?
+16 bits, 8 bits, 2 bits, 4 bits
+
+Vad är x i: int x = 5 + 12 / 3 + 1;
+10, 6, 7, 8
+
+## Rymden
+
+Hur lång tid tar det för solens ljus att nå jorden?
+8 minuter, 7 timmar, 16 sekunder, 24 timmar
+
+Vilken planet är solsystemets överlägset största planet?
+Jupiter, Saturnus, Neptunus, Uranus
+
+Vad kallas en våldsamt exploderande stjärna?
+Supernova, Meteorit, Komet, Nebulosa
+
+Vintergatan heter vår galax. Men vilket är dess engelska namn?
+Milky Way, Winter street, Vanilla Sky, Frosty Bliss
+
+Hur lång omloppstid har Saturnus?
+29.5 år, 19,5 år, 1,5 år, 49,5 år
+
+Ljuset från solen färdas med en hastighet av ungefär...
+300 000 km/s, 300 000 km/h, 300 000 km/min, 300 000 km/ms
+
+Snittemperatur på planeten Mars (celcius)?
+-60, -30, +5, + 15
+
+Våra närmsta planetgrannar?
+Mars & Venus, Mars & Merkurius, Venus & Jupiter, Mars & Jupiter
+
+Månens omloppstid runt jorden?
+27 dagar, 69 dagar, 14 dagar, 113 dagar
+
+Vad heter det högsta berget i vårt solsystem?
+Olympus Mons, Mount Everest, Space jam, Royal Castle
+ 
+Jorden har ett annat namn, vilket?
+Tellus, Aftonsjtärnan, Vintergatan, Atlas
+
+
+
+
+
+
+
+
+

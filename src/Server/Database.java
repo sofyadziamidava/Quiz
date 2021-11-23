@@ -30,6 +30,10 @@ public class Database {
         categories.add(new Category("a", q4));
     }
 
+    public void loadCategories() {
+
+    }
+
     public Category getRandomCategory() {
         Random rand = new Random();
         int upperbound = categories.size();
