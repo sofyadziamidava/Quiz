@@ -5,11 +5,8 @@ import Client.GUI.Window;
 
 public class Client {
 
-    Window window;
-    StartWindow startWindow;
-    ClientNetwork clientNetwork;
-    Player player;
-
+    private Window window;
+    private StartWindow startWindow;
 
     public Client() {
         createWindow();
@@ -21,8 +18,7 @@ public class Client {
             ClientNetwork.sleep(500);
             boolean connectButtonPressed = startWindow.getReady();
             if(connectButtonPressed){
-                this.player = new Player(startWindow.getSavedName());
-                clientNetwork = new ClientNetwork(window, player);
+                new ClientNetwork(window, new Player(startWindow.getSavedName()));
             }
         }
     }
@@ -37,5 +33,4 @@ public class Client {
     public static void main(String[] args) {
         new Client();
     }
-
 }

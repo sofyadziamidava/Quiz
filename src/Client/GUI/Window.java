@@ -6,19 +6,15 @@ public class Window extends JFrame {
 
     public Window() {
 
-        setSize(750, 450);
-        setTitle("QuizKampen");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        this.setSize(750, 450);
+        this.setTitle("QuizKampen");
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
 
     }
 
     public GameWindow getGameWindow() {
         return new GameWindow();
-    }
-
-    public StartWindow getStartWindow() {
-        return new StartWindow();
     }
 
     public static void main(String[] args) {
