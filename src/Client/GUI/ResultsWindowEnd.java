@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
-public class ResultsWindow extends JPanel {
+public class ResultsWindowEnd extends JPanel {
 
     Player player;
 
@@ -28,6 +28,7 @@ public class ResultsWindow extends JPanel {
     private JPanel player1ResultsField;
     private JPanel player2ResultsField;
     private JPanel questionResults;
+    private JPanel playerTotalField;
 
     private JPanel buttonsPanel;
 
@@ -40,7 +41,7 @@ public class ResultsWindow extends JPanel {
     private JLabel player2Results;
     private JLabel topText;
 
-    public ResultsWindow(int points, int opponentResult, Player player){
+    public ResultsWindowEnd(int points, int opponentResult, Player player){
 
         this.player = player;
 
@@ -53,6 +54,7 @@ public class ResultsWindow extends JPanel {
         add(categoryLabel = new JLabel("Category"));
         categoryLabel.setForeground(Color.blue);
         add(resultsPanel = new JPanel());
+        add(playerTotalField = new JPanel());
         add(buttonsPanel = new JPanel());
 
         resultsPanel.setBackground(Color.CYAN);
@@ -64,31 +66,30 @@ public class ResultsWindow extends JPanel {
         player1ResultsField.setBackground(Color.green);
         player1ResultsField.setLayout(new BoxLayout(player1ResultsField, BoxLayout.Y_AXIS));
         player1ResultsField.add(player1Label = new JLabel(player.getName()));
-        player1Label.setFont(new Font("Arial", Font.BOLD, 20));
         player1ResultsField.add(questionResults = new JPanel());
-        JLabel playerRoundScore = new JLabel("Points this round: " + points);
-        playerRoundScore.setFont(new Font("Arial", Font.BOLD, 20));
-        player1ResultsField.add(playerRoundScore);
-        JLabel playerTotalScore = new JLabel("Total score: " + player.getScore());
-        playerTotalScore.setFont(new Font("Arial", Font.BOLD, 20));
-        player1ResultsField.add(playerTotalScore);
+        player1ResultsField.add(new JLabel(player.getName() + " total: " + points));
 
+        questionResults.setLayout(new BoxLayout(questionResults, BoxLayout.Y_AXIS));
+        questionResults.add(player1Results = new JLabel("player1results Q1"));
+        questionResults.add(new JLabel("Player1results Q2"));
+        questionResults.add(new JLabel("Player1results Q3"));
 
         player2ResultsField.setBackground(Color.pink);
         player2ResultsField.setLayout(new BoxLayout(player2ResultsField, BoxLayout.Y_AXIS));
-        player2ResultsField.add(player2Label = new JLabel("Opponent"));
-        player2Label.setFont(new Font("Arial", Font.BOLD, 20));
+        player2ResultsField.add(player2Label = new JLabel("Player2"));
         player2ResultsField.add(questionResults = new JPanel());
-        JLabel opponentRoundScore = new JLabel("Points this round: " + opponentResult);
-        opponentRoundScore.setFont(new Font("Arial", Font.BOLD, 20));
+        player2ResultsField.add(new JLabel("Opponent total: " + opponentResult));
 
-        player2ResultsField.add(opponentRoundScore);
-        JLabel opponentTotalScore = new JLabel("Total score: " + opponentResult);
-        opponentTotalScore.setFont(new Font("Arial", Font.BOLD, 20));
-        player2ResultsField.add(opponentTotalScore);
+        questionResults.setLayout(new BoxLayout(questionResults, BoxLayout.Y_AXIS));
+        questionResults.add(player2Results = new JLabel("player2results Q1"));
+        questionResults.add(new JLabel("Player2results Q2"));
+        questionResults.add(new JLabel("Player2results Q3"));
 
+        playerTotalField.setBackground(Color.YELLOW);
+        playerTotalField.add(new JLabel(player.getName() + " total: " + points));
+        playerTotalField.add(new JLabel("Opponent total: " + opponentResult));
 
-        buttonsPanel.add(continueButton = new myButton("Next round"));
+        buttonsPanel.add(continueButton = new myButton("Continue"));
         continueButton.addActionListener(new myContinueListener());
         buttonsPanel.add(new myButton("Exit"));
     }
@@ -104,7 +105,7 @@ public class ResultsWindow extends JPanel {
         int[] testArr = new int[]{1,5};
         Player player = new Player("Kalle");
         Window test = new Window();
-        test.add(new ResultsWindow(2, 1, player));
+        test.add(new ResultsWindowEnd(2, 1, player));
         test.setVisible(true);
     }
 }
