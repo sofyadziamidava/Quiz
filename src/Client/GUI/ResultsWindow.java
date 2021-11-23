@@ -1,7 +1,7 @@
 package Client.GUI;
 
 import Client.ClientProtocol;
-import Server.Player;
+import shared.Player;
 import shared.Question;
 import shared.Rond;
 
@@ -40,13 +40,38 @@ public class ResultsWindow extends JPanel {
     private JLabel player2Results;
     private JLabel topText;
 
-    public ResultsWindow(Rond rond, Question question, Player player1, Player player2){}
+    public ResultsWindow(Rond rond){
+
+        rounds = rond.getQuestionList();
+        this.player1 = ClientProtocol.clientPlayer;
+        this.player2 = ClientProtocol.opponentPlayer;
+
+        setBackground(Color.gray);
+        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        add(topText = new JLabel("Results"));
+        SetCategoryText(rond);
+        add(categoryLabel = new JLabel("Category"));
+        categoryLabel.setForeground(Color.blue);
+
+        add(resultsPanel = new JPanel());
+        add(playerTotalField = new JPanel());
+        add(buttonsPanel = new JPanel());
+
+        resultsPanel.add(playerResultsField = BuildPlayerResultsField(playerResultsField, player1));
+        resultsPanel.add(playerResultsField = BuildPlayerResultsField(playerResultsField, player2));
+
+        playerTotalField.setBackground(Color.YELLOW);
+        playerTotalField.add(setRoundTotalLabel(player1));
+        playerTotalField.add(setRoundTotalLabel(player2));
+
+        buttonsPanel.add(continueButton = SetContinueButtonText());
+        continueButton.addActionListener(new myContinueListener());
+        buttonsPanel.add(new myButton("Exit"));
+
+    }
     public ResultsWindow(int points, int opponentResult){
 
-        //rounds = rond.getQuestionList();
-        this.question = question;
-        this.player1 = player1;
-        this.player2 = player2;
+
         this.points = points;
         this.opponentResult = opponentResult;
 
@@ -73,7 +98,6 @@ public class ResultsWindow extends JPanel {
         player1ResultsField.add(player1Label = new JLabel("Player1"));
         player1ResultsField.add(questionResults = new JPanel());
         player1ResultsField.add(showTotalResult(points));
-       // player1ResultsField.add(showTotalResult(player1ResultsField, points));
 
         questionResults.setLayout(new BoxLayout(questionResults, BoxLayout.Y_AXIS));
         questionResults.add(player1Results = new JLabel("player1results Q1"));
@@ -85,7 +109,6 @@ public class ResultsWindow extends JPanel {
         player2ResultsField.add(player2Label = new JLabel("Player2"));
         player2ResultsField.add(questionResults = new JPanel());
         player2ResultsField.add(showTotalResult(opponentResult));
-        //player2ResultsField.add(player2Tot = new JLabel("player2total"));
 
         questionResults.setLayout(new BoxLayout(questionResults, BoxLayout.Y_AXIS));
         questionResults.add(player2Results = new JLabel("player2results Q1"));
@@ -93,13 +116,19 @@ public class ResultsWindow extends JPanel {
         questionResults.add(new JLabel("Player2results Q3"));
 
         playerTotalField.setBackground(Color.YELLOW);
-        playerTotalField.add(showTotalResult(ClientProtocol.clientScoreTotal));
-        playerTotalField.add(showTotalResult(ClientProtocol.opponentScoreTotal));
+        playerTotalField.add(setRoundTotalLabel(ClientProtocol.clientPlayer));
+        playerTotalField.add(setRoundTotalLabel(ClientProtocol.opponentPlayer));
+        //playerTotalField.add(showTotalResult(ClientProtocol.clientScoreTotal));
+        //playerTotalField.add(showTotalResult(ClientProtocol.opponentScoreTotal));
 
-        /*buttonsPanel.add(continueButton = SetContinueButtonText(rounds, question));*/
-        buttonsPanel.add(continueButton = new myButton("Continue"));
+        buttonsPanel.add(continueButton = SetContinueButtonText());
+        //buttonsPanel.add(continueButton = new myButton("Continue"));
         continueButton.addActionListener(new myContinueListener());
         buttonsPanel.add(new myButton("Exit"));
+    }
+
+    public String checkWinner(){
+        if
     }
 
     public JLabel showTotalResult(int points){
@@ -115,24 +144,18 @@ public class ResultsWindow extends JPanel {
     }
 
 
-    /*public JLabel SetCategoryText(Question category){
-        JLabel categoryLabel = new JLabel(category.getCategory); //Vi behöver nog lägga till String Category i Question
+    public JLabel SetCategoryText(Rond category){
+        JLabel categoryLabel = new JLabel(category.getCategory());
         categoryLabel.setFont(new Font("Arial", Font.BOLD, 20));
         categoryLabel.setForeground(Color.blue);
         return categoryLabel;
     }
 
 
-    public JPanel setTotalLabel(JPanel panel, int[] points){
-        for (int i = 0; i<points.length; ++i) {
-            JLabel totalLabel;
-            panel.add(totalLabel = new JLabel(""+points[i]));
-        }
-        return panel;
-    }
 
 
-    public JPanel BuildPlayerResultsField(JPanel resultsField, Player player){ //Lägg till string name i Player?
+
+    public JPanel BuildPlayerResultsField(JPanel resultsField, Player player){
 
         JPanel playerResultsField = new JPanel();
         playerResultsField.setBackground(Color.green);
@@ -140,55 +163,66 @@ public class ResultsWindow extends JPanel {
         playerResultsField.add(SetPlayerLabel(player));
         playerResultsField.add(questionResults = new JPanel());
         questionResults.setLayout(new BoxLayout(questionResults, BoxLayout.Y_AXIS));
-        BuildPlayerResultsLabels(questionResults, player.getPoints); //poängArray i Player
-        playerResultsField.add(SetPlayerLabel(player));
+        BuildPlayerResultsLabels(questionResults, player);
 
         return resultsField;
     }
 
-    public JPanel BuildPlayerResultsLabels(JPanel playerPanel, int[] points){ //Lägg till poängarrayen i Player och skicka players istället för arrayen från server
-        //sätt grundvärde i poängarrayen till -1
-        for (int i = 0; i<points.length; ++i) {
-            if(points[i] == -1){
+    public void BuildPlayerResultsLabels(JPanel playerPanel, Player player){
+
+        for (int i = 0; i<rounds.size(); ++i) {
+            if(player.getCurrentRoundList() == null){
                 JLabel label = new JLabel("Round not played yet");
                 label.setFont(new Font("Arial", Font.BOLD, 20));
             }
             else{
-                JLabel label = new JLabel("Question "+(i+1) + " - " + points[i] + " points.");
+                JLabel label = new JLabel("Question "+(i+1) + " - " + player.getPointForSpecificQuestion(ClientProtocol.currentRound, i) + " points.");
                 label.setFont(new Font("Arial", Font.BOLD, 20));
                 playerPanel.add(label);
             }
-
         }
-        return playerPanel;
     }
 
     public JLabel SetPlayerLabel(Player player){
-        JLabel playerName = new JLabel(player.getName());
-        playerName.setFont(new Font("Arial", Font.BOLD, 20));
+        JLabel playerName;
+        if(player == null){
+            playerName = new JLabel("Player null");
+            playerName.setFont(new Font("Arial", Font.BOLD, 20));
+        }
+        else {
+            playerName = new JLabel(player.getName());
+            playerName.setFont(new Font("Arial", Font.BOLD, 20));
+        }
         return  playerName;
     }
 
+    public JLabel setRoundTotalLabel(Player player){
+        JLabel totalLabel = new JLabel("Current total: "+""+player.getTotalForAllRounds());
+        return totalLabel;
+    }
 
-    public myButton SetContinueButtonText(List<Question> rounds, Question question){
+
+    public myButton SetContinueButtonText(){
         myButton button;
-        if(question == rounds.get(-1)){
+        if(ClientProtocol.currentRound == ClientProtocol.totalRounds){
             button = new myButton("New game");
+            //lägg till action för nytt spel
         }
         else{
             button = new myButton("Next Round");
+            button.addActionListener(new myContinueListener());
         }
 
         return button;
     }
-*/
 
 
-    public static void main(String[] args) {
+
+    /*public static void main(String[] args) {
         int[] testArr = new int[]{1,5};
         Window test = new Window();
-        test.add(new ResultsWindow(2, 2));
+        test.add(new ResultsWindow();
         test.setVisible(true);
     }
-
+*/
 }

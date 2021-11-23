@@ -2,6 +2,7 @@ package Client;
 
 import Client.GUI.StartWindow;
 import Client.GUI.Window;
+import shared.Player;
 
 public class Client {
 

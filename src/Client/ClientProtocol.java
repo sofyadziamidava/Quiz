@@ -3,6 +3,7 @@ package Client;
 import Client.GUI.GameWindow;
 import Client.GUI.ResultsWindow;
 import Client.GUI.Window;
+import shared.Player;
 import shared.Question;
 import shared.Rond;
 
@@ -23,8 +24,12 @@ public class ClientProtocol {
     public static boolean waitingForNextRound = true;
     public static int clientScoreTotal;
     public static int opponentScoreTotal;
+    public static int currentRound;
+    public static int totalRounds;
     public static String clientName;
     public static String opponentName;
+    public static Player clientPlayer;
+    public static Player opponentPlayer;
 
     private static int pointsPerRond;
 
@@ -48,6 +53,7 @@ public class ClientProtocol {
     }
 
     public void handleNewRond(Object o){
+        currentRound +=1;
         waitingForNextRound = true;
         pointsPerRond = 0;
         Rond newRond = (Rond)o;
@@ -62,10 +68,11 @@ public class ClientProtocol {
         //send points to server
     }
 
-    public void resultsWindow(int opponentResult) {
+    public void resultsWindow(int opponentResult, Rond currentRound) {
         addOpponentScore(opponentResult);
         this.window = new Window();
-        this.resultsWindow = new ResultsWindow(pointsPerRond, opponentResult);
+        this.resultsWindow = new ResultsWindow(currentRound);
+        //this.resultsWindow = new ResultsWindow(pointsPerRond, opponentResult);
         window.add(resultsWindow);
         this.window.setVisible(true);
 

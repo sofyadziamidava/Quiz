@@ -25,6 +25,7 @@ public class GameProtocol {
             state = NEWROND;
         }*/
         if (state == NEWROND) {   // -> null,null
+
             game.sendRounds();          // Rond
             state = WAITINGFORRESULTS;
         } else if (state == WAITINGFORRESULTS) {

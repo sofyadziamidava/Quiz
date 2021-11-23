@@ -113,9 +113,10 @@ public class GameWindow extends JPanel implements ActionListener {
         myButton temp = (myButton) e.getSource();
         if(temp.getText().equals(correctAnswer)){
             temp.setBackground(Color.green);
-            ClientProtocol.increasePoint();
+            ClientProtocol.clientPlayer.addPoints(ClientProtocol.currentRound, 1);
         } else{
             temp.setBackground(Color.red);
+            ClientProtocol.clientPlayer.addPoints(ClientProtocol.currentRound, 0);
         }
         setButtonsEnabled();
         buttonPressed = true;

@@ -1,5 +1,6 @@
 package Server;
 
+import shared.Player;
 import shared.Rond;
 
 import java.io.FileInputStream;
@@ -84,6 +85,19 @@ public class Game extends Thread {
                 System.out.println("could not send round to player");
             }
         }
+    }
+
+    public void sendOpponentPlayer(){
+        try {
+            playerStreams[0].send(players[1]);
+            playerStreams[1].send(players[0]);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void setPlayers(){
+
     }
 
     public void sendingOpponentResultToClients() {

@@ -44,9 +44,8 @@ public class StartWindow extends JPanel{
     private class StartAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            //lägg till connect to server, ändra state
             savedName = name.getText();
-            ClientProtocol.clientName = savedName;
+            ClientProtocol.clientPlayer.setName(savedName);
             System.out.println(savedName);
             System.out.println("Ready from button: " + ready);
             nameLabel.setText("Hello " + savedName + ", Please wait for the game to start...");

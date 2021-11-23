@@ -1,6 +1,7 @@
 package Client;
 
 import Client.GUI.Window;
+import shared.Player;
 import shared.Rond;
 
 import java.io.IOException;
@@ -29,10 +30,12 @@ public class ClientNetwork {
              ObjectInputStream dataFromServer = new ObjectInputStream(clientSocket.getInputStream());
         ) {
             Object obj;
+            Rond currentRound = null;
             while ((obj = dataFromServer.readObject()) != null) {
 
                 if (obj instanceof Rond) {
                     sleep(3000);
+                    currentRound = (Rond)obj;
                     clientProtocol.handleNewRond(obj);
                     System.out.println("round received ");
                     String pointsToSend = String.valueOf(ClientProtocol.getPointsPerRond());
@@ -41,13 +44,16 @@ public class ClientNetwork {
                 }
 
                 else if (obj instanceof Integer) {
-                    clientProtocol.resultsWindow((int)obj);
+                    clientProtocol.resultsWindow((int)obj, currentRound);
                     dataToServer.writeObject(clientProtocol.waitForContinue());
                 }
 
                 else if (obj instanceof int[]) {
                     int[] results = (int[])obj;
-                    clientProtocol.resultsWindow(results[0]);
+                    clientProtocol.resultsWindow(results[0], currentRound);
+                }
+                else if (obj instanceof Player){
+                    ClientProtocol.opponentPlayer = (Player)obj;
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
