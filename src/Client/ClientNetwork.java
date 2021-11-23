@@ -22,7 +22,7 @@ public class ClientNetwork {
     public void connectToServer() {
         int serverPort = 42424;
         String serverHost = "127.0.0.1";
-        ClientProtocol clientProtocol = new ClientProtocol(window);
+        ClientProtocol clientProtocol = new ClientProtocol(window, player);
 
         try (Socket clientSocket = new Socket(serverHost, serverPort);
              ObjectOutputStream dataToServer = new ObjectOutputStream(clientSocket.getOutputStream());
@@ -35,8 +35,8 @@ public class ClientNetwork {
                     sleep(3000);
                     clientProtocol.handleNewRond(obj);
                     System.out.println("round received ");
-                    String pointsToSend = String.valueOf(ClientProtocol.getPointsPerRond());
-                    System.out.println("sending points from client to server");
+                    String pointsToSend = String.valueOf(player.getScore());
+                    System.out.println("sending " + player.getScore() + " points from client to server");
                     dataToServer.writeObject(pointsToSend);
                 }
 

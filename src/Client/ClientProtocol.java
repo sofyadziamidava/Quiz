@@ -17,6 +17,7 @@ public class ClientProtocol {
     WaitingWindow waitingWindow;
     GameWindow gamePanel;
     ResultsWindow resultsWindow;
+    Player player;
 
     private String question;
     private List<String> answers;
@@ -26,20 +27,17 @@ public class ClientProtocol {
     public static int clientScoreTotal;
     public static int opponentScoreTotal;
     public static String clientName;
-    public static String opponentName;
+
 
     private static int pointsPerRond;
 
-    public void addClientScore(int newScore) {
-        clientScoreTotal += newScore;
+    public ClientProtocol(Window window, Player player){
+        this.window = window;
+        this.player = player;
     }
 
     public void addOpponentScore(int newScore) {
         opponentScoreTotal += newScore;
-    }
-
-    public ClientProtocol(Window window){
-        this.window = window;
     }
 
     public String waitForContinue() {
@@ -58,10 +56,8 @@ public class ClientProtocol {
         for(Question question : questionList){
             playRound(question);
         }
-        addClientScore(pointsPerRond);
-
         displayWaitingWindow();
-        //send points to server
+        player.increasePoint(pointsPerRond);
     }
 
     public void resultsWindow(int opponentResult) {

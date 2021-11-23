@@ -40,7 +40,6 @@ public class ResultsWindow extends JPanel {
     private JLabel player2Results;
     private JLabel topText;
 
-    public ResultsWindow(Rond rond, Question question, Player player1, Player player2){}
     public ResultsWindow(int points, int opponentResult){
 
         //rounds = rond.getQuestionList();
@@ -113,76 +112,6 @@ public class ResultsWindow extends JPanel {
             ClientProtocol.waitingForNextRound = false;
         }
     }
-
-
-    /*public JLabel SetCategoryText(Question category){
-        JLabel categoryLabel = new JLabel(category.getCategory); //Vi behöver nog lägga till String Category i Question
-        categoryLabel.setFont(new Font("Arial", Font.BOLD, 20));
-        categoryLabel.setForeground(Color.blue);
-        return categoryLabel;
-    }
-
-
-    public JPanel setTotalLabel(JPanel panel, int[] points){
-        for (int i = 0; i<points.length; ++i) {
-            JLabel totalLabel;
-            panel.add(totalLabel = new JLabel(""+points[i]));
-        }
-        return panel;
-    }
-
-
-    public JPanel BuildPlayerResultsField(JPanel resultsField, Player player){ //Lägg till string name i Player?
-
-        JPanel playerResultsField = new JPanel();
-        playerResultsField.setBackground(Color.green);
-        playerResultsField.setLayout(new BoxLayout(playerResultsField, BoxLayout.Y_AXIS));
-        playerResultsField.add(SetPlayerLabel(player));
-        playerResultsField.add(questionResults = new JPanel());
-        questionResults.setLayout(new BoxLayout(questionResults, BoxLayout.Y_AXIS));
-        BuildPlayerResultsLabels(questionResults, player.getPoints); //poängArray i Player
-        playerResultsField.add(SetPlayerLabel(player));
-
-        return resultsField;
-    }
-
-    public JPanel BuildPlayerResultsLabels(JPanel playerPanel, int[] points){ //Lägg till poängarrayen i Player och skicka players istället för arrayen från server
-        //sätt grundvärde i poängarrayen till -1
-        for (int i = 0; i<points.length; ++i) {
-            if(points[i] == -1){
-                JLabel label = new JLabel("Round not played yet");
-                label.setFont(new Font("Arial", Font.BOLD, 20));
-            }
-            else{
-                JLabel label = new JLabel("Question "+(i+1) + " - " + points[i] + " points.");
-                label.setFont(new Font("Arial", Font.BOLD, 20));
-                playerPanel.add(label);
-            }
-
-        }
-        return playerPanel;
-    }
-
-    public JLabel SetPlayerLabel(Player player){
-        JLabel playerName = new JLabel(player.getName());
-        playerName.setFont(new Font("Arial", Font.BOLD, 20));
-        return  playerName;
-    }
-
-
-    public myButton SetContinueButtonText(List<Question> rounds, Question question){
-        myButton button;
-        if(question == rounds.get(-1)){
-            button = new myButton("New game");
-        }
-        else{
-            button = new myButton("Next Round");
-        }
-
-        return button;
-    }
-*/
-
 
     public static void main(String[] args) {
         int[] testArr = new int[]{1,5};
