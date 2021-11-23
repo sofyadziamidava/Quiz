@@ -11,13 +11,12 @@ import java.util.List;
 
 public class ClientProtocol {
 
-    Window window;
-    Window gameWindow;
-    WaitingWindow waitingWindow;
-    GameWindow gamePanel;
-    ResultsWindow resultsWindow;
-    ResultsWindowEnd resultsWindowEnd;
-    Player player;
+    private Window window;
+    private WaitingWindow waitingWindow;
+    private GameWindow gamePanel;
+    private ResultsWindow resultsWindow;
+    private ResultsWindowEnd resultsWindowEnd;
+    private Player player;
 
     private String question;
     private List<String> answers;
@@ -73,20 +72,21 @@ public class ClientProtocol {
 
     public void resultsWindow(int opponentResult) {
         player.increaseOpponentScore(opponentResult);
-        window.dispose();
-        this.window = new Window();
+        window.getContentPane().removeAll();
+        window.revalidate();
         this.resultsWindow = new ResultsWindow(pointsPerRond, opponentResult, player);
         window.add(resultsWindow);
-        this.window.setVisible(true);
+        window.repaint();
+        window.setVisible(true);
     }
 
     public void displayWaitingWindow(){
-        this.window = new Window();
+        window.getContentPane().removeAll();
+        window.revalidate();
         this.waitingWindow = new WaitingWindow();
         window.add(waitingWindow);
-        window.setSize(400,300);
-        window.setLocationRelativeTo(null);
-        this.window.setVisible(true);
+        this.window.repaint();
+        window.setVisible(true);
     }
 
     private void playRound(Question currentQuestion) {
@@ -108,15 +108,17 @@ public class ClientProtocol {
     }
 
     private void createGameWindowFromCurrentQuestion(String question, List<String> alternatives, String correctAnswer) {
-        window.dispose();
-        this.gameWindow = new Window();
-        this.gamePanel = gameWindow.getGameWindow();
-        this.gameWindow.add(gamePanel);
-        this.gameWindow.setVisible(true);
+        window.getContentPane().removeAll();
+        window.revalidate();
 
+        this.gamePanel = window.getGameWindow();
         this.gamePanel.displayQuestion(question);
         this.gamePanel.displayButtons(alternatives);
         this.gamePanel.setCorrectAnswer(correctAnswer);
+
+        this.window.add(gamePanel);
+        this.window.repaint();
+        window.setVisible(true);
     }
 
     private void playCurrentQuestion() {
@@ -129,7 +131,6 @@ public class ClientProtocol {
             checkTimer = gamePanel.getTimerLabel().getText().equals("0");
         }
         ClientNetwork.sleep(1000);
-        this.gameWindow.dispose();
     }
 
     public void closeGame() {
@@ -137,12 +138,14 @@ public class ClientProtocol {
     }
 
     private void createEndResultWindow() {
-        window.dispose();
+        window.getContentPane().removeAll();
+        window.revalidate();
         System.out.println("inside end result method");
-        this.window = new Window();
+
         this.resultsWindowEnd = new ResultsWindowEnd(player);
         window.add(resultsWindowEnd);
-        this.window.setVisible(true);
+        this.window.repaint();
+        window.setVisible(true);
     }
 
     public static int getPointsPerRond() {
