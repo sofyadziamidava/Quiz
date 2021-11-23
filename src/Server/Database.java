@@ -18,20 +18,30 @@ public class Database {
     private ArrayList<Question> djur = new ArrayList<>();
 
     public Database() {
-        natur.add(new Question("a", Arrays.asList("a","b","c","d")));
-        natur.add(new Question("a", Arrays.asList("a","b","c","d")));
+        natur.add(new Question("Vilket annat namn har blomman hästhovsört?",
+                Arrays.asList("Tussilago","Lupin","Maskros","Tusensköna")));
+        natur.add(new Question("Vad livnär sig blåvalen på?",
+                Arrays.asList("Plankton och krill","Korallrev och tång","Fisk och bläckfisk","Hajar och Rockor")));
 
-        vetenskap.add(new Question("a", Arrays.asList("a","b","c","d")));
-        vetenskap.add(new Question("a", Arrays.asList("a","b","c","d")));
+        vetenskap.add(new Question("Vilket av dessa är ett primtal?",
+                Arrays.asList("97","27","35","57")));
+        vetenskap.add(new Question("Vilket nummer har det kemiska ämnet koppar i det periodiska systemet?",
+                Arrays.asList("29","9","19","16")));
 
-        kultur.add(new Question("a", Arrays.asList("a","b","c","d")));
-        kultur.add(new Question("a", Arrays.asList("a","b","c","d")));
+        kultur.add(new Question("Vem har skrivit 'Hamlet'?",
+                Arrays.asList("William Shakespeare","Homeros","Mark Twain","H.C. Andersen")));
+        kultur.add(new Question("Varifrån kommer 80-tals bandet Alphaville?",
+                Arrays.asList("Tyskland","USA","England","Sverige")));
 
-        samhälle.add(new Question("a", Arrays.asList("a","b","c","d")));
-        samhälle.add(new Question("a", Arrays.asList("a","b","c","d")));
+        samhälle.add(new Question("Hur många monarkier existerade i Europa under år 2010?",
+                Arrays.asList("12","10","11","8")));
+        samhälle.add(new Question("Vem var sedan 2009 ständig sekreterare i Svenska Akademin?",
+                Arrays.asList("Peter Englund","Sture Allén","Horace Engdahl","Torgny Lindgren")));
 
-        djur.add(new Question("a", Arrays.asList("a","b","c","d")));
-        djur.add(new Question("a", Arrays.asList("a","b","c","d")));
+        djur.add(new Question("Var kan man beskåda en vild anakonda?",
+                Arrays.asList("Sydamerika","Afrika","Asien","Australien")));
+        djur.add(new Question("Vilken art är Sveriges minsta fågel?",
+                Arrays.asList("Kungsfågel","Blåmes","Sävsångare","Tofsmes")));
 
         categories.add(natur);
         categories.add(vetenskap);
