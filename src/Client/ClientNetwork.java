@@ -12,16 +12,18 @@ import java.util.Arrays;
 public class ClientNetwork {
 
     Window window;
+    Player player;
 
-    public ClientNetwork(Window window) {
+    public ClientNetwork(Window window, Player player) {
         this.window = window;
+        this.player = player;
         connectToServer();
     }
 
     public void connectToServer() {
         int serverPort = 42424;
         String serverHost = "127.0.0.1";
-        ClientProtocol clientProtocol = new ClientProtocol(window);
+        ClientProtocol clientProtocol = new ClientProtocol(window, player);
 
         try (Socket clientSocket = new Socket(serverHost, serverPort);
              ObjectOutputStream dataToServer = new ObjectOutputStream(clientSocket.getOutputStream());

@@ -30,7 +30,6 @@ public class Client {
                 this.player = new Player(startWindow.getSavedName());
                 clientNetwork = new ClientNetwork(window, player);
             }
-
         }
     }
 
