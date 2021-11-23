@@ -2,6 +2,7 @@ package Client.GUI;
 
 import Client.ClientProtocol;
 import Client.Clock;
+import Client.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,13 +22,15 @@ public class GameWindow extends JPanel implements ActionListener {
     private String correctAnswer;
     private boolean buttonPressed = false;
     myButton[] buttonsInGame;
+    Player player;
 
 
     public void setCorrectAnswer(String correctAnswer) {
         this.correctAnswer = correctAnswer;
     }
 
-    public GameWindow() {
+    public GameWindow(Player player) {
+        this.player = player;
 
         buttonsArray = new myButton[4];
         timerLabel = new JLabel();
@@ -89,14 +92,6 @@ public class GameWindow extends JPanel implements ActionListener {
             b[i] = button;
         }
         return b;
-    }
-
-
-
-    public static void main(String[] args) {
-        Window testWindow = new Window();
-        testWindow.add(testWindow.getGameWindow());
-        testWindow.setVisible(true);
     }
 
     public JLabel getTimerLabel() {

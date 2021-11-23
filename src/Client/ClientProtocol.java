@@ -1,9 +1,6 @@
 package Client;
 
-import Client.GUI.GameWindow;
-import Client.GUI.ResultsWindow;
-import Client.GUI.WaitingWindow;
-import Client.GUI.Window;
+import Client.GUI.*;
 import shared.Question;
 import shared.Rond;
 
@@ -16,7 +13,8 @@ public class ClientProtocol {
     Window gameWindow;
     WaitingWindow waitingWindow;
     GameWindow gamePanel;
-    ResultsWindow resultsWindow;
+    ResultWindowNew resultsWindow;
+    Player player;
 
     private String question;
     private List<String> answers;
@@ -26,8 +24,9 @@ public class ClientProtocol {
 
     private static int pointsPerRond;
 
-    public ClientProtocol(Window window){
+    public ClientProtocol(Window window, Player player){
         this.window = window;
+        this.player = player;
     }
 
     public String waitForContinue() {
@@ -48,20 +47,21 @@ public class ClientProtocol {
         }
 
         displayWaitingWindow();
+        player.increasePoint(pointsPerRond);
         //send points to server
     }
 
     public void resultsWindow(int opponentResult) {
         window.dispose();
-        this.window = new Window();
-        this.resultsWindow = new ResultsWindow(pointsPerRond, opponentResult);
+        this.window = new Window(player);
+        ResultWindowNew resultsWindow = new ResultWindowNew(player);
         window.add(resultsWindow);
         this.window.setVisible(true);
 
     }
 
     public void displayWaitingWindow(){
-        this.window = new Window();
+        this.window = new Window(player);
         this.waitingWindow = new WaitingWindow();
         window.add(waitingWindow);
         window.setSize(400,300);
@@ -72,7 +72,7 @@ public class ClientProtocol {
 
     private void playRound(Question currentQuestion) {
         unpackCurrentQuestion(currentQuestion);
-        createGameWindowFromCurrentQuestion(question, answers, correctAnswer);
+        createGameWindowFromCurrentQuestion(question, answers, correctAnswer, player);
         playCurrentQuestion();
     }
 
@@ -83,9 +83,10 @@ public class ClientProtocol {
         Collections.shuffle(answers);
     }
 
-    private void createGameWindowFromCurrentQuestion(String question, List<String> alternatives, String correctAnswer) {
+    private void createGameWindowFromCurrentQuestion(String question, List<String> alternatives, String correctAnswer,
+                                                     Player player) {
         window.dispose();
-        this.gameWindow = new Window();
+        this.gameWindow = new Window(player);
         this.gamePanel = gameWindow.getGameWindow();
         this.gameWindow.add(gamePanel);
         this.gameWindow.setVisible(true);

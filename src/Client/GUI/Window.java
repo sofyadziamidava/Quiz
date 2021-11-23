@@ -1,10 +1,15 @@
 package Client.GUI;
 
+import Client.Player;
+
 import javax.swing.*;
 
 public class Window extends JFrame {
 
-    public Window() {
+    Player player;
+
+    public Window(Player player) {
+        this.player = player;
 
         setSize(750, 450);
         setTitle("QuizKampen");
@@ -14,15 +19,12 @@ public class Window extends JFrame {
     }
 
     public GameWindow getGameWindow() {
-        return new GameWindow();
+        return new GameWindow(player);
     }
 
     public StartWindow getStartWindow() {
         return new StartWindow();
     }
 
-    public static void main(String[] args) {
-        new Window();
-    }
 
 }
