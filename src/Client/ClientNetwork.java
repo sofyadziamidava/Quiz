@@ -11,9 +11,11 @@ import java.net.Socket;
 public class ClientNetwork {
 
     Window window;
+    Player player;
 
-    public ClientNetwork(Window window) {
+    public ClientNetwork(Window window, Player player) {
         this.window = window;
+        this.player = player;
         connectToServer();
     }
 

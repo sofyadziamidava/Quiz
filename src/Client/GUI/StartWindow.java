@@ -37,8 +37,8 @@ public class StartWindow extends JPanel{
 
     }
 
-    public void changeFrame() {
-
+    public String getSavedName() {
+        return savedName;
     }
 
     private class StartAction implements ActionListener {
