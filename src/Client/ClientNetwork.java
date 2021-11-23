@@ -35,7 +35,7 @@ public class ClientNetwork {
                     System.out.println("round received ");
                     sleep(3000);
                     clientProtocol.handleNewRond(obj);
-                    String pointsToSend = String.valueOf(clientProtocol.getPointsPerRond());
+                    String pointsToSend = String.valueOf(clientProtocol.getPointsPerRondPlayer());
                     System.out.println("sending " + pointsToSend + " points from client to server");
                     System.out.println("Total score player: " + player.getScore());
                     dataToServer.writeObject(pointsToSend);
@@ -44,16 +44,14 @@ public class ClientNetwork {
                     int opponentScore = (int) obj;
                     System.out.println("OpponentScore from server: " + opponentScore);
                     System.out.println("Opponent total score: " + player.getOpponentScore());
+                    clientProtocol.addToScoreTableOpponent(opponentScore);
                     clientProtocol.resultsWindow(opponentScore);
                     dataToServer.writeObject(clientProtocol.waitForContinue());
                     System.out.println("Size of list should end at size 3: " + player.getScoreTablePlayer().size());
 
-                } else if (obj instanceof int[]) {
-                    int[] results = (int[]) obj;
-                    clientProtocol.resultsWindow(results[0]);
-
                 } else if (obj instanceof Boolean) {
                     System.out.println("Recieving boolean correct");
+                    clientProtocol.sendListToOpponentTable();
                     clientProtocol.closeGame();
                 }
             }

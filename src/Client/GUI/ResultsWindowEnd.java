@@ -28,11 +28,11 @@ public class ResultsWindowEnd extends JPanel {
     private JPanel player1ResultsField;
     private JPanel player2ResultsField;
     private JPanel questionResults;
+    private JPanel questionResults2;
     private JPanel playerTotalField;
 
     private JPanel buttonsPanel;
 
-    private JLabel categoryLabel;
     private JLabel player1Label;
     private JLabel player2Label;
     private JLabel player1Tot;
@@ -52,8 +52,6 @@ public class ResultsWindowEnd extends JPanel {
         setBackground(Color.gray);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(topText = new JLabel("Results"));
-        add(categoryLabel = new JLabel("Category"));
-        categoryLabel.setForeground(Color.blue);
         add(resultsPanel = new JPanel());
         add(playerTotalField = new JPanel());
         add(buttonsPanel = new JPanel());
@@ -71,19 +69,19 @@ public class ResultsWindowEnd extends JPanel {
         player1ResultsField.add(new JLabel(player.getName() + " total: " + points));
 
         questionResults.setLayout(new BoxLayout(questionResults, BoxLayout.Y_AXIS));
-        questionResultsAdds();
-
+        roundResultOfGamePlayer();
 
         player2ResultsField.setBackground(Color.pink);
         player2ResultsField.setLayout(new BoxLayout(player2ResultsField, BoxLayout.Y_AXIS));
-        player2ResultsField.add(player2Label = new JLabel("Player2"));
+        player2ResultsField.add(player2Label = new JLabel("Opponent"));
         player2ResultsField.add(questionResults = new JPanel());
         player2ResultsField.add(new JLabel("Opponent total: " + opponentResult));
 
         questionResults.setLayout(new BoxLayout(questionResults, BoxLayout.Y_AXIS));
-        questionResults.add(player2Results = new JLabel("player2results Q1"));
-        questionResults.add(new JLabel("Player2results Q2"));
-        questionResults.add(new JLabel("Player2results Q3"));
+
+        roundResultOfGame(player.getScoreTableOpponent(), questionResults);
+
+
 
         playerTotalField.setBackground(Color.YELLOW);
         playerTotalField.add(new JLabel(player.getName() + " total: " + points));
@@ -94,7 +92,15 @@ public class ResultsWindowEnd extends JPanel {
         buttonsPanel.add(new myButton("Exit"));
     }
 
-    private void questionResultsAdds() {
+    private void roundResultOfGame(List<Integer> list, JPanel panel) {
+        int round = 1;
+        for(Integer i : list){
+            panel.add(new JLabel("Round " + round + " points: " + i));
+            round++;
+        }
+    }
+
+    private void roundResultOfGamePlayer() {
         int counter = 1;
         int round = 1;
         for(List<Integer> list : player.getScoreTablePlayer()){

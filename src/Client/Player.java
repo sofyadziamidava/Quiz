@@ -9,7 +9,7 @@ public class Player {
     private int totalScore;
     private int opponentScore;
     List<List<Integer>> scoreTablePlayer;
-    List<List<Integer>> scoreTableOpponent;
+    List<Integer> scoreTableOpponent;
 
 
 
@@ -46,5 +46,13 @@ public class Player {
 
     public int getScore() {
         return totalScore;
+    }
+
+    public void addToScoreTableOpponent(List<Integer> list){
+        scoreTableOpponent = list;
+    }
+
+    public List<Integer> getScoreTableOpponent() {
+        return scoreTableOpponent;
     }
 }
