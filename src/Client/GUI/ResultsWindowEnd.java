@@ -73,8 +73,6 @@ public class ResultsWindowEnd extends JPanel {
         player2ResultsField.setBackground(Color.pink);
         player2ResultsField.setLayout(new BoxLayout(player2ResultsField, BoxLayout.Y_AXIS));
         player2ResultsField.add(player2Label = new JLabel("Opponent"));
-        questionResults2 = new JPanel();
-        questionResults2.setLayout(new FlowLayout());
         player2ResultsField.add(questionResults2 = new JPanel());
         player2ResultsField.add(new JLabel("Opponent total: " + opponentResult));
         roundResultOfGame(player.getScoreTableOpponent(), questionResults2);
@@ -86,6 +84,7 @@ public class ResultsWindowEnd extends JPanel {
     }
 
     private void roundResultOfGame(List<Integer> list, JPanel panel) {
+        panel.setLayout(new GridLayout(list.size(), 1));
         int round = 1;
         for(Integer i : list){
             panel.add(new JLabel("Round " + round + " points: " + i));
