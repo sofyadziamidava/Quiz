@@ -1,9 +1,7 @@
 package Client;
 
+import Client.GUI.*;
 import Client.GUI.GameWindow;
-import Client.GUI.ResultsWindow;
-import Client.GUI.WaitingWindow;
-import Client.GUI.Window;
 import shared.Question;
 import shared.Rond;
 
@@ -18,6 +16,7 @@ public class ClientProtocol {
     WaitingWindow waitingWindow;
     GameWindow gamePanel;
     ResultsWindow resultsWindow;
+    ResultsWindowEnd resultsWindowEnd;
     Player player;
 
     private String question;
@@ -131,6 +130,18 @@ public class ClientProtocol {
         }
         ClientNetwork.sleep(1000);
         this.gameWindow.dispose();
+    }
+
+    public void closeGame() {
+        createEndResultWindow();
+    }
+
+    private void createEndResultWindow() {
+        window.dispose();
+        this.window = new Window();
+        this.resultsWindowEnd = new ResultsWindowEnd(player);
+        window.add(resultsWindow);
+        this.window.setVisible(true);
     }
 
     public static int getPointsPerRond() {

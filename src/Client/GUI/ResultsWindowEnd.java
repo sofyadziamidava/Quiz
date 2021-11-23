@@ -41,8 +41,9 @@ public class ResultsWindowEnd extends JPanel {
     private JLabel player2Results;
     private JLabel topText;
 
-    public ResultsWindowEnd(int points, int opponentResult, Player player){
+    public ResultsWindowEnd(Player player){
 
+        int points = 0;
         this.player = player;
 
         this.roundPoints = points;
@@ -70,9 +71,8 @@ public class ResultsWindowEnd extends JPanel {
         player1ResultsField.add(new JLabel(player.getName() + " total: " + points));
 
         questionResults.setLayout(new BoxLayout(questionResults, BoxLayout.Y_AXIS));
-        questionResults.add(player1Results = new JLabel("player1results Q1"));
-        questionResults.add(new JLabel("Player1results Q2"));
-        questionResults.add(new JLabel("Player1results Q3"));
+        questionResultsAdds();
+
 
         player2ResultsField.setBackground(Color.pink);
         player2ResultsField.setLayout(new BoxLayout(player2ResultsField, BoxLayout.Y_AXIS));
@@ -94,6 +94,20 @@ public class ResultsWindowEnd extends JPanel {
         buttonsPanel.add(new myButton("Exit"));
     }
 
+    private void questionResultsAdds() {
+        int counter = 1;
+        int round = 1;
+        for(List<Integer> list : player.getScoreTablePlayer()){
+            questionResults.add(new JLabel("Round " + round));
+            for(Integer i : list){
+                questionResults.add(new JLabel("player1results Q" + counter + ": " + i));
+                counter++;
+            }
+            counter = 1;
+            round++;
+        }
+    }
+
     private class myContinueListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -105,7 +119,7 @@ public class ResultsWindowEnd extends JPanel {
         int[] testArr = new int[]{1,5};
         Player player = new Player("Kalle");
         Window test = new Window();
-        test.add(new ResultsWindowEnd(2, 1, player));
+        test.add(new ResultsWindowEnd(player));
         test.setVisible(true);
     }
 }

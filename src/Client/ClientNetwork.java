@@ -55,6 +55,7 @@ public class ClientNetwork {
                     clientProtocol.resultsWindow(results[0]);
                 }
                 else if (obj instanceof Boolean) {
+                    clientProtocol.closeGame();
                     System.out.println("Recieving boolean correct");
                 }
             }
