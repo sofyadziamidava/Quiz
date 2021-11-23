@@ -52,7 +52,6 @@ public class StartWindow extends JPanel{
             startButton.setVisible(false);
             ready = true;
         }
-
     }
 
     public boolean getReady() {
