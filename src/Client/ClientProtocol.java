@@ -73,19 +73,19 @@ public class ClientProtocol {
     public void resultsWindow(int opponentResult) {
         player.increaseOpponentScore(opponentResult);
         window.getContentPane().removeAll();
-        window.revalidate();
+
         this.resultsWindow = new ResultsWindow(pointsPerRond, opponentResult, player);
         window.add(resultsWindow);
-        window.repaint();
+
         window.setVisible(true);
     }
 
     public void displayWaitingWindow(){
         window.getContentPane().removeAll();
-        window.revalidate();
+
         this.waitingWindow = new WaitingWindow();
         window.add(waitingWindow);
-        this.window.repaint();
+
         window.setVisible(true);
     }
 
@@ -109,7 +109,7 @@ public class ClientProtocol {
 
     private void createGameWindowFromCurrentQuestion(String question, List<String> alternatives, String correctAnswer) {
         window.getContentPane().removeAll();
-        window.revalidate();
+
 
         this.gamePanel = window.getGameWindow();
         this.gamePanel.displayQuestion(question);
@@ -117,7 +117,7 @@ public class ClientProtocol {
         this.gamePanel.setCorrectAnswer(correctAnswer);
 
         this.window.add(gamePanel);
-        this.window.repaint();
+
         window.setVisible(true);
     }
 
@@ -139,12 +139,12 @@ public class ClientProtocol {
 
     private void createEndResultWindow() {
         window.getContentPane().removeAll();
-        window.revalidate();
+
         System.out.println("inside end result method");
 
         this.resultsWindowEnd = new ResultsWindowEnd(player);
         window.add(resultsWindowEnd);
-        this.window.repaint();
+
         window.setVisible(true);
     }
 
