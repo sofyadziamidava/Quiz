@@ -9,6 +9,7 @@ public class Client {
     StartWindow startWindow;
     ClientNetwork clientNetwork;
 
+
     public Client() {
         window = new Window();
         startWindow = new StartWindow();
