@@ -61,6 +61,7 @@ public class ClientProtocol {
     }
 
     public void resultsWindow(int opponentResult) {
+        player.increaseOpponentScore(opponentResult);
         window.dispose();
         this.window = new Window();
         this.resultsWindow = new ResultsWindow(pointsPerRond, opponentResult, player);

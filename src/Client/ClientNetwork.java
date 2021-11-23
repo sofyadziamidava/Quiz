@@ -32,16 +32,20 @@ public class ClientNetwork {
             while ((obj = dataFromServer.readObject()) != null) {
 
                 if (obj instanceof Rond) {
+                    System.out.println("round received ");
                     sleep(3000);
                     clientProtocol.handleNewRond(obj);
-                    System.out.println("round received ");
-                    String pointsToSend = String.valueOf(player.getScore());
-                    System.out.println("sending " + player.getScore() + " points from client to server");
+                    String pointsToSend = String.valueOf(ClientProtocol.getPointsPerRond());
+                    System.out.println("sending " + pointsToSend + " points from client to server");
+                    System.out.println("Total score player: " + player.getScore());
                     dataToServer.writeObject(pointsToSend);
                 }
 
                 else if (obj instanceof Integer) {
-                    clientProtocol.resultsWindow((int)obj);
+                    int opponentScore = (int)obj;
+                    System.out.println("OpponentScore from server: " + opponentScore);
+                    System.out.println("Opponent total score: " + player.getOpponentScore());
+                    clientProtocol.resultsWindow(opponentScore);
                     dataToServer.writeObject(clientProtocol.waitForContinue());
                 }
 

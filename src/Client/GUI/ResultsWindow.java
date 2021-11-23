@@ -30,8 +30,6 @@ public class ResultsWindow extends JPanel {
     private JPanel questionResults;
 
     private JPanel buttonsPanel;
-
-    private JLabel categoryLabel;
     private JLabel player1Label;
     private JLabel player2Label;
     private JLabel player1Tot;
@@ -50,8 +48,6 @@ public class ResultsWindow extends JPanel {
         setBackground(Color.gray);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(topText = new JLabel("Results"));
-        add(categoryLabel = new JLabel("Category"));
-        categoryLabel.setForeground(Color.blue);
         add(resultsPanel = new JPanel());
         add(buttonsPanel = new JPanel());
 
@@ -83,7 +79,7 @@ public class ResultsWindow extends JPanel {
         opponentRoundScore.setFont(new Font("Arial", Font.BOLD, 20));
 
         player2ResultsField.add(opponentRoundScore);
-        JLabel opponentTotalScore = new JLabel("Total score: " + opponentResult);
+        JLabel opponentTotalScore = new JLabel("Total score: " + player.getOpponentScore());
         opponentTotalScore.setFont(new Font("Arial", Font.BOLD, 20));
         player2ResultsField.add(opponentTotalScore);
 
