@@ -81,7 +81,7 @@ public class ResultsWindow extends JPanel {
 
         player2ResultsField.setBackground(Color.pink);
         player2ResultsField.setLayout(new BoxLayout(player2ResultsField, BoxLayout.Y_AXIS));
-        player2ResultsField.add(player2Label = new JLabel("Opponent"));
+        player2ResultsField.add(player2Label = new JLabel(ClientProtocol.opponentName));
         player2Label.setFont(new Font("Arial", Font.BOLD, 20));
         player2ResultsField.add(questionResults2 = new JPanel());
         JLabel opponentRoundScore = new JLabel("Points this round: " + opponentResult);
