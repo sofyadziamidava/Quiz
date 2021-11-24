@@ -2,6 +2,7 @@ package Client.GUI;
 
 import Client.ClientProtocol;
 import Client.Clock;
+import Client.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -83,7 +84,6 @@ public class GameWindow extends JPanel implements ActionListener {
 
     public Button[] createButtons(Button[] buttonsArray, JPanel buttonsPanel){
         Button[] b = buttonsArray;
-        //lägga till ActionListener, intern klass
         for (int i = 0; i<4; ++i){
             Button button = new Button("button"+i);
             button.addActionListener(this);
@@ -118,9 +118,16 @@ public class GameWindow extends JPanel implements ActionListener {
     }
 
     private void setButtonsEnabled() {
-        //set all buttons to -> setEnable(false);
         for(Button button : buttonsInGame){
             button.setEnabled(false);
         }
+    }
+
+    public static void main(String[] args) {
+        Window window = new Window();
+        ClientProtocol cp = new ClientProtocol(window, new Player("kalle"));
+        GameWindow startWindow = new GameWindow(cp);
+        window.add(startWindow);
+        window.setVisible(true);
     }
 }
