@@ -9,5 +9,4 @@ public class GUIFont {
     public static Font customFont(int size){
         return new java.awt.Font("Arial", java.awt.Font.PLAIN, size);
     }
-
 }

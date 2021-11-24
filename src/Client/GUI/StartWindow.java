@@ -12,7 +12,7 @@ public class StartWindow extends JPanel{
 
     private boolean ready;
     private JTextArea name;
-    private JPanel botton;
+    private JPanel bottom;
     private JPanel titlePanel;
     private JPanel loginPanel;
     private String savedName;
@@ -53,21 +53,21 @@ public class StartWindow extends JPanel{
 
     private void createBottomPanel() {
         StartAction buttonAction = new StartAction();
-        botton = new JPanel();
-        botton.setBackground(GUIFont.backgroundColor);
+        bottom = new JPanel();
+        bottom.setBackground(GUIFont.backgroundColor);
         startButton = new myButton("Find opponent");
         startButton.setBackground(Color.white);
         startButton.setPreferredSize(new Dimension(120, 40));
-        botton.add(startButton);
+        bottom.add(startButton);
         startButton.addActionListener(buttonAction);
     }
 
     private void setMainPanelSettings() {
-        this.setBackground(new Color(205,230,255));
+        this.setBackground(GUIFont.backgroundColor);
         this.setLayout(new GridLayout(3,1));
         this.add(titlePanel);
         this.add(loginPanel);
-        this.add(botton);
+        this.add(bottom);
     }
 
     public String getSavedName() {
