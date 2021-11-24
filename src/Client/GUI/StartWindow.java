@@ -7,10 +7,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import static javax.swing.BoxLayout.Y_AXIS;
-
 public class StartWindow extends JPanel{
 
+    JPanel botton;
+    JPanel titlePanel;
     String savedName;
     JTextArea name;
     JPanel loginPanel;
@@ -20,18 +20,27 @@ public class StartWindow extends JPanel{
     private final Color backgroundColor = new Color(205,230,255);
 
     public StartWindow() {
+        ready = false;
 
-        // title panel
-        JPanel titlePanel = new JPanel();
+        createTitlePanel();
+        createLoginPanel();
+        createBottomPanel();
+        setMainPanelSettings();
+
+
+    }
+
+    private void createTitlePanel() {
+        titlePanel = new JPanel();
         titlePanel.setLayout(new GridLayout());
         JLabel title = new JLabel("QuizCamp");
         title.setFont(customFont(40));
         titlePanel.setBackground(backgroundColor);
         title.setHorizontalAlignment(JLabel.CENTER);
-
         titlePanel.add(title);
+    }
 
-        // login panel
+    private void createLoginPanel() {
         loginPanel = new JPanel();
         loginPanel.setLayout(new FlowLayout());
         loginPanel.setBackground(backgroundColor);
@@ -44,25 +53,20 @@ public class StartWindow extends JPanel{
 
         loginPanel.add(nameLabel);
         loginPanel.add(name);
+    }
 
-
-        //botton panel
-        JPanel botton = new JPanel();
-        botton.setBackground(backgroundColor);
-        startButton = new myButton("Start");
-        botton.add(startButton);
-
-
-        ready = false;
+    private void createBottomPanel() {
         StartAction buttonAction = new StartAction();
-
-
-
-
-
-
+        botton = new JPanel();
+        botton.setBackground(backgroundColor);
+        startButton = new myButton("Find opponent");
+        startButton.setBackground(Color.white);
+        startButton.setPreferredSize(new Dimension(120, 40));
+        botton.add(startButton);
         startButton.addActionListener(buttonAction);
+    }
 
+    private void setMainPanelSettings() {
         this.setBackground(new Color(205,230,255));
         this.setLayout(new GridLayout(3,1));
         this.add(titlePanel);
