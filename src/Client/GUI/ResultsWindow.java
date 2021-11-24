@@ -25,9 +25,11 @@ public class ResultsWindow extends JPanel {
 
     private JPanel resultsPanel;
     private JPanel playerResultsField;
+
     private JPanel player1ResultsField;
     private JPanel player2ResultsField;
     private JPanel questionResults;
+    private JPanel questionResults2;
 
     private JPanel buttonsPanel;
     private JLabel player1Label;
@@ -38,8 +40,15 @@ public class ResultsWindow extends JPanel {
     private JLabel player2Results;
     private JLabel topText;
 
-    public ResultsWindow(int points, int opponentResult, Player player){
+    private boolean endOfGame;
 
+    public ResultsWindow(int points, Player player, boolean endOfGame){
+        this(points, player.getOpponentScore(), player, endOfGame);
+    }
+
+    public ResultsWindow(int points, int opponentResult, Player player, boolean endOfGame){
+
+        this.endOfGame = endOfGame;
         this.player = player;
 
         this.roundPoints = points;
@@ -74,7 +83,7 @@ public class ResultsWindow extends JPanel {
         player2ResultsField.setLayout(new BoxLayout(player2ResultsField, BoxLayout.Y_AXIS));
         player2ResultsField.add(player2Label = new JLabel("Opponent"));
         player2Label.setFont(new Font("Arial", Font.BOLD, 20));
-        player2ResultsField.add(questionResults = new JPanel());
+        player2ResultsField.add(questionResults2 = new JPanel());
         JLabel opponentRoundScore = new JLabel("Points this round: " + opponentResult);
         opponentRoundScore.setFont(new Font("Arial", Font.BOLD, 20));
 
@@ -83,10 +92,24 @@ public class ResultsWindow extends JPanel {
         opponentTotalScore.setFont(new Font("Arial", Font.BOLD, 20));
         player2ResultsField.add(opponentTotalScore);
 
+        if(endOfGame){
+            roundResultOfGame(player.getScoreTablePlayer(), questionResults);
+            roundResultOfGame(player.getScoreTableOpponent(), questionResults2);
+
+        }
 
         buttonsPanel.add(continueButton = new myButton("Next round"));
         continueButton.addActionListener(new myContinueListener());
         buttonsPanel.add(new myButton("Exit"));
+    }
+
+    private void roundResultOfGame(List<Integer> list, JPanel panel) {
+        panel.setLayout(new GridLayout(list.size(), 1));
+        int round = 1;
+        for(Integer i : list){
+            panel.add(new JLabel("Round " + round + " points: " + i));
+            round++;
+        }
     }
 
     private class myContinueListener implements ActionListener{
@@ -100,7 +123,7 @@ public class ResultsWindow extends JPanel {
         int[] testArr = new int[]{1,5};
         Player player = new Player("Kalle");
         Window test = new Window();
-        test.add(new ResultsWindow(2, 1, player));
+        test.add(new ResultsWindow(2, 1, player, true));
         test.setVisible(true);
     }
 }

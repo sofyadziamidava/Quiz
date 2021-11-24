@@ -75,6 +75,7 @@ public class ResultsWindowEnd extends JPanel {
         player2ResultsField.add(player2Label = new JLabel("Opponent"));
         player2ResultsField.add(questionResults2 = new JPanel());
         player2ResultsField.add(new JLabel("Opponent total: " + opponentResult));
+
         roundResultOfGame(player.getScoreTableOpponent(), questionResults2);
 
 

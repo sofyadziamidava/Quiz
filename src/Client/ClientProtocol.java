@@ -62,7 +62,7 @@ public class ClientProtocol {
     public void resultsWindow(int opponentResult) {
         player.increaseOpponentScore(opponentResult);
         window.getContentPane().removeAll();
-        this.resultsWindow = new ResultsWindow(pointsPerRondPlayer, opponentResult, player);
+        this.resultsWindow = new ResultsWindow(pointsPerRondPlayer, opponentResult, player, false);
         window.add(resultsWindow);
 
         window.setVisible(true);
@@ -119,8 +119,8 @@ public class ClientProtocol {
 
     private void createEndResultWindow() {
         window.getContentPane().removeAll();
-        this.resultsWindowEnd = new ResultsWindowEnd(player);
-        window.add(resultsWindowEnd);
+        this.resultsWindow = new ResultsWindow(pointsPerRondPlayer, player, true);
+        window.add(resultsWindow);
         window.setVisible(true);
     }
 
