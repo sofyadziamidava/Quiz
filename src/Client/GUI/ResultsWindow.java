@@ -95,7 +95,8 @@ public class ResultsWindow extends JPanel {
         if(endOfGame){
             roundResultOfGame(player.getScoreTablePlayer(), questionResults);
             roundResultOfGame(player.getScoreTableOpponent(), questionResults2);
-
+            player1ResultsField.remove(playerRoundScore);
+            player2ResultsField.remove(opponentRoundScore);
         }
 
         buttonsPanel.add(continueButton = new myButton("Next round"));
@@ -107,7 +108,9 @@ public class ResultsWindow extends JPanel {
         panel.setLayout(new GridLayout(list.size(), 1));
         int round = 1;
         for(Integer i : list){
-            panel.add(new JLabel("Round " + round + " points: " + i));
+            JLabel label = new JLabel("Round " + round + " points: " + i);
+            label.setFont(new Font("Arial", Font.BOLD, 16));
+            panel.add(label);
             round++;
         }
     }
