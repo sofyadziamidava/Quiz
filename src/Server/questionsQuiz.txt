@@ -79,7 +79,7 @@ Högsta temperatur i Sverige någonsin?
 #Java
 
 Vad är en korrekt syntax för att mata ut "Hello World" i Java?
-System.out.println("Hello World"); system.out.println("Hello World"); System.out.println("Hello World") System.out.println("hello world");
+System.out.println("Hello World");, system.out.println("Hello World");, System.out.println("Hello World"), System.out.println("hello world");
 
 Vilken metod kan användas för att hitta längden på en sträng?
 length(), length, getLength(), getSize()
@@ -105,7 +105,7 @@ null, 0, "", inte definierat
 Storlek på en char?
 16 bits, 8 bits, 2 bits, 4 bits
 
-Vad är x i: int x = 5 + 12 / 3 + 1;
+Vad är x i: int x = 5 + 12 / 3 + 1; ?
 10, 6, 7, 8
 
 #Rymden
@@ -123,9 +123,9 @@ Vintergatan heter vår galax. Men vilket är dess engelska namn?
 Milky Way, Winter street, Vanilla Sky, Frosty Bliss
 
 Hur lång omloppstid har Saturnus?
-29.5 år, 19,5 år, 1,5 år, 49,5 år
+29.5 år, 19.5 år, 1.5 år, 49.5 år
 
-Ljuset från solen färdas med en hastighet av ungefär...
+Ljuset från solen färdas med en hastighet av ungefär... ?
 300 000 km/s, 300 000 km/h, 300 000 km/min, 300 000 km/ms
 
 Snittemperatur på planeten Mars (celcius)?
