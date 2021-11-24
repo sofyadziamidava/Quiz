@@ -5,6 +5,7 @@ import Client.GUI.Font.GUIFont;
 import Client.Player;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.DefaultMenuLayout;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,12 +24,12 @@ public class ResultsWindow extends JPanel {
 
 
         JPanel resultsPanel = new JPanel();
+        resultsPanel.setLayout(new GridLayout(0,2));
 
         JPanel buttonsPanel  = new JPanel();
         buttonsPanel.setLayout(new FlowLayout());
         buttonsPanel.setBackground(GUIFont.backgroundColor);
 
-        resultsPanel.setLayout(new GridLayout(0,2));
 
         JPanel player1ResultsField = new JPanel();
         resultsPanel.add(player1ResultsField);
@@ -80,8 +81,8 @@ public class ResultsWindow extends JPanel {
             player2ResultsField.remove(opponentRoundScore);
         }
 
-        Button continueButton;
-        buttonsPanel.add(continueButton = new Button("Next round"));
+        Button continueButton = new Button("Next round");
+        buttonsPanel.add(continueButton);
         continueButton.addActionListener(new myContinueListener());
         buttonsPanel.add(new Button("Exit"));
 
