@@ -12,10 +12,8 @@ import java.util.List;
 
 public class ResultsWindow extends JPanel {
 
-    Player player;
+    private Player player;
 
-    private List<Question> rounds;
-    private Question question;
 
 
     private int roundPoints;
