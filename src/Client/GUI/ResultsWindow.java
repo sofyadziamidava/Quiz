@@ -132,11 +132,11 @@ public class ResultsWindow extends JPanel {
         }
     }
 
-    public static void main(String[] args) {
+    /*public static void main(String[] args) {
         int[] testArr = new int[]{1,5};
         Player player = new Player("Kalle");
         Window test = new Window();
         test.add(new ResultsWindow(2, 1, player));
         test.setVisible(true);
-    }
+    }*/
 }
