@@ -119,4 +119,13 @@ public class ResultsWindow extends JPanel {
             ClientProtocol.waitingForNextRound = false;
         }
     }
+
+    public static void main(String[] args) {
+        Window window = new Window();
+        Player player = new Player("Kalle");
+        ClientProtocol.opponentName = "Pelle";
+        ResultsWindow startWindow = new ResultsWindow(1,1, player, false);
+        window.add(startWindow);
+        window.setVisible(true);
+    }
 }
