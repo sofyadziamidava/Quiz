@@ -15,7 +15,6 @@ public class ClientProtocol {
     private WaitingWindow waitingWindow;
     private GameWindow gamePanel;
     private ResultsWindow resultsWindow;
-    private ResultsWindowEnd resultsWindowEnd;
     private Player player;
 
     private String question;

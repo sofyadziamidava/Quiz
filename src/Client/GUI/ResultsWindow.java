@@ -121,12 +121,4 @@ public class ResultsWindow extends JPanel {
             ClientProtocol.waitingForNextRound = false;
         }
     }
-
-    public static void main(String[] args) {
-        int[] testArr = new int[]{1,5};
-        Player player = new Player("Kalle");
-        Window test = new Window();
-        test.add(new ResultsWindow(2, 1, player, true));
-        test.setVisible(true);
-    }
 }
