@@ -24,6 +24,7 @@ public class ClientProtocol {
     private final int FIRST_ELEMENT = 0;
     public static boolean waitingForNextRound = true;
     public static String clientName;
+    public static String opponentName;
 
     List<Integer> playerScoreTable;
     List<Integer> opponentScoreTable;

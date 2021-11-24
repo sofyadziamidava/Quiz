@@ -28,10 +28,15 @@ public class ClientNetwork {
              ObjectOutputStream dataToServer = new ObjectOutputStream(clientSocket.getOutputStream());
              ObjectInputStream dataFromServer = new ObjectInputStream(clientSocket.getInputStream());
         ) {
+            dataToServer.writeObject(ClientProtocol.clientName);
             Object obj;
             while ((obj = dataFromServer.readObject()) != null) {
 
-                if (obj instanceof Rond) {
+                if (obj instanceof String) {
+                    ClientProtocol.opponentName = (String)obj;
+                }
+
+                else if (obj instanceof Rond) {
                     sleep(3000);
                     clientProtocol.handleNewRond(obj);
                     String pointsToSend = String.valueOf(clientProtocol.getPointsPerRondPlayer());
