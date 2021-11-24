@@ -18,7 +18,7 @@ public class Game extends Thread {
     int[] player2SumPoints;
     boolean gameOn = true;
 
-    public Game(PlayerStream ps1, PlayerStream ps2)  {
+    public Game(PlayerStream ps1, PlayerStream ps2) {
         this.db = new Database();
         this.players[0] = new Player();
         this.players[1] = new Player();
@@ -43,7 +43,7 @@ public class Game extends Thread {
         return playerStreams[1];
     }
 
-    public void setPlayersResultHolder(){
+    public void setPlayersResultHolder() {
         this.player1SumPoints = new int[this.getNrOfRounds()];
         this.player2SumPoints = new int[this.getNrOfRounds()];
     }
