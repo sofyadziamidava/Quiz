@@ -13,6 +13,13 @@ public class Client {
         connectToServer();
     }
 
+    private void createWindow() {
+        window = new Window();
+        startWindow = new StartWindow();
+        window.add(startWindow);
+        window.setVisible(true);
+    }
+
     private void connectToServer() {
         while(true){
             ClientNetwork.sleep(500);
@@ -21,13 +28,6 @@ public class Client {
                 new ClientNetwork(window, new Player(startWindow.getSavedName()));
             }
         }
-    }
-
-    private void createWindow() {
-        window = new Window();
-        startWindow = new StartWindow();
-        window.add(startWindow);
-        window.setVisible(true);
     }
 
     public static void main(String[] args) {
