@@ -1,17 +1,20 @@
 package Client.GUI;
 
+import Client.GUI.Font.GUIFont;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class WaitingWindow extends JPanel {
-    public WaitingWindow(){
-        setLayout(new GridLayout());
-        setBackground(Color.LIGHT_GRAY);
 
-        JLabel label = new JLabel("*waiting for opponents results*", SwingConstants.CENTER);
-        label.setFont(new Font("Arial", Font.BOLD, 20));
+    public WaitingWindow(){
+        String labelText = "waiting for the opponent to finish before you can see the results...";
+        JLabel label = new JLabel(labelText, SwingConstants.CENTER);
+        label.setFont(GUIFont.customFont(20));
         label.setHorizontalAlignment(JLabel.CENTER);
 
-        add(label);
+        this.setLayout(new GridLayout());
+        this.setBackground(GUIFont.backgroundColor);
+        this.add(label);
     }
 }

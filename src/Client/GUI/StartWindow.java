@@ -1,6 +1,7 @@
 package Client.GUI;
 
 import Client.ClientProtocol;
+import Client.GUI.Font.GUIFont;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +10,7 @@ import java.awt.event.ActionListener;
 
 public class StartWindow extends JPanel{
 
-    boolean ready;
+    private boolean ready;
     private JTextArea name;
     private JPanel botton;
     private JPanel titlePanel;
@@ -17,7 +18,6 @@ public class StartWindow extends JPanel{
     private String savedName;
     private JLabel nameLabel;
     private myButton startButton;
-    private final Color backgroundColor = new Color(205,230,255);
 
     public StartWindow() {
         ready = false;
@@ -31,8 +31,8 @@ public class StartWindow extends JPanel{
         titlePanel = new JPanel();
         titlePanel.setLayout(new GridLayout());
         JLabel title = new JLabel("QuizCamp");
-        title.setFont(customFont(40));
-        titlePanel.setBackground(backgroundColor);
+        title.setFont(GUIFont.customFont(40));
+        titlePanel.setBackground(GUIFont.backgroundColor);
         title.setHorizontalAlignment(JLabel.CENTER);
         titlePanel.add(title);
     }
@@ -40,12 +40,12 @@ public class StartWindow extends JPanel{
     private void createLoginPanel() {
         loginPanel = new JPanel();
         loginPanel.setLayout(new FlowLayout());
-        loginPanel.setBackground(backgroundColor);
+        loginPanel.setBackground(GUIFont.backgroundColor);
         nameLabel = new JLabel("Enter name:");
-        nameLabel.setFont(customFont(20));
+        nameLabel.setFont(GUIFont.customFont(20));
         nameLabel.setHorizontalAlignment(JLabel.CENTER);
         name = new JTextArea();
-        name.setFont(customFont(20));
+        name.setFont(GUIFont.customFont(20));
         name.setPreferredSize(new Dimension(100, 30));
         loginPanel.add(nameLabel);
         loginPanel.add(name);
@@ -54,7 +54,7 @@ public class StartWindow extends JPanel{
     private void createBottomPanel() {
         StartAction buttonAction = new StartAction();
         botton = new JPanel();
-        botton.setBackground(backgroundColor);
+        botton.setBackground(GUIFont.backgroundColor);
         startButton = new myButton("Find opponent");
         startButton.setBackground(Color.white);
         startButton.setPreferredSize(new Dimension(120, 40));
@@ -76,10 +76,6 @@ public class StartWindow extends JPanel{
 
     public boolean getReady() {
         return ready;
-    }
-
-    private Font customFont(int size){
-        return new Font("Arial", Font.PLAIN, size);
     }
 
     private class StartAction implements ActionListener {
