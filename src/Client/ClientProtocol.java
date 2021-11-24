@@ -11,11 +11,11 @@ import java.util.List;
 
 public class ClientProtocol {
 
-    private Window window;
+    private final Window window;
     private WaitingWindow waitingWindow;
     private GameWindow gamePanel;
     private ResultsWindow resultsWindow;
-    private Player player;
+    private final Player player;
 
     private String question;
     private List<String> answers;
