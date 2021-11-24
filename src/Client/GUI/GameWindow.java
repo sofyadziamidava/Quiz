@@ -75,6 +75,8 @@ public class GameWindow extends JPanel implements ActionListener {
         this.question.setText(question);
     }
 
+
+
     public void displayButtons(List<String> list){
         for (int i = 0; i < buttonsArray.length; i++) {
             buttonsArray[i].setText(list.get(i));
