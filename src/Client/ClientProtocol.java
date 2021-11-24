@@ -20,7 +20,7 @@ public class ClientProtocol {
     private String question;
     private List<String> answers;
     private String correctAnswer;
-    private final int FIRST_ELEMENT = 0;
+    private static final int FIRST_ELEMENT = 0;
     public static boolean waitingForNextRound = true;
     public static String clientName;
     public static String opponentName;
