@@ -16,11 +16,11 @@ public class GameWindow extends JPanel implements ActionListener {
     JLabel timerLabel;
     JPanel questionPanel;
     JPanel buttonsPanel;
-    myButton[]buttonsArray;
+    Button[]buttonsArray;
     Clock timer;
     private String correctAnswer;
     private boolean buttonPressed = false;
-    myButton[] buttonsInGame;
+    Button[] buttonsInGame;
     ClientProtocol clientProtocol;
 
 
@@ -31,7 +31,7 @@ public class GameWindow extends JPanel implements ActionListener {
     public GameWindow(ClientProtocol clientProtocol) {
         this.clientProtocol = clientProtocol;
 
-        buttonsArray = new myButton[4];
+        buttonsArray = new Button[4];
         timerLabel = new JLabel();
         timer = new Clock(timerLabel);
 
@@ -81,11 +81,11 @@ public class GameWindow extends JPanel implements ActionListener {
         }
     }
 
-    public myButton[] createButtons(myButton[] buttonsArray, JPanel buttonsPanel){
-        myButton[] b = buttonsArray;
+    public Button[] createButtons(Button[] buttonsArray, JPanel buttonsPanel){
+        Button[] b = buttonsArray;
         //lägga till ActionListener, intern klass
         for (int i = 0; i<4; ++i){
-            myButton button = new myButton("button"+i);
+            Button button = new Button("button"+i);
             button.addActionListener(this);
             buttonsPanel.add(button);
             b[i] = button;
@@ -105,7 +105,7 @@ public class GameWindow extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        myButton temp = (myButton) e.getSource();
+        Button temp = (Button) e.getSource();
         if(temp.getText().equals(correctAnswer)){
             temp.setBackground(Color.green);
             clientProtocol.increasePoint();
@@ -119,7 +119,7 @@ public class GameWindow extends JPanel implements ActionListener {
 
     private void setButtonsEnabled() {
         //set all buttons to -> setEnable(false);
-        for(myButton button : buttonsInGame){
+        for(Button button : buttonsInGame){
             button.setEnabled(false);
         }
     }

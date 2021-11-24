@@ -17,7 +17,7 @@ public class StartWindow extends JPanel{
     private JPanel loginPanel;
     private String savedName;
     private JLabel nameLabel;
-    private myButton startButton;
+    private Button startButton;
 
     public StartWindow() {
         ready = false;
@@ -55,7 +55,7 @@ public class StartWindow extends JPanel{
         StartAction buttonAction = new StartAction();
         bottom = new JPanel();
         bottom.setBackground(GUIFont.backgroundColor);
-        startButton = new myButton("Find opponent");
+        startButton = new Button("Find opponent");
         startButton.setBackground(Color.white);
         startButton.setPreferredSize(new Dimension(120, 40));
         bottom.add(startButton);
