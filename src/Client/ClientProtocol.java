@@ -15,7 +15,6 @@ public class ClientProtocol {
     private WaitingWindow waitingWindow;
     private GameWindow gamePanel;
     private ResultsWindow resultsWindow;
-    private ResultsWindowEnd resultsWindowEnd;
     private Player player;
 
     private String question;
@@ -24,6 +23,7 @@ public class ClientProtocol {
     private final int FIRST_ELEMENT = 0;
     public static boolean waitingForNextRound = true;
     public static String clientName;
+    public static String opponentName;
 
     List<Integer> playerScoreTable;
     List<Integer> opponentScoreTable;
@@ -62,7 +62,7 @@ public class ClientProtocol {
     public void resultsWindow(int opponentResult) {
         player.increaseOpponentScore(opponentResult);
         window.getContentPane().removeAll();
-        this.resultsWindow = new ResultsWindow(pointsPerRondPlayer, opponentResult, player);
+        this.resultsWindow = new ResultsWindow(pointsPerRondPlayer, opponentResult, player, false);
         window.add(resultsWindow);
 
         window.setVisible(true);
@@ -119,8 +119,8 @@ public class ClientProtocol {
 
     private void createEndResultWindow() {
         window.getContentPane().removeAll();
-        this.resultsWindowEnd = new ResultsWindowEnd(player);
-        window.add(resultsWindowEnd);
+        this.resultsWindow = new ResultsWindow(pointsPerRondPlayer, player, true);
+        window.add(resultsWindow);
         window.setVisible(true);
     }
 

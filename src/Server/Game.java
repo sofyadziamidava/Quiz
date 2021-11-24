@@ -16,6 +16,8 @@ public class Game extends Thread {
     PlayerStream[] playerStreams = new PlayerStream[2];
     int[] player1SumPoints;
     int[] player2SumPoints;
+    String player1name;
+    String player2name;
     boolean gameOn = true;
 
     public Game(PlayerStream ps1, PlayerStream ps2) {
@@ -126,14 +128,28 @@ public class Game extends Thread {
         this.setNrOfQuestionsPerRound(Integer.parseInt(p.getProperty("nrOfQuestionsPerRound")));
         this.setPlayersResultHolder();
     }
+    public void sendNames() {
+        try {
+            playerStreams[0].send(player2name);
+            playerStreams[1].send(player1name);
+        }
+        catch (IOException e) {
+            System.out.println("could not send name");
+        }
+
+    }
 
     public void run() {
 
         this.loadData();
         GameProtocol protocol = new GameProtocol(this);
         String[] input = new String[2];
+
         try {
+            player1name = getPlayerStream1().receive();  // kommer bådas namn in??
+            player2name = getPlayerStream2().receive();
             protocol.gameProcess(input);   // första gången protokollet kallas skickas string med null,null
+
 
             while (gameOn) {  // loopen går igång direkt, ligger och väntar på svar från båda
                 String player1Input = getPlayerStream1().receive();

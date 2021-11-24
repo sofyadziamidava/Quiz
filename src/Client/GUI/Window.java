@@ -10,11 +10,5 @@ public class Window extends JFrame {
         this.setTitle("QuizKampen");
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
-
     }
-
-    public static void main(String[] args) {
-        new Window();
-    }
-
 }
