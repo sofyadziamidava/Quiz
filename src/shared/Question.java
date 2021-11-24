@@ -7,13 +7,8 @@ public class Question implements Serializable {
     private String question;
     private List<String> answers;
 
-    public Question(String question, List<String> answers){
+    public Question(String question) {
         this.question = question;
-        this.answers = answers;
-    }
-    public Question(String question){
-        this.question = question;
-
     }
 
     public void addAnswers(List a) {
@@ -28,13 +23,5 @@ public class Question implements Serializable {
         return this.answers;
     }
 
-    public String toString() {
-        String s = null;
-        for (String a: answers
-             ) {
-            s = s + a;
-        }
-        return s;
-    }
 
 }
