@@ -17,6 +17,7 @@ public class StartWindow extends JPanel{
     JLabel nameLabel;
     myButton startButton;
     boolean ready;
+    private final Color backgroundColor = new Color(205,230,255);
 
     public StartWindow() {
 
@@ -25,7 +26,7 @@ public class StartWindow extends JPanel{
         titlePanel.setLayout(new GridLayout());
         JLabel title = new JLabel("QuizCamp");
         title.setFont(customFont(40));
-        titlePanel.setBackground(Color.GREEN);
+        titlePanel.setBackground(backgroundColor);
         title.setHorizontalAlignment(JLabel.CENTER);
 
         titlePanel.add(title);
@@ -33,7 +34,7 @@ public class StartWindow extends JPanel{
         // login panel
         loginPanel = new JPanel();
         loginPanel.setLayout(new FlowLayout());
-        loginPanel.setBackground(Color.yellow);
+        loginPanel.setBackground(backgroundColor);
         nameLabel = new JLabel("Enter name:");
         nameLabel.setFont(customFont(20));
         nameLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -47,7 +48,7 @@ public class StartWindow extends JPanel{
 
         //botton panel
         JPanel botton = new JPanel();
-        botton.setBackground(Color.black);
+        botton.setBackground(backgroundColor);
         startButton = new myButton("Start");
         botton.add(startButton);
 
@@ -91,7 +92,7 @@ public class StartWindow extends JPanel{
     }
 
     private Font customFont(int size){
-        return new Font("Arial", Font.BOLD, size);
+        return new Font("Arial", Font.PLAIN, size);
     }
 
     public static void main(String[] args) {
