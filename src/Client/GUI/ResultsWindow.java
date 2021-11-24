@@ -28,6 +28,7 @@ public class ResultsWindow extends JPanel {
         this.add(resultsPanel);
 
         JPanel buttonsPanel  = new JPanel();
+        buttonsPanel.setLayout(new GridBagLayout());
         buttonsPanel.setBackground(GUIFont.backgroundColor);
         this.add(buttonsPanel);
 
@@ -85,8 +86,9 @@ public class ResultsWindow extends JPanel {
             player2ResultsField.remove(opponentRoundScore);
         }
 
-        myButton continueButton;
-        buttonsPanel.add(continueButton = new myButton("Next round"));
+        myButton continueButton = new myButton("Next round");
+        continueButton.setHorizontalAlignment(JLabel.CENTER);
+        buttonsPanel.add(continueButton);
         continueButton.addActionListener(new myContinueListener());
         buttonsPanel.add(new myButton("Exit"));
     }
@@ -96,7 +98,7 @@ public class ResultsWindow extends JPanel {
         int round = 1;
         for(Integer i : list){
             JLabel label = new JLabel("Round " + round + " points: " + i);
-            label.setFont(new Font("Arial", Font.BOLD, 16));
+            label.setFont(GUIFont.customFont(16));
             panel.add(label);
             round++;
         }
