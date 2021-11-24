@@ -80,10 +80,8 @@ public class ResultsWindow extends JPanel {
             player2ResultsField.remove(opponentRoundScore);
         }
 
-        Button continueButton = new Button("Next round");
-        continueButton.setBackground(GUIFont.buttonColor);
-        continueButton.setHorizontalAlignment(JLabel.CENTER);
-        buttonsPanel.add(continueButton);
+        Button continueButton;
+        buttonsPanel.add(continueButton = new Button("Next round"));
         continueButton.addActionListener(new myContinueListener());
         buttonsPanel.add(new Button("Exit"));
 
