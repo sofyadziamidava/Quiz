@@ -6,6 +6,7 @@ public class myButton extends JButton {
 
     public myButton(String text) {
         super(text);
+        this.setFocusable(false);
     }
 }
 

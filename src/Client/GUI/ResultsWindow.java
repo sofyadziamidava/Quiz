@@ -3,13 +3,14 @@ package Client.GUI;
 import Client.ClientProtocol;
 import Client.GUI.Font.GUIFont;
 import Client.Player;
-import shared.Question;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+
+import static javax.swing.BoxLayout.Y_AXIS;
 
 public class ResultsWindow extends JPanel {
 
@@ -20,30 +21,26 @@ public class ResultsWindow extends JPanel {
     public ResultsWindow(int points, int opponentResult, Player player, boolean endOfGame){
 
         this.setBackground(GUIFont.backgroundColor);
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
+        this.setLayout(new BoxLayout(this, Y_AXIS));
 
         JPanel resultsPanel = new JPanel();
-        //resultsPanel.setBackground(GUIFont.backgroundColor);
         this.add(resultsPanel);
 
         JPanel buttonsPanel  = new JPanel();
-        buttonsPanel.setLayout(new GridBagLayout());
+        buttonsPanel.setLayout(new FlowLayout());
         buttonsPanel.setBackground(GUIFont.backgroundColor);
         this.add(buttonsPanel);
 
         resultsPanel.setLayout(new GridLayout(0,2));
 
         JPanel player1ResultsField = new JPanel();
-        //player1ResultsField.setBackground(GUIFont.backgroundColor);
         resultsPanel.add(player1ResultsField);
 
         JPanel player2ResultsField = new JPanel();
-        //player2ResultsField.setBackground(GUIFont.backgroundColor);
         resultsPanel.add(player2ResultsField);
 
         player1ResultsField.setBackground(GUIFont.darkerBackgroundColor);
-        player1ResultsField.setLayout(new BoxLayout(player1ResultsField, BoxLayout.Y_AXIS));
+        player1ResultsField.setLayout(new BoxLayout(player1ResultsField, Y_AXIS));
 
         JLabel player1Label = new JLabel(player.getName());
         player1ResultsField.add(player1Label);
@@ -63,7 +60,7 @@ public class ResultsWindow extends JPanel {
 
 
         player2ResultsField.setBackground(GUIFont.darkerBackgroundColor);
-        player2ResultsField.setLayout(new BoxLayout(player2ResultsField, BoxLayout.Y_AXIS));
+        player2ResultsField.setLayout(new BoxLayout(player2ResultsField, Y_AXIS));
         JLabel player2Label = new JLabel(ClientProtocol.opponentName);
         player2ResultsField.add(player2Label);
         player2Label.setFont(GUIFont.customFont(20));
@@ -87,6 +84,7 @@ public class ResultsWindow extends JPanel {
         }
 
         myButton continueButton = new myButton("Next round");
+        continueButton.setBackground(GUIFont.buttonColor);
         continueButton.setHorizontalAlignment(JLabel.CENTER);
         buttonsPanel.add(continueButton);
         continueButton.addActionListener(new myContinueListener());
