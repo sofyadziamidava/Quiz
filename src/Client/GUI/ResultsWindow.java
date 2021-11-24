@@ -20,16 +20,13 @@ public class ResultsWindow extends JPanel {
 
     public ResultsWindow(int points, int opponentResult, Player player, boolean endOfGame){
 
-        this.setBackground(GUIFont.backgroundColor);
-        this.setLayout(new BoxLayout(this, Y_AXIS));
+
 
         JPanel resultsPanel = new JPanel();
-        this.add(resultsPanel);
 
         JPanel buttonsPanel  = new JPanel();
         buttonsPanel.setLayout(new FlowLayout());
         buttonsPanel.setBackground(GUIFont.backgroundColor);
-        this.add(buttonsPanel);
 
         resultsPanel.setLayout(new GridLayout(0,2));
 
@@ -89,6 +86,11 @@ public class ResultsWindow extends JPanel {
         buttonsPanel.add(continueButton);
         continueButton.addActionListener(new myContinueListener());
         buttonsPanel.add(new Button("Exit"));
+
+        this.setBackground(GUIFont.backgroundColor);
+        this.setLayout(new BoxLayout(this, Y_AXIS));
+        this.add(resultsPanel);
+        this.add(buttonsPanel);
     }
 
     private void roundResultOfGame(List<Integer> list, JPanel panel) {
