@@ -1,6 +1,7 @@
 package Client.GUI;
 
 import Client.ClientProtocol;
+import Client.GUI.Font.GUIFont;
 import Client.Player;
 import shared.Question;
 
@@ -12,82 +13,69 @@ import java.util.List;
 
 public class ResultsWindow extends JPanel {
 
-    private Player player;
-
-
-
-    private int roundPoints;
-    private int opponentResult;
-
-    private myButton continueButton;
-
-    private JPanel resultsPanel;
-    private JPanel playerResultsField;
-
-    private JPanel player1ResultsField;
-    private JPanel player2ResultsField;
-    private JPanel questionResults;
-    private JPanel questionResults2;
-
-    private JPanel buttonsPanel;
-    private JLabel player1Label;
-    private JLabel player2Label;
-    private JLabel player1Tot;
-    private JLabel player2Tot;
-    private JLabel player1Results;
-    private JLabel player2Results;
-    private JLabel topText;
-
-    private boolean endOfGame;
-
     public ResultsWindow(int points, Player player, boolean endOfGame){
         this(points, player.getOpponentScore(), player, endOfGame);
     }
 
     public ResultsWindow(int points, int opponentResult, Player player, boolean endOfGame){
 
-        this.endOfGame = endOfGame;
-        this.player = player;
+        this.setBackground(GUIFont.backgroundColor);
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-        this.roundPoints = points;
-        this.opponentResult = opponentResult;
 
-        setBackground(Color.gray);
-        setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        add(topText = new JLabel("Results"));
-        add(resultsPanel = new JPanel());
-        add(buttonsPanel = new JPanel());
+        JPanel resultsPanel = new JPanel();
+        //resultsPanel.setBackground(GUIFont.backgroundColor);
+        this.add(resultsPanel);
 
-        resultsPanel.setBackground(Color.CYAN);
+        JPanel buttonsPanel  = new JPanel();
+        buttonsPanel.setBackground(GUIFont.backgroundColor);
+        this.add(buttonsPanel);
+
         resultsPanel.setLayout(new GridLayout(0,2));
 
-        resultsPanel.add(player1ResultsField = new JPanel());
-        resultsPanel.add(player2ResultsField = new JPanel());
+        JPanel player1ResultsField = new JPanel();
+        //player1ResultsField.setBackground(GUIFont.backgroundColor);
+        resultsPanel.add(player1ResultsField);
 
-        player1ResultsField.setBackground(Color.green);
+        JPanel player2ResultsField = new JPanel();
+        //player2ResultsField.setBackground(GUIFont.backgroundColor);
+        resultsPanel.add(player2ResultsField);
+
+        player1ResultsField.setBackground(GUIFont.darkerBackgroundColor);
         player1ResultsField.setLayout(new BoxLayout(player1ResultsField, BoxLayout.Y_AXIS));
-        player1ResultsField.add(player1Label = new JLabel(player.getName()));
-        player1Label.setFont(new Font("Arial", Font.BOLD, 20));
-        player1ResultsField.add(questionResults = new JPanel());
+
+        JLabel player1Label = new JLabel(player.getName());
+        player1ResultsField.add(player1Label);
+        player1Label.setFont(GUIFont.customFont(20));
+
+        JPanel questionResults = new JPanel();
+        questionResults.setBackground(GUIFont.backgroundColor);
+        player1ResultsField.add(questionResults);
+
         JLabel playerRoundScore = new JLabel("Points this round: " + points);
-        playerRoundScore.setFont(new Font("Arial", Font.BOLD, 20));
+        playerRoundScore.setFont(GUIFont.customFont(20));
         player1ResultsField.add(playerRoundScore);
+
         JLabel playerTotalScore = new JLabel("Total score: " + player.getScore());
-        playerTotalScore.setFont(new Font("Arial", Font.BOLD, 20));
+        playerTotalScore.setFont(GUIFont.customFont(20));
         player1ResultsField.add(playerTotalScore);
 
 
-        player2ResultsField.setBackground(Color.pink);
+        player2ResultsField.setBackground(GUIFont.darkerBackgroundColor);
         player2ResultsField.setLayout(new BoxLayout(player2ResultsField, BoxLayout.Y_AXIS));
-        player2ResultsField.add(player2Label = new JLabel(ClientProtocol.opponentName));
-        player2Label.setFont(new Font("Arial", Font.BOLD, 20));
-        player2ResultsField.add(questionResults2 = new JPanel());
-        JLabel opponentRoundScore = new JLabel("Points this round: " + opponentResult);
-        opponentRoundScore.setFont(new Font("Arial", Font.BOLD, 20));
+        JLabel player2Label = new JLabel(ClientProtocol.opponentName);
+        player2ResultsField.add(player2Label);
+        player2Label.setFont(GUIFont.customFont(20));
 
+        JPanel questionResults2 = new JPanel();
+        questionResults2.setBackground(GUIFont.backgroundColor);
+        player2ResultsField.add(questionResults2);
+        JLabel opponentRoundScore = new JLabel("Points this round: " + opponentResult);
+        opponentRoundScore.setFont(GUIFont.customFont(20));
         player2ResultsField.add(opponentRoundScore);
+
         JLabel opponentTotalScore = new JLabel("Total score: " + player.getOpponentScore());
-        opponentTotalScore.setFont(new Font("Arial", Font.BOLD, 20));
+        opponentTotalScore.setFont(GUIFont.customFont(20));
         player2ResultsField.add(opponentTotalScore);
 
         if(endOfGame){
@@ -97,6 +85,7 @@ public class ResultsWindow extends JPanel {
             player2ResultsField.remove(opponentRoundScore);
         }
 
+        myButton continueButton;
         buttonsPanel.add(continueButton = new myButton("Next round"));
         continueButton.addActionListener(new myContinueListener());
         buttonsPanel.add(new myButton("Exit"));
