@@ -20,9 +20,5 @@ public class Rond implements Serializable {
         return questionList;
     }
 
-    public String getCategory() {
-        return category;
-    }
-
 
 }

@@ -3,12 +3,14 @@ package Server;
 import shared.Question;
 import shared.Rond;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Random;
 
 public class Database {
 
@@ -47,7 +49,6 @@ public class Database {
         Random rand = new Random();
         int upperbound = categories.size();
         int int_random = rand.nextInt(upperbound);
-
         while (alreadySelectedCategories.contains(int_random)) {
             int_random = rand.nextInt(upperbound);
         }
@@ -58,13 +59,10 @@ public class Database {
     public Rond createRond(int nrOfQuestions) {
         Category c = getRandomCategory();
         Rond rond = new Rond(c.getCategory());
-        rond.addQuestions(c.getQuestions(nrOfQuestions));
+        rond.addQuestions(c.generateQuestions(nrOfQuestions));
         return rond;
     }
 
 
-    public static void main(String[] args) throws IOException {
-        Database db = new Database();
-        db.loadCategories();
-    }
+
 }
