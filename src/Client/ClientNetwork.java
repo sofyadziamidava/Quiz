@@ -48,6 +48,13 @@ public class ClientNetwork {
                     clientProtocol.sendListToPlayerTable();
                     clientProtocol.closeGame();
                     System.out.println("Player total score: " + player.getScore());
+                } else if (obj instanceof String){
+                    String fromServer = (String)obj;
+                    if(fromServer.equals("OPPONENT DISCONNECTED")){
+                        System.out.println("Opponent disconnetced");
+                        clientProtocol.displayDisconnectWindow();
+                        break;
+                    }
                 }
             }
         } catch (IOException | ClassNotFoundException e) {

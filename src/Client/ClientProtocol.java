@@ -5,17 +5,19 @@ import Client.GUI.GameWindow;
 import shared.Question;
 import shared.Rond;
 
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 public class ClientProtocol {
 
-    private Window window;
+    private static Window window;
     private WaitingWindow waitingWindow;
     private GameWindow gamePanel;
     private ResultsWindow resultsWindow;
     private ResultsWindowEnd resultsWindowEnd;
+    private DisconnectWindow disconnectWindow;
     private Player player;
 
     private String question;
@@ -72,7 +74,13 @@ public class ClientProtocol {
         window.getContentPane().removeAll();
         this.waitingWindow = new WaitingWindow();
         window.add(waitingWindow);
+        window.setVisible(true);
+    }
 
+    public void displayDisconnectWindow(){
+        window.getContentPane().removeAll();
+        this.disconnectWindow = new DisconnectWindow();
+        window.add(disconnectWindow);
         window.setVisible(true);
     }
 

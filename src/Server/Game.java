@@ -145,7 +145,19 @@ public class Game extends Thread {
                 }
             }
         } catch (IOException | ClassNotFoundException e) {
-            e.printStackTrace();
+            if(e instanceof IOException){
+                try{
+                    playerStreams[0].send("OPPONENT DISCONNECTED");
+                }catch (IOException exception){
+                    try {
+                        playerStreams[1].send("OPPONENT DISCONNECTED");
+                    } catch (IOException ex) {
+                        ex.printStackTrace();
+                    }
+                }
+            } else {
+                e.printStackTrace();
+            }
         }
     }
 
