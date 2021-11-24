@@ -9,25 +9,22 @@ import java.awt.event.ActionListener;
 
 public class StartWindow extends JPanel{
 
-    JPanel botton;
-    JPanel titlePanel;
-    String savedName;
-    JTextArea name;
-    JPanel loginPanel;
-    JLabel nameLabel;
-    myButton startButton;
     boolean ready;
+    private JTextArea name;
+    private JPanel botton;
+    private JPanel titlePanel;
+    private JPanel loginPanel;
+    private String savedName;
+    private JLabel nameLabel;
+    private myButton startButton;
     private final Color backgroundColor = new Color(205,230,255);
 
     public StartWindow() {
         ready = false;
-
         createTitlePanel();
         createLoginPanel();
         createBottomPanel();
         setMainPanelSettings();
-
-
     }
 
     private void createTitlePanel() {
@@ -50,7 +47,6 @@ public class StartWindow extends JPanel{
         name = new JTextArea();
         name.setFont(customFont(20));
         name.setPreferredSize(new Dimension(100, 30));
-
         loginPanel.add(nameLabel);
         loginPanel.add(name);
     }
@@ -78,6 +74,14 @@ public class StartWindow extends JPanel{
         return savedName;
     }
 
+    public boolean getReady() {
+        return ready;
+    }
+
+    private Font customFont(int size){
+        return new Font("Arial", Font.PLAIN, size);
+    }
+
     private class StartAction implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -89,20 +93,5 @@ public class StartWindow extends JPanel{
             startButton.setVisible(false);
             ready = true;
         }
-    }
-
-    public boolean getReady() {
-        return ready;
-    }
-
-    private Font customFont(int size){
-        return new Font("Arial", Font.PLAIN, size);
-    }
-
-    public static void main(String[] args) {
-        Window window = new Window();
-        StartWindow startWindow = new StartWindow();
-        window.add(startWindow);
-        window.setVisible(true);
     }
 }
