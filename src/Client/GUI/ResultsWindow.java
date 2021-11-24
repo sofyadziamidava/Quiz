@@ -22,6 +22,7 @@ public class ResultsWindow extends JPanel {
     private int opponentResult;
 
     private myButton continueButton;
+    private myButton exitButton;
 
     private JPanel resultsPanel;
     private JPanel playerResultsField;
@@ -45,13 +46,13 @@ public class ResultsWindow extends JPanel {
         this.roundPoints = points;
         this.opponentResult = opponentResult;
 
-        setBackground(Color.gray);
+        setBackground(new Color(205,230,255));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(topText = new JLabel("Results"));
         add(resultsPanel = new JPanel());
         add(buttonsPanel = new JPanel());
 
-        resultsPanel.setBackground(Color.CYAN);
+        resultsPanel.setBackground(new Color(205,230,255));
         resultsPanel.setLayout(new GridLayout(0,2));
 
         resultsPanel.add(player1ResultsField = new JPanel());
@@ -86,13 +87,22 @@ public class ResultsWindow extends JPanel {
 
         buttonsPanel.add(continueButton = new myButton("Next round"));
         continueButton.addActionListener(new myContinueListener());
-        buttonsPanel.add(new myButton("Exit"));
+        buttonsPanel.add(exitButton = new myButton("Exit"));
+        exitButton.addActionListener(new myExitButtonListener());
+
     }
 
     private class myContinueListener implements ActionListener{
         @Override
         public void actionPerformed(ActionEvent e) {
             ClientProtocol.waitingForNextRound = false;
+        }
+    }
+
+    private class myExitButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.exit(0);
         }
     }
 

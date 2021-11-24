@@ -23,6 +23,7 @@ public class ResultsWindowEnd extends JPanel {
     private int opponentResult;
 
     private myButton continueButton;
+    private myButton exitButton;
 
     private JPanel resultsPanel;
     private JPanel playerResultsField;
@@ -50,27 +51,27 @@ public class ResultsWindowEnd extends JPanel {
         this.roundPoints = points;
         this.opponentResult = opponentResult;
 
-        setBackground(Color.gray);
+        setBackground(new Color(205,230,255));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         add(topText = new JLabel("Results"));
         add(resultsPanel = new JPanel());
         add(playerTotalField = new JPanel());
         add(buttonsPanel = new JPanel());
 
-        resultsPanel.setBackground(Color.CYAN);
+        resultsPanel.setBackground(new Color(205,230,255));
         resultsPanel.setLayout(new GridLayout(0,2));
 
         resultsPanel.add(player1ResultsField = new JPanel());
         resultsPanel.add(player2ResultsField = new JPanel());
 
-        player1ResultsField.setBackground(Color.green);
+        player1ResultsField.setBackground(new Color(205,230,255));
         player1ResultsField.setLayout(new BoxLayout(player1ResultsField, BoxLayout.Y_AXIS));
         player1ResultsField.add(player1Label = new JLabel(player.getName()));
         player1ResultsField.add(questionResults = new JPanel());
         player1ResultsField.add(new JLabel(player.getName() + " total: " + player.getScore()));
         roundResultOfGame(player.getScoreTablePlayer(), questionResults);
 
-        player2ResultsField.setBackground(Color.pink);
+        player2ResultsField.setBackground(new Color(205,230,255));
         player2ResultsField.setLayout(new BoxLayout(player2ResultsField, BoxLayout.Y_AXIS));
         player2ResultsField.add(player2Label = new JLabel("Opponent"));
         player2ResultsField.add(questionResults2 = new JPanel());
@@ -80,7 +81,8 @@ public class ResultsWindowEnd extends JPanel {
 
         buttonsPanel.add(continueButton = new myButton("Continue"));
         continueButton.addActionListener(new myContinueListener());
-        buttonsPanel.add(new myButton("Exit"));
+        buttonsPanel.add(exitButton = new myButton("Exit"));
+        exitButton.addActionListener(new myExitButtonListener());
     }
 
     private void roundResultOfGame(List<Integer> list, JPanel panel) {
@@ -96,6 +98,13 @@ public class ResultsWindowEnd extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             ClientProtocol.waitingForNextRound = false;
+        }
+    }
+
+    private class myExitButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.exit(0);
         }
     }
 

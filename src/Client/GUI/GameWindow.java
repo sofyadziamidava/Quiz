@@ -36,7 +36,7 @@ public class GameWindow extends JPanel implements ActionListener {
         timer = new Clock(timerLabel);
 
 
-        setBackground(Color.yellow);
+        setBackground(new Color(205,230,255));
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         questionPanel = new JPanel();
@@ -51,7 +51,7 @@ public class GameWindow extends JPanel implements ActionListener {
 
 
         JPanel timerPanel = new JPanel();
-        timerPanel.setBackground(Color.white);
+        timerPanel.setBackground(new Color(205,230,255));
         timerText = new JLabel("Time left: ");
         timerText.setFont(new Font("Arial", Font.BOLD, 20));
         timerLabel.setFont(new Font("Arila", Font.BOLD, 20));
@@ -60,7 +60,7 @@ public class GameWindow extends JPanel implements ActionListener {
 
         buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(2, 2));
-        buttonsPanel.setBackground(Color.GREEN);
+        buttonsPanel.setBackground(new Color(205,230,255));
         this.buttonsInGame = createButtons(buttonsArray, buttonsPanel);
 
         timer.start();

@@ -1,6 +1,7 @@
 package Client.GUI;
 
 import Client.ClientProtocol;
+import org.w3c.dom.css.RGBColor;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +20,7 @@ public class StartWindow extends JPanel{
     public StartWindow() {
         ready = false;
         StartAction buttonAction = new StartAction();
-        setBackground(Color.blue);
+        setBackground(new Color(205, 230, 255));
 
 
         nameTextPanel = new JPanel();
