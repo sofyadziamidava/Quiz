@@ -69,8 +69,8 @@ public class Game extends Thread {
 
     public void sendingOpponentResultToClients(String[] input) {
         try {
-            playerStreams[0].send(Integer.parseInt(input[1]));
-            playerStreams[1].send(Integer.parseInt(input[0]));
+            getPlayerStream1().send(Integer.parseInt(input[1]));
+            getPlayerStream2().send(Integer.parseInt(input[0]));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -78,8 +78,8 @@ public class Game extends Thread {
 
     public void sendEndOfGame() {
         try {
-            playerStreams[0].send(true);
-            playerStreams[1].send(true);
+            getPlayerStream1().send(true);
+            getPlayerStream2().send(true);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -99,8 +99,8 @@ public class Game extends Thread {
 
     public void sendNames(String[] input) {
         try {
-            playerStreams[0].send(input[1]);
-            playerStreams[1].send(input[0]);
+            getPlayerStream1().send(input[1]);
+            getPlayerStream2().send(input[0]);
         }
         catch (IOException e) {
             System.out.println("could not send name");
