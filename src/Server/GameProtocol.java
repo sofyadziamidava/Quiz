@@ -20,8 +20,8 @@ public class GameProtocol {
             game.sendRounds();
             state = WAITINGFORRESULTS;
         } else if (state == WAITINGFORRESULTS) {
-            game.updatePoints(input);
-            game.sendingOpponentResultToClients();
+            //game.updatePoints(input);
+            game.sendingOpponentResultToClients(input);
             if (game.getCurrentRound() == game.getNrOfRounds() - 1) {
                 game.sendEndOfGame();
                 game.ends();

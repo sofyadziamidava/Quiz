@@ -13,8 +13,6 @@ public class Game extends Thread {
     int nrOfQuestionsPerRound;
     int currentRound;
     PlayerStream[] playerStreams = new PlayerStream[2];
-    int[] player1SumPoints;
-    int[] player2SumPoints;
     boolean gameOn = true;
 
     public Game(PlayerStream ps1, PlayerStream ps2) {
@@ -30,11 +28,6 @@ public class Game extends Thread {
 
     public PlayerStream getPlayerStream2() {
         return playerStreams[1];
-    }
-
-    public void setPlayersResultHolder() {
-        this.player1SumPoints = new int[this.getNrOfRounds()];
-        this.player2SumPoints = new int[this.getNrOfRounds()];
     }
 
     public void setNrOfRounds(int nrOfRounds) {
@@ -58,11 +51,6 @@ public class Game extends Thread {
         this.interrupt();
     }
 
-    public void updatePoints(String[] input) {
-        this.player1SumPoints[currentRound] = Integer.parseInt(input[0]);
-        this.player2SumPoints[currentRound] = Integer.parseInt(input[1]);
-    }
-
     public void sendRounds() {
         Rond rond = db.createRond(nrOfQuestionsPerRound);
         for (PlayerStream playerStream : playerStreams) {
@@ -79,10 +67,10 @@ public class Game extends Thread {
         currentRound++;
     }
 
-    public void sendingOpponentResultToClients() {
+    public void sendingOpponentResultToClients(String[] input) {
         try {
-            playerStreams[0].send(player2SumPoints[currentRound]);
-            playerStreams[1].send(player1SumPoints[currentRound]);
+            playerStreams[0].send(Integer.parseInt(input[1]));
+            playerStreams[1].send(Integer.parseInt(input[0]));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -107,7 +95,6 @@ public class Game extends Thread {
         }
         this.setNrOfRounds(Integer.parseInt(p.getProperty("nrOfRounds")));
         this.setNrOfQuestionsPerRound(Integer.parseInt(p.getProperty("nrOfQuestionsPerRound")));
-        this.setPlayersResultHolder();
     }
 
     public void sendNames(String[] input) {

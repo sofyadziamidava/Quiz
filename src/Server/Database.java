@@ -49,7 +49,6 @@ public class Database {
         Random rand = new Random();
         int upperbound = categories.size();
         int int_random = rand.nextInt(upperbound);
-
         while (alreadySelectedCategories.contains(int_random)) {
             int_random = rand.nextInt(upperbound);
         }
