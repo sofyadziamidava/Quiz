@@ -2,6 +2,7 @@ package Client.GUI;
 
 import Client.ClientProtocol;
 import Client.Clock;
+import Client.GUI.Font.GUIFont;
 import Client.Player;
 
 import javax.swing.*;
@@ -37,7 +38,7 @@ public class GameWindow extends JPanel implements ActionListener {
         timer = new Clock(timerLabel);
 
 
-        setBackground(Color.yellow);
+        setBackground(GUIFont.backgroundColor);
         setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         questionPanel = new JPanel();
@@ -48,11 +49,11 @@ public class GameWindow extends JPanel implements ActionListener {
 
 
         questionPanel.add(question);
-        questionPanel.setBackground(Color.white);
+        questionPanel.setBackground(GUIFont.backgroundColor);
 
 
         JPanel timerPanel = new JPanel();
-        timerPanel.setBackground(Color.white);
+        timerPanel.setBackground(GUIFont.backgroundColor);
         timerText = new JLabel("Time left: ");
         timerText.setFont(new Font("Arial", Font.BOLD, 20));
         timerLabel.setFont(new Font("Arila", Font.BOLD, 20));
@@ -61,7 +62,7 @@ public class GameWindow extends JPanel implements ActionListener {
 
         buttonsPanel = new JPanel();
         buttonsPanel.setLayout(new GridLayout(2, 2));
-        buttonsPanel.setBackground(Color.GREEN);
+        buttonsPanel.setBackground(GUIFont.backgroundColor);
         this.buttonsInGame = createButtons(buttonsArray, buttonsPanel);
 
         timer.start();
