@@ -21,7 +21,7 @@ public class ClientNetwork {
 
     public void connectToServer() {
         int serverPort = 42424;
-        String serverHost = "127.0.0.1";
+        String serverHost = "192.168.1.225";
         ClientProtocol clientProtocol = new ClientProtocol(window, player);
 
         try (Socket clientSocket = new Socket(serverHost, serverPort);
