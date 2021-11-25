@@ -12,7 +12,6 @@ public class Game extends Thread {
     int nrOfRounds;
     int nrOfQuestionsPerRound;
     int currentRound;
-    Player[] players = new Player[2];
     PlayerStream[] playerStreams = new PlayerStream[2];
     int[] player1SumPoints;
     int[] player2SumPoints;
@@ -22,19 +21,9 @@ public class Game extends Thread {
 
     public Game(PlayerStream ps1, PlayerStream ps2) {
         this.db = new Database();
-        this.players[0] = new Player();
-        this.players[1] = new Player();
         this.playerStreams[0] = ps1;
         this.playerStreams[1] = ps2;
         currentRound = 0;
-    }
-
-    public Player getPlayer1() {
-        return players[0];
-    }
-
-    public Player getPlayer2() {
-        return players[1];
     }
 
     public PlayerStream getPlayerStream1() {
@@ -88,17 +77,11 @@ public class Game extends Thread {
         }
     }
 
-    public void sendingOpponentResultToClients() {
-        try {
-            playerStreams[0].send(player2SumPoints[currentRound]);
-            playerStreams[1].send(player1SumPoints[currentRound]);
-            currentRound++;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public void updateRound() {
+        this.currentRound++;
     }
 
-    public void sendAllOpponentResultsToClient() {
+    public void sendingOpponentResultToClients() {
         try {
             playerStreams[0].send(player2SumPoints[currentRound]);
             playerStreams[1].send(player1SumPoints[currentRound]);
@@ -128,6 +111,7 @@ public class Game extends Thread {
         this.setNrOfQuestionsPerRound(Integer.parseInt(p.getProperty("nrOfQuestionsPerRound")));
         this.setPlayersResultHolder();
     }
+
     public void sendNames() {
         try {
             playerStreams[0].send(player2name);
@@ -136,7 +120,6 @@ public class Game extends Thread {
         catch (IOException e) {
             System.out.println("could not send name");
         }
-
     }
 
     public void run() {
@@ -146,12 +129,11 @@ public class Game extends Thread {
         String[] input = new String[2];
 
         try {
-            player1name = getPlayerStream1().receive();  // kommer bådas namn in??
+            player1name = getPlayerStream1().receive();
             player2name = getPlayerStream2().receive();
-            protocol.gameProcess(input);   // första gången protokollet kallas skickas string med null,null
+            protocol.gameProcess(input);
 
-
-            while (gameOn) {  // loopen går igång direkt, ligger och väntar på svar från båda
+            while (gameOn) {
                 String player1Input = getPlayerStream1().receive();
                 String player2Input = getPlayerStream2().receive();
                 if (player1Input != null && player2Input != null) {
