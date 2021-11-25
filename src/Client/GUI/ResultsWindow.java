@@ -44,6 +44,7 @@ public class ResultsWindow extends JPanel {
             roundResultOfGame(player.getScoreTableOpponent(), questionResults2);
             player1ResultsField.remove(playerRoundScore);
             player2ResultsField.remove(opponentRoundScore);
+            checkWinner();
         }
 
         this.setBackground(GUIFont.backgroundColor);
@@ -111,6 +112,18 @@ public class ResultsWindow extends JPanel {
             label.setFont(GUIFont.customFont(16));
             panel.add(label);
             round++;
+        }
+    }
+
+    private void checkWinner(){
+        if(player.getScore() > player.getOpponentScore()){
+            JOptionPane.showMessageDialog(null, "YOU WON");
+        }
+        else if(player.getScore() == player.getOpponentScore()){
+            JOptionPane.showMessageDialog(null, "IT'S A TIE");
+        }
+        else{
+            JOptionPane.showMessageDialog(null, "YOU LOST");
         }
     }
 
