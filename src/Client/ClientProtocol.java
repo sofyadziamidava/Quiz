@@ -41,7 +41,7 @@ public class ClientProtocol {
         while (waitingForNextRound) {
             ClientNetwork.sleep(500);
         }
-        return "a";                             ///////  a returneras, anropas från clientNetwork
+        return "a";
     }
 
     public void handleNewRond(Object o){
