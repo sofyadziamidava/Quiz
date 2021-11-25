@@ -3,20 +3,24 @@ package Server;
 import java.io.IOException;
 
 public class GameProtocol {
+    public static final int FIRSTROND = 0;
     public static final int NEWROND = 1;
     public static final int WAITINGFORRESULTS = 2;
-    public int state = NEWROND;
+    public int state = FIRSTROND;
 
     private Game game;
 
     public GameProtocol(Game game) {
         this.game = game;
-        }
+    }
 
     public void gameProcess(String[] input) throws IOException, ClassNotFoundException {
 
-        if (state == NEWROND) {   // -> null,null
+        if (state == FIRSTROND) {
             game.sendNames(input);
+            game.sendRounds();
+            state = WAITINGFORRESULTS;
+        } else if (state == NEWROND) {
             game.sendRounds();
             state = WAITINGFORRESULTS;
         } else if (state == WAITINGFORRESULTS) {
