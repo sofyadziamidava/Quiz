@@ -37,7 +37,7 @@ public class ResultsWindow extends JPanel {
 
         createPlayerOnePanels();
         createPlayerTwoPanels();
-        createBottomPanel();
+        createBottomPanel(endOfGame);
 
         if(endOfGame){
             roundResultOfGame(player.getScoreTablePlayer(), questionResults);
@@ -94,14 +94,19 @@ public class ResultsWindow extends JPanel {
         player2ResultsField.add(opponentTotalScore);
     }
 
-    private void createBottomPanel() {
+    private void createBottomPanel(boolean endOfGame) {
         buttonsPanel  = new JPanel();
         buttonsPanel.setLayout(new FlowLayout());
         buttonsPanel.setBackground(GUIFont.backgroundColor);
         Button continueButton = new Button("Next round");
         buttonsPanel.add(continueButton);
         continueButton.addActionListener(new myContinueListener());
-        buttonsPanel.add(new Button("Exit"));
+        Button exitButton = new Button("Exit");
+        buttonsPanel.add(exitButton);
+        exitButton.addActionListener(new myExitButtonListener());
+        if(endOfGame){
+            buttonsPanel.remove(continueButton);
+        }
     }
 
     private void roundResultOfGame(List<Integer> list, JPanel panel) {
@@ -131,6 +136,13 @@ public class ResultsWindow extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             ClientProtocol.waitingForNextRound = false;
+        }
+    }
+
+    private class myExitButtonListener implements ActionListener{
+        @Override
+        public void actionPerformed(ActionEvent e){
+            System.exit(0);
         }
     }
 
